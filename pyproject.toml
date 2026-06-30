@@ -17,6 +17,7 @@ dependencies = [
     "pydantic>=2.13.4",
     "pyvista>=0.48.4",
     "pyyaml>=6.0.3",
+    "requests>=2.32.5",
     "rich>=15.0.0",
     "scipy>=1.17.1",
     "structlog>=26.1.0",

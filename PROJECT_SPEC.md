@@ -50,6 +50,23 @@ U_inf:                40 m/s
 
 All 15 medium cases pass mesh, mass-balance and force-stability gates. Three representative fine checks pass the pressure/load sanity thresholds. The offline Core replay uses C_D, suction/downforce and pressure recovery as targets.
 
+### NASA Hump Methodology Preflight
+
+The NASA/TMR wall-mounted hump slice is a CFD-methodology extension, not a new
+headline benchmark. It ingests experimental Cp/Cf data and published CFL3D SA/SST
+curves for a recognised separated-flow validation case, then checks whether the
+small no-plenum PLOT3D grid can enter the OpenFOAM workflow.
+
+Current status:
+
+- reference data ingestion and SA/SST-vs-experiment metric plumbing are implemented;
+- `plot3dToFoam` can ingest the `103 x 28` grid after `-noBlank -2D 0.1`;
+- prototype patch splitting creates front/back/inlet/outlet/top/hump-wall patches;
+- the global AeroMap mesh gate remains strict;
+- a separate NASA/TMR methodology gate allows the official boundary-layer grid only
+  for conversion, boundary-condition and single-solver smoke work;
+- no OpenFOAM correlation result or turbulence-model recommendation is claimed.
+
 ## Coordinate And Coefficient Contract
 
 - SI units internally.
@@ -89,9 +106,13 @@ AeroMap reports both prediction error and design-decision quality:
 
 ## Public Scope
 
-This repository is an offline benchmark and reproducible prototype. It demonstrates budgeted simulation selection, compact 3D metadata ingestion and a structured underfloor pressure/load response map.
+This repository is an offline benchmark and reproducible prototype. It demonstrates budgeted simulation selection, compact 3D metadata ingestion, a field-level AirfRANS surface-pressure baseline, a structured underfloor pressure/load response map and a NASA/TMR separated-flow methodology preflight.
 
-The release does not present production F1 geometry, live solver scheduling, field prediction, wall-shear/separation labels or DoMINO accuracy as current results. Those are extension paths once matching validation data are available.
+The release does not present production F1 geometry, industrial live solver scheduling, 3D field prediction, wall-shear/separation labels, OpenFOAM NASA hump correlation accuracy, turbulence-model recommendation or DoMINO accuracy as current results. Those are extension paths once matching validation data are available.
+
+The NASA hump extension does not yet claim OpenFOAM correlation accuracy or a
+turbulence-model recommendation. It is a methodology preflight until a solver run
+passes smoke gates and medium/fine grid correlation evidence exists.
 
 ## Reproduction Targets
 
@@ -107,4 +128,6 @@ uv run aeromap benchmark aeromap-decision-replay-v03 \
   --out docs/evidence/aeromap/airfrans_decision_replay_v03.json \
   --svg-dir docs/evidence/aeromap
 uv run scripts/run_venturi_core_2d_response_map_replay.py --overwrite
+uv run python scripts/prepare_nasa_hump_methodology.py
+uv run python scripts/convert_tmr_nasa_hump_to_openfoam.py
 ```

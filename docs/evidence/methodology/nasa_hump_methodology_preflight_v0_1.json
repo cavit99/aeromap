@@ -1,0 +1,268 @@
+{
+  "case_context": {
+    "nominal_dimensionality": "2D validation treatment",
+    "reynolds_number": 936000,
+    "upper_boundary": "contoured/slip-style tunnel top from NASA/TMR setup",
+    "validation_focus": [
+      "smooth-body separation",
+      "reattachment",
+      "boundary-layer recovery"
+    ]
+  },
+  "claim_boundary": {
+    "openfoam_correlation_result": false,
+    "openfoam_grid_ingest_feasible": true,
+    "reference_data_ingestion": true,
+    "solver_ran": false,
+    "turbulence_model_recommendation": false
+  },
+  "classification": "NASA_HUMP_METHODOLOGY_PREFLIGHT_V0_1",
+  "correlation_eligibility": [
+    {
+      "requirement": "experimental_cp_cf_parsed",
+      "status": "Pass"
+    },
+    {
+      "requirement": "published_cfl3d_sa_sst_references_parsed",
+      "status": "Pass"
+    },
+    {
+      "requirement": "plot3d_grid_converted",
+      "status": "Pass"
+    },
+    {
+      "requirement": "patch_split_audited",
+      "status": "Pass"
+    },
+    {
+      "requirement": "methodology_mesh_gate_defined",
+      "status": "Pass"
+    },
+    {
+      "requirement": "openfoam_sst_setup_generated",
+      "status": "Pending"
+    },
+    {
+      "requirement": "solver_run_completed",
+      "status": "Not yet"
+    },
+    {
+      "requirement": "cp_cf_extracted_from_openfoam",
+      "status": "Not yet"
+    },
+    {
+      "requirement": "openfoam_vs_experiment_compared",
+      "status": "Not yet"
+    },
+    {
+      "requirement": "grid_sensitivity_checked",
+      "status": "Not yet"
+    }
+  ],
+  "grid_summary": {
+    "block_count": 1,
+    "expected_2d_cells": 2754,
+    "i_dim": 103,
+    "j_dim": 28,
+    "minimum_streamwise_spacing": 0.009102203319989868,
+    "minimum_wall_normal_spacing": 5.5541695482447046e-05,
+    "x_max": 4.0,
+    "x_min": -6.39,
+    "y_max": 0.90905,
+    "y_min": 0.0
+  },
+  "mesh_policy": {
+    "accepted_for": [
+      "conversion_smoke",
+      "boundary_condition_smoke",
+      "single_solver_smoke"
+    ],
+    "fatal_checks": [
+      "negative_or_zero_cell_volume",
+      "invalid_or_nonfinite_coordinates",
+      "broken_boundary_patch_topology",
+      "missing_hump_wall_patch",
+      "failed_plot3d_conversion",
+      "solver_crash_before_first_iteration"
+    ],
+    "gate": "NASA_TMR_BOUNDARY_LAYER_METHODOLOGY_GATE_V0_1",
+    "global_aeromap_gate_passed": false,
+    "mesh_quality": "accepted_with_methodology_warning",
+    "methodology_gate_passed": true,
+    "not_accepted_for": [
+      "headline_correlation",
+      "turbulence_model_recommendation",
+      "grid_convergence_claim"
+    ],
+    "official_tmr_boundary_layer_grid": true,
+    "rationale": "The official 103 x 28 TMR boundary-layer grid is intentionally stretched. High aspect ratio and small determinant warnings are therefore treated as methodology warnings for smoke work only, not as correlation eligibility.",
+    "waived_warnings": [
+      "high_aspect_ratio_expected_for_near_wall_RANS_grid",
+      "small_determinant_cells_expected_from_boundary_layer_stretching"
+    ]
+  },
+  "next_step": "Use scripts/convert_tmr_nasa_hump_to_openfoam.py to materialise a local conversion scaffold, then run one SST smoke case only after boundary conditions and post-processing are audited.",
+  "openfoam_ingest_smoke": {
+    "patch_split_status": "prototype_successful",
+    "patches": {
+      "back": "empty",
+      "front": "empty",
+      "hump_wall": "wall",
+      "inlet": "patch",
+      "outlet": "patch",
+      "top_slip": "slip wall candidate"
+    },
+    "plot3d_to_foam_command": "plot3dToFoam -noBlank -2D 0.1 hump2newtop_noplenumZ103x28.p2dfmt",
+    "solver_blocker": "The global AeroMap mesh gate does not pass because the tiny official boundary-layer grid reports high-aspect-ratio and low-determinant warnings. The NASA/TMR methodology gate permits smoke work with an explicit warning, but not correlation claims.",
+    "solver_run": false,
+    "strict_mesh_gate": {
+      "boundary_patches": 6,
+      "cells": 2754,
+      "failed_mesh_checks": 2,
+      "log_path": "artifacts/methodology/nasa_hump/smoke_case_p2d_noblank/checkMesh_split.log",
+      "max_aspect_ratio": 19660.6,
+      "mesh_ok": false,
+      "small_determinant_cells": 382,
+      "source": "recorded_local_plot3dToFoam_smoke_summary"
+    }
+  },
+  "published_reference_correlation": {
+    "note": "These compare NASA/TMR-published CFL3D SA/SST curves against the experimental data. They validate the metric pipeline; they are not AeroMap/OpenFOAM results.",
+    "sa": {
+      "cf": {
+        "comparison_points": 135,
+        "mae": 0.0007035707252294813,
+        "max_abs": 0.0018287299725760035,
+        "rmse": 0.0008966602793807874,
+        "x_max": 1.57,
+        "x_min": -0.07
+      },
+      "cp": {
+        "comparison_points": 126,
+        "mae": 0.019468010951728596,
+        "max_abs": 0.06907732801158911,
+        "rmse": 0.028419763783631632,
+        "x_max": 2.125,
+        "x_min": -0.80454
+      }
+    },
+    "sst": {
+      "cf": {
+        "comparison_points": 135,
+        "mae": 0.0006583823703011449,
+        "max_abs": 0.0017413866154809424,
+        "rmse": 0.0008337411159941377,
+        "x_max": 1.57,
+        "x_min": -0.07
+      },
+      "cp": {
+        "comparison_points": 126,
+        "mae": 0.028176250455585135,
+        "max_abs": 0.14472551035831596,
+        "rmse": 0.04189108226896975,
+        "x_max": 2.125,
+        "x_min": -0.80454
+      }
+    }
+  },
+  "purpose": "CFD methodology preflight: public separated-flow reference, turbulence-model correlation targets, OpenFOAM ingest feasibility and mesh-gate policy.",
+  "reference_curve_summary": {
+    "cfl3d_sa_cf_zero_crossings": [
+      -0.006045114068681329,
+      0.0041888042783763116,
+      0.6608525369415241,
+      1.2667293257444219
+    ],
+    "cfl3d_sst_cf_zero_crossings": [
+      -0.005866190971705588,
+      0.004140698387633648,
+      0.6540003003611249,
+      1.2710399036326805
+    ],
+    "experimental_cf_points": 135,
+    "experimental_cf_zero_crossings": [
+      0.7460076775431862,
+      1.1162068965517242
+    ],
+    "experimental_cp_points": 126
+  },
+  "schema_version": "nasa_hump_methodology_preflight_v0.1.0",
+  "selected_case": "NASA/TMR 2D wall-mounted hump, no-flow-control, no-plenum grid",
+  "source_file_retention": "Raw NASA/TMR downloads live under ignored artifacts/methodology when the preflight script is run. The committed artifact stores source URLs and hashes.",
+  "source_files": {
+    "cfl3d_sa_cf": {
+      "path": "artifacts/methodology/nasa_hump/raw/cfl3d_sa_cf.dat",
+      "sha256": "b3d6165dc161deb4bcf43721715ee3e80f0b34d10abfdf41ce08ee9c9508de5f",
+      "size_bytes": 28642
+    },
+    "cfl3d_sa_cp": {
+      "path": "artifacts/methodology/nasa_hump/raw/cfl3d_sa_cp.dat",
+      "sha256": "fd27a69f4ed9058d24c1da89fe044c4627e497f7edc97d13e874200ad7057312",
+      "size_bytes": 28039
+    },
+    "cfl3d_sst_cf": {
+      "path": "artifacts/methodology/nasa_hump/raw/cfl3d_sst_cf.dat",
+      "sha256": "8f7edd216eb2b1fa4f8d0ec74fb05bbbb4858ce383043a98b0d0a963870689b8",
+      "size_bytes": 28643
+    },
+    "cfl3d_sst_cp": {
+      "path": "artifacts/methodology/nasa_hump/raw/cfl3d_sst_cp.dat",
+      "sha256": "6f96de81be4e6b2a613ef529fa97a68a7da1cc6fadbdc429391f7f0189b3b0ab",
+      "size_bytes": 28027
+    },
+    "experimental_cf": {
+      "path": "artifacts/methodology/nasa_hump/raw/experimental_cf.dat",
+      "sha256": "f38f1d303c6f43937da188682196ad61dde380b9fc47a099e3d08bdda406d9a8",
+      "size_bytes": 4813
+    },
+    "experimental_cp": {
+      "path": "artifacts/methodology/nasa_hump/raw/experimental_cp.dat",
+      "sha256": "a30835421ac9448d1ea83e93d5565f0beb8a7550e3033654d4a4efa4d4d3e024",
+      "size_bytes": 4324
+    },
+    "grid_nmf_103x28": {
+      "path": "artifacts/methodology/nasa_hump/raw/grid_nmf_103x28.nmf",
+      "sha256": "7ab454f17dbffd3b7700e837455502dac86d30ae04adae255ffff70a6817a2dc",
+      "size_bytes": 877
+    },
+    "grid_p2d_103x28": {
+      "path": "artifacts/methodology/nasa_hump/raw/hump2newtop_noplenumZ103x28.p2dfmt.gz",
+      "sha256": "d77fe802438b5a64b1db9bf1c698f318091f5a34817fb8df36f7b044c44d281d",
+      "size_bytes": 36737
+    },
+    "mapbc": {
+      "path": "artifacts/methodology/nasa_hump/raw/mapbc.mapbc",
+      "sha256": "25c937161a2468459f71c56549d5177501564c0cab7d9b9c834b902faa836a3d",
+      "size_bytes": 533
+    },
+    "tmr_case_intro": {
+      "path": "artifacts/methodology/nasa_hump/raw/tmr_case_intro.html",
+      "sha256": "749596d1abd49607f8137d75189c3854b0c025568efa24f9eb85ccfe4d61e74b",
+      "size_bytes": 20462
+    },
+    "tmr_sa_reference": {
+      "path": "artifacts/methodology/nasa_hump/raw/tmr_sa_reference.html",
+      "sha256": "3a640b5865242689eec376794d889095c3092c3d0facd4bc8f82dd5f0e10cef3",
+      "size_bytes": 8292
+    },
+    "tmr_sst_reference": {
+      "path": "artifacts/methodology/nasa_hump/raw/tmr_sst_reference.html",
+      "sha256": "bcb2f317756db4159ba5f145ee2fb8eac04f8b67234a1ca65de217bd02cf714a",
+      "size_bytes": 8757
+    }
+  },
+  "source_urls": {
+    "cfl3d_sa_cf": "https://tmbwg.github.io/turbmodels/Nasahump_validation/nasahump_cfl3d_cf_noplenum_sa.dat",
+    "cfl3d_sa_cp": "https://tmbwg.github.io/turbmodels/Nasahump_validation/nasahump_cfl3d_cp_noplenum_sa.dat",
+    "cfl3d_sst_cf": "https://tmbwg.github.io/turbmodels/Nasahump_validation/nasahump_cfl3d_cf_noplenum_sst.dat",
+    "cfl3d_sst_cp": "https://tmbwg.github.io/turbmodels/Nasahump_validation/nasahump_cfl3d_cp_noplenum_sst.dat",
+    "experimental_cf": "https://tmbwg.github.io/turbmodels/Nasahump_validation/noflow_cf.exp.dat",
+    "experimental_cp": "https://tmbwg.github.io/turbmodels/Nasahump_validation/noflow_cp.exp.dat",
+    "grid_nmf_103x28": "https://tmbwg.github.io/turbmodels/Nasahump_grids/hump2newtop_noplenumZ103x28.nmf",
+    "grid_zip": "https://www.nasa.gov/wp-content/uploads/2026/02/nasahump-grids.zip",
+    "mapbc": "https://tmbwg.github.io/turbmodels/Nasahump_grids/hump2newtop_noplenumZ_all.hex.mapbc",
+    "tmr_case_intro": "https://tmbwg.github.io/turbmodels/nasahump_val.html",
+    "tmr_sa_reference": "https://tmbwg.github.io/turbmodels/nasahump_val_sa.html",
+    "tmr_sst_reference": "https://tmbwg.github.io/turbmodels/nasahump_val_sst.html"
+  }
+}
