@@ -6,9 +6,9 @@
     "pressure_recovery"
   ],
   "artifacts": {
-    "learning_curve_svg": "docs/evidence/cfd/aerocliff_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg",
-    "manifest": "docs/evidence/cfd/aerocliff_core/live_core_loop_v0_1/live_core_loop_manifest.json",
-    "report": "docs/reports/aerocliff_core_live_acquisition_loop.md"
+    "learning_curve_svg": "docs/evidence/cfd/venturi_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg",
+    "manifest": "docs/evidence/cfd/venturi_core/live_core_loop_v0_1/live_core_loop_manifest.json",
+    "report": "docs/reports/venturi_core_live_acquisition_loop.md"
   },
   "candidate_pool": [
     {
@@ -65,7 +65,7 @@
       "diffuser_angle_deg": 6.0,
       "ride_height_mm": 60.0,
       "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-      "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+      "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
     },
     {
       "case_id": "venturi_core_8f78206e8ab35663",
@@ -114,7 +114,7 @@
     "domino_accuracy": false,
     "f1_floor_accuracy": false,
     "field_level_surrogate": false,
-    "full_3d_aerocliff_accuracy": false,
+    "full_3d_extension_accuracy": false,
     "industrial_live_cfd_savings": false,
     "local_live_or_replay_core_loop": true,
     "openfoam_result_ingestion": true,
@@ -123,10 +123,10 @@
   },
   "classification": "AEROMAP_LIVE_CORE_ACQUISITION_LOOP_V0_1",
   "dataset": {
-    "classification": "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
+    "classification": "VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
     "clean_case_count": 15,
-    "path": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json",
-    "sha256": "7b3e099ec5b13ca5385760b11fb16490ee2a6b34e513c9b79b853ffd50a2aca5"
+    "path": "docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json",
+    "sha256": "9de6e363061576ed4f3b857e9814226dfbb1bbe0865f2118a861647541302885"
   },
   "diagnostic_only": [
     "diagnostic_corrected_f_sep",
@@ -150,7 +150,7 @@
       "diffuser_angle_deg": 5.0,
       "ride_height_mm": 60.0,
       "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-      "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+      "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
     },
     {
       "case_id": "venturi_core_1299ced75c5bace8",
@@ -196,7 +196,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -241,7 +241,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -301,7 +301,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -361,7 +361,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -437,7 +437,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -550,7 +550,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "diversity": 0.020649728738058207,
@@ -871,7 +871,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "diversity": 0.057097722053392176,
@@ -929,7 +929,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -974,7 +974,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -1026,7 +1026,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -1086,7 +1086,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_8f78206e8ab35663",
@@ -1162,7 +1162,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_8f78206e8ab35663",
@@ -1590,7 +1590,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -1635,7 +1635,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -1695,7 +1695,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -1755,7 +1755,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -1831,7 +1831,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -1944,7 +1944,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "diversity": 0.020649728738058207,
@@ -2265,7 +2265,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "diversity": 0.057097722053392176,
@@ -2323,7 +2323,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -2360,7 +2360,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -2412,7 +2412,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -2480,7 +2480,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -2548,7 +2548,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -2556,7 +2556,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -2593,7 +2593,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             }
           ],
@@ -2712,7 +2712,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.8167364359696581
@@ -2876,7 +2876,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.901431078688177
@@ -2952,7 +2952,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             }
           ]
@@ -2982,7 +2982,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -3027,7 +3027,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -3079,7 +3079,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -3139,7 +3139,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -3215,7 +3215,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -3371,7 +3371,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.6835896920722179
@@ -3549,7 +3549,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.7453534018221998
@@ -3641,7 +3641,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -3678,7 +3678,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -3686,7 +3686,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -3707,7 +3707,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -3738,7 +3738,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -3746,7 +3746,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -3806,7 +3806,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -3814,7 +3814,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -3874,7 +3874,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -3882,7 +3882,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_c5261c970c116b30",
@@ -3927,7 +3927,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.9806145334024735
@@ -4003,7 +4003,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -4300,7 +4300,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -4345,7 +4345,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -4405,7 +4405,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -4473,7 +4473,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -4549,7 +4549,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -4778,7 +4778,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.8970120565868259
@@ -4909,7 +4909,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.35192393119447596
@@ -4959,7 +4959,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -4996,7 +4996,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -5056,7 +5056,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -5116,7 +5116,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -5124,7 +5124,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -5153,7 +5153,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -5192,7 +5192,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -5200,7 +5200,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -5273,7 +5273,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.8192539268062028
@@ -5423,7 +5423,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.9913994807367261
@@ -5499,7 +5499,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -5618,7 +5618,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -5655,7 +5655,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_f087849d8f12d3b3",
@@ -5715,7 +5715,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_f087849d8f12d3b3",
@@ -5775,7 +5775,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_f087849d8f12d3b3",
@@ -5843,7 +5843,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -5851,7 +5851,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_f087849d8f12d3b3",
@@ -5888,7 +5888,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             }
           ],
@@ -6171,7 +6171,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.7283162575047357
@@ -6247,7 +6247,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             }
           ]
@@ -6277,7 +6277,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -6322,7 +6322,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -6382,7 +6382,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -6450,7 +6450,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -6526,7 +6526,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -6694,7 +6694,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.8376663346296802
@@ -6936,7 +6936,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -6973,7 +6973,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -6981,7 +6981,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -7002,7 +7002,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -7025,7 +7025,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -7033,7 +7033,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -7085,7 +7085,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -7093,7 +7093,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -7153,7 +7153,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -7161,7 +7161,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -7222,7 +7222,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.8879866569877606
@@ -7298,7 +7298,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -7595,7 +7595,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -7640,7 +7640,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -7700,7 +7700,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -7768,7 +7768,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -7844,7 +7844,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -8115,7 +8115,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.4058591591309142
@@ -8204,7 +8204,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.652763275330838
@@ -8254,7 +8254,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_1299ced75c5bace8",
@@ -8291,7 +8291,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -8351,7 +8351,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -8411,7 +8411,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -8419,7 +8419,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -8448,7 +8448,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -8487,7 +8487,7 @@
                   "diffuser_angle_deg": 5.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_487e584f49d49c9a",
@@ -8495,7 +8495,7 @@
                   "diffuser_angle_deg": 6.0,
                   "ride_height_mm": 60.0,
                   "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                  "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                  "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                 },
                 {
                   "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -8582,7 +8582,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.8693315446785694
@@ -8643,7 +8643,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.6519730194604051
@@ -8718,7 +8718,7 @@
                     "diffuser_angle_deg": 6.0,
                     "ride_height_mm": 60.0,
                     "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                    "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                    "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
                   },
                   "components": {
                     "random": 0.9698444927156448
@@ -8794,7 +8794,7 @@
                 "diffuser_angle_deg": 6.0,
                 "ride_height_mm": 60.0,
                 "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-                "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+                "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
               }
             },
             {
@@ -9130,7 +9130,7 @@
             "diffuser_angle_deg": 5.0,
             "ride_height_mm": 60.0,
             "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-            "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+            "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
           },
           {
             "case_id": "venturi_core_1299ced75c5bace8",
@@ -9175,7 +9175,7 @@
             "diffuser_angle_deg": 5.0,
             "ride_height_mm": 60.0,
             "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-            "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+            "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
           },
           {
             "case_id": "venturi_core_1299ced75c5bace8",
@@ -9235,7 +9235,7 @@
             "diffuser_angle_deg": 5.0,
             "ride_height_mm": 60.0,
             "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-            "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+            "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
           },
           {
             "case_id": "venturi_core_1299ced75c5bace8",
@@ -9295,7 +9295,7 @@
             "diffuser_angle_deg": 5.0,
             "ride_height_mm": 60.0,
             "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-            "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+            "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
           },
           {
             "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -9371,7 +9371,7 @@
             "diffuser_angle_deg": 5.0,
             "ride_height_mm": 60.0,
             "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_5deg_near_cliff_validation_v0",
-            "target_status": "AEROCLIFF_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
+            "target_status": "VENTURI_CORE_NEAR_CLIFF_PRESSURE_LOAD_REFERENCE_V0"
           },
           {
             "case_id": "venturi_core_adf1f944b8d6c44a",
@@ -9484,7 +9484,7 @@
               "diffuser_angle_deg": 6.0,
               "ride_height_mm": 60.0,
               "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-              "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+              "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
             },
             "components": {
               "diversity": 0.020649728738058207,
@@ -9805,7 +9805,7 @@
               "diffuser_angle_deg": 6.0,
               "ride_height_mm": 60.0,
               "source": "reused_from_core_response_map_dataset_v0.json:core_60mm_6deg_separated_validation_v0",
-              "target_status": "AEROCLIFF_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
+              "target_status": "VENTURI_CORE_SEPARATED_PRESSURE_LOAD_SCREENING_REFERENCE_V0"
             },
             "components": {
               "diversity": 0.057097722053392176,
@@ -9838,5 +9838,5 @@
   },
   "primary_policy": "engineering_utility",
   "schema_version": "aeromap_live_core_acquisition_loop_v0.1.0",
-  "target_family": "AEROCLIFF_CORE_PRESSURE_LOAD_RESPONSE_MAP"
+  "target_family": "VENTURI_CORE_PRESSURE_LOAD_RESPONSE_MAP"
 }

@@ -47,7 +47,7 @@ def test_aeromap_plan_sets_claim_boundaries() -> None:
     assert plan["benchmark_class"] == AEROMAP_CLASS
     assert plan["headline"] == "AeroMap Mission Control"
     assert plan["lanes"]["lane_a"]["name"] == "AEROMAP_BUDGET_BENCHMARK"
-    assert plan["lanes"]["lane_b"]["name"] == "AEROCLIFF_CORE_EXTENSION"
+    assert plan["lanes"]["lane_b"]["name"] == "VENTURI_CORE_EXTENSION"
     assert plan["cost_policy"] == {
         "cloud": "forbidden_for_this_goal",
         "ec2": "forbidden_for_this_goal",

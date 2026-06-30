@@ -151,7 +151,7 @@ For each STL the bridge computed bounding box, scale diagonal, surface area,
 triangle-area statistics, normal statistics, deterministic sampled
 surface-centroid point cloud and compact geometry embedding.
 
-An optional AeroCliff Core STL comparison can be generated on demand for
+An optional Venturi Core STL comparison can be generated on demand for
 descriptor-level context. The previous descriptor distance to the three-DrivAer
 sample was:
 
@@ -226,7 +226,7 @@ Interpretation:
 2. DrivAerML was selected because compact all-case geometry and force/moment
    summaries were available and it is the most vehicle-relevant candidate.
 3. The 3D geometry evidence is three real DrivAerML STLs with about 753k
-   triangles each, with an optional generated AeroCliff Core descriptor
+   triangles each, with an optional generated Venturi Core descriptor
    comparison.
 4. The scalar replay ran on 484 cases. Diversity is recommended for this bridge;
    v2 is not the winner.
@@ -243,7 +243,7 @@ The updated positioning should be:
 
 1. AeroMap v0.3 proves simulation-budget learning on AirfRANS.
 2. AeroMap-3D bridge proves compact 3D aero scalar practicability on DrivAerML.
-3. AeroCliff Core remains the custom underfloor benchmark tier, with a future
+3. Venturi Core remains the custom underfloor benchmark tier, with a future
    full-3D extension lane.
 
 Do not lead with the DrivAerML bridge as the headline. It is a credibility
@@ -284,6 +284,6 @@ Extension paths:
 
 - richer field-level prediction;
 - measured solver-cost savings;
-- full custom AeroCliff Core or 3D transfer;
+- full custom Venturi Core or 3D transfer;
 - extra 3D datasets;
 - acquisition retuning on a dedicated calibration split.

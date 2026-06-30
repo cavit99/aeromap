@@ -1,6 +1,6 @@
 {
-  "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_RELEASE_FIGURES",
-  "evidence_generation_git_sha": "2f6780a",
+  "classification": "AEROMAP_VENTURI_CORE_MVP_V0_1_RELEASE_FIGURES",
+  "evidence_generation_git_sha": "a4a39fc",
   "figures": [
     {
       "caption": "Geometry-disjoint final metrics summary for AeroMap Mission Control v0.3.",
@@ -33,7 +33,7 @@
       "source_case": "AeroMap 3D bridge and release context"
     },
     {
-      "caption": "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
+      "caption": "AeroMap evidence story: AirfRANS, DrivAerML bridge and Venturi Core.",
       "path": "docs/assets/aeromap/aeromap_evidence_tiers.png",
       "source_case": "AeroMap 3D bridge and release context"
     },
@@ -43,32 +43,32 @@
       "source_case": "AeroMap 3D bridge and release context"
     },
     {
-      "caption": "AeroCliff Core 3 x 5 suction/downforce response surface.",
-      "path": "docs/assets/aeromap/aerocliff_core_response_surface.png",
-      "source_case": "AeroCliff Core 2D pressure/load response replay"
+      "caption": "Venturi Core 3 x 5 suction/downforce response surface.",
+      "path": "docs/assets/aeromap/venturi_core_response_surface.png",
+      "source_case": "Venturi Core 2D pressure/load response replay"
     },
     {
-      "caption": "AeroCliff Core pressure recovery surface over ride height and diffuser angle.",
-      "path": "docs/assets/aeromap/aerocliff_core_pressure_recovery_surface.png",
-      "source_case": "AeroCliff Core 2D pressure/load response replay"
+      "caption": "Venturi Core pressure recovery surface over ride height and diffuser angle.",
+      "path": "docs/assets/aeromap/venturi_core_pressure_recovery_surface.png",
+      "source_case": "Venturi Core 2D pressure/load response replay"
     },
     {
-      "caption": "AeroCliff Core offline response-map active replay method comparison.",
-      "path": "docs/assets/aeromap/aerocliff_core_active_replay.png",
-      "source_case": "AeroCliff Core 2D pressure/load response replay"
+      "caption": "Venturi Core offline response-map active replay method comparison.",
+      "path": "docs/assets/aeromap/venturi_core_active_replay.png",
+      "source_case": "Venturi Core 2D pressure/load response replay"
     },
     {
-      "caption": "AeroMap to AeroCliff Core workflow for bounded pressure/load response mapping.",
-      "path": "docs/assets/aeromap/aeromap_aerocliff_core_story.png",
-      "source_case": "AeroCliff Core 2D pressure/load response replay"
+      "caption": "AeroMap to Venturi Core workflow for bounded pressure/load response mapping.",
+      "path": "docs/assets/aeromap/aeromap_venturi_core_story.png",
+      "source_case": "Venturi Core 2D pressure/load response replay"
     }
   ],
   "git_sha_note": "This SHA records the commit used to generate the figure manifest; the containing release commit may be later.",
   "schema_version": "aeromap_release_figures_v1",
   "source_evidence": {
-    "aerocliff_core_dataset": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json",
-    "aerocliff_core_replay": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json",
     "airfrans": "docs/evidence/aeromap/airfrans_decision_replay_v03.json",
-    "drivaerml_bridge": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json"
+    "drivaerml_bridge": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json",
+    "venturi_core_dataset": "docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json",
+    "venturi_core_replay": "docs/evidence/cfd/venturi_core/core_2d_response_map_active_replay_v0.json"
   }
 }

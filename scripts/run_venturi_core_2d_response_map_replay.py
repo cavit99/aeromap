@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the bounded 2D AeroCliff Core pressure/load response-map replay."""
+"""Run the bounded 2D Venturi Core pressure/load response-map replay."""
 
 from __future__ import annotations
 
@@ -23,13 +23,13 @@ from aeromap.cfd.venturi_core import (
 )
 from aeromap.io import sha256_file
 
-SCHEMA_VERSION = "aerocliff_core_2d_pressure_load_response_replay_v0.1.0"
-DATASET_SCHEMA_VERSION = "aerocliff_core_2d_pressure_load_response_dataset_v0.1.0"
-REPORT_PATH = Path("artifacts/reports/aerocliff_core_2d_response_map_active_replay.md")
-DATASET_PATH = Path("docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json")
-REPLAY_PATH = Path("docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json")
+SCHEMA_VERSION = "venturi_core_2d_pressure_load_response_replay_v0.1.0"
+DATASET_SCHEMA_VERSION = "venturi_core_2d_pressure_load_response_dataset_v0.1.0"
+REPORT_PATH = Path("artifacts/reports/venturi_core_2d_response_map_active_replay.md")
+DATASET_PATH = Path("docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json")
+REPLAY_PATH = Path("docs/evidence/cfd/venturi_core/core_2d_response_map_active_replay_v0.json")
 
-CORE_EVIDENCE_DIR = Path("docs/evidence/cfd/aerocliff_core")
+CORE_EVIDENCE_DIR = Path("docs/evidence/cfd/venturi_core")
 SOURCE_1D_DATASET = CORE_EVIDENCE_DIR / "core_response_map_dataset_v0.json"
 RIDE_HEIGHTS_MM = (50.0, 60.0, 70.0)
 DIFFUSER_ANGLES_DEG = (3.0, 4.0, 5.0, 6.0, 7.0)
@@ -109,7 +109,7 @@ def _case_config(
 ) -> VenturiCoreConfig:
     return VenturiCoreConfig.model_validate(
         {
-            "classification": "AEROCLIFF_CORE_VENTURI_LAB",
+            "classification": "VENTURI_CORE_VENTURI_LAB",
             "geometry": {
                 "ride_height_mm": ride_height_mm,
                 "diffuser_angle_deg": diffuser_angle_deg,
@@ -274,7 +274,7 @@ def _run_medium_with_one_continuation(
     overwrite: bool,
 ) -> dict[str, Any]:
     key = f"{ride_height_mm:.0f}mm_{diffuser_angle_deg:.0f}deg"
-    cases_dir = repo_root / "artifacts/aerocliff_core/core_2d_response_map_v0/cases" / key
+    cases_dir = repo_root / "artifacts/venturi_core/core_2d_response_map_v0/cases" / key
     initial = _run_case(
         repo_root=repo_root,
         cases_dir=cases_dir / "initial",
@@ -555,7 +555,7 @@ def _initial_labelled_indices(rows: list[dict[str, Any]]) -> list[int]:
 def _run_replay(rows: list[dict[str, Any]]) -> dict[str, Any]:
     if len(rows) < MIN_CLEAN_CASES_FOR_REPLAY:
         return {
-            "classification": "AEROCLIFF_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
+            "classification": "VENTURI_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
             "accepted": False,
             "reason": "too few clean medium cases for a meaningful 2D replay",
             "records": [],
@@ -617,7 +617,7 @@ def _run_replay(rows: list[dict[str, Any]]) -> dict[str, Any]:
         key=lambda method: summary[method]["area_under_normalised_rmse_mean_curve"],
     )
     return {
-        "classification": "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0",
+        "classification": "VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0",
         "accepted": True,
         "reason": "offline 2D Core pressure/load response-map replay completed",
         "initial_label_count": INITIAL_LABEL_COUNT,
@@ -738,7 +738,7 @@ def _run_fine_sanity_case(
     ride_height_mm = medium["ride_height_mm"]
     angle = medium["diffuser_angle_deg"]
     key = f"{ride_height_mm:.0f}mm_{angle:.0f}deg"
-    cases_dir = repo_root / "artifacts/aerocliff_core/core_2d_response_map_v0/fine_checks" / key
+    cases_dir = repo_root / "artifacts/venturi_core/core_2d_response_map_v0/fine_checks" / key
     initial = _run_case(
         repo_root=repo_root,
         cases_dir=cases_dir / "initial",
@@ -849,7 +849,7 @@ def _release_scope() -> dict[str, bool]:
         "continuous_f_sep_label": False,
         "cliff_boundary_label": False,
         "active_learning_cliff_discovery": False,
-        "full_3d_aerocliff_accuracy": False,
+        "full_3d_extension_accuracy": False,
         "f1_floor_accuracy": False,
         "domino_accuracy": False,
         "live_cfd_savings": False,
@@ -866,7 +866,7 @@ def _write_dataset(
     clean = _clean_rows(rows)
     dataset = {
         "schema_version": DATASET_SCHEMA_VERSION,
-        "classification": "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
+        "classification": "VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
         "accepted": len(clean) >= MIN_CLEAN_CASES_FOR_REPLAY
         and medium_status["stop_reason"] is None,
         "training_eligible": False,
@@ -917,34 +917,34 @@ def _classification_from_results(
     medium_status = dataset["medium_map_status"]
     if medium_status["stop_reason"] is not None:
         return (
-            "AEROCLIFF_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
+            "VENTURI_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
             False,
             False,
             f"medium-map stop condition fired: {medium_status['stop_reason']}",
         )
     if medium_status["clean_case_count"] < MIN_CLEAN_CASES_FOR_REPLAY:
         return (
-            "AEROCLIFF_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
+            "VENTURI_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
             False,
             False,
             "too few clean medium cases for a meaningful replay",
         )
     if not replay.get("accepted", False):
         return (
-            "AEROCLIFF_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
+            "VENTURI_CORE_2D_RESPONSE_MAP_INCONCLUSIVE",
             False,
             False,
             str(replay.get("reason", "replay did not complete")),
         )
     if fine_sanity.get("status") == "ran" and not fine_sanity.get("all_passed", False):
         return (
-            "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_SCREENING_V0",
+            "VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_SCREENING_V0",
             True,
             True,
             "medium 2D replay completed, but representative fine checks make it screening-only",
         )
     return (
-        "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0",
+        "VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0",
         True,
         False,
         (
@@ -1073,10 +1073,10 @@ def _write_report(repo_root: Path, payload: dict[str, Any], dataset: dict[str, A
     replay = payload["replay"]
     medium_status = dataset["medium_map_status"]
     lines = [
-        "# AeroCliff Core 2D Pressure/Load Response-Map Active Replay",
+        "# Venturi Core 2D Pressure/Load Response-Map Active Replay",
         "",
         (
-            "This report upgrades the previous one-dimensional AeroCliff Core replay "
+            "This report upgrades the previous one-dimensional Venturi Core replay "
             "into a small 3 x 5 structured Venturi-underfloor pressure/load response "
             "map. It is continuous response mapping, not cliff classification."
         ),

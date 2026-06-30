@@ -1,20 +1,20 @@
-# AeroMap + AeroCliff Core MVP v0.1
+# AeroMap + Venturi Core MVP v0.1
 
 ## Executive summary
 
-`AEROMAP_AEROCLIFF_CORE_MVP_V0_1` combines three pieces:
+`AEROMAP_VENTURI_CORE_MVP_V0_1` combines three pieces:
 
 1. AeroMap Mission Control, an offline active-learning replay for CFD-label budgets.
 2. A compact DrivAerML bridge that demonstrates 3D automotive-aero scalar ingestion.
-3. AeroCliff Core, a structured Venturi-underfloor pressure/load response benchmark.
+3. Venturi Core, a structured Venturi-underfloor pressure/load response benchmark.
 
 The headline claim is:
 
 > AeroMap learns aerodynamic maps under a CFD-label budget and connects that decision loop to a structured Venturi-underfloor pressure/load response map.
 
-## Why AeroCliff Core exists
+## Why Venturi Core exists
 
-The full AeroCliff geometry is the custom 3D transfer lane. AeroCliff Core is the controlled benchmark tier: it keeps the underfloor throat/diffuser mechanism and replaces the unstructured 3D meshing burden with a structured `blockMesh` setup.
+The full custom 3D geometry is the transfer lane. Venturi Core is the controlled benchmark tier: it keeps the underfloor throat/diffuser mechanism and replaces the unstructured 3D meshing burden with a structured `blockMesh` setup.
 
 Core is intentionally small:
 
@@ -51,7 +51,7 @@ The DrivAerML bridge uses compact root metadata:
 
 Diversity is currently the recommended acquisition policy for this bridge. The point of the bridge is practicability: the same replay machinery handles compact 3D automotive-aero data without downloading volume fields or boundary fields.
 
-## AeroCliff Core response map
+## Venturi Core response map
 
 The Core response map spans:
 
@@ -106,7 +106,7 @@ The surrogate is a deterministic inverse-distance response interpolator. That ke
 Classification:
 
 ```text
-AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0
+VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0
 ```
 
 Replay summary:
@@ -127,7 +127,7 @@ This MVP establishes:
 
 - open-CFD budgeted acquisition on AirfRANS;
 - compact 3D automotive scalar replay on DrivAerML;
-- structured AeroCliff Core pressure/load response mapping;
+- structured Venturi Core pressure/load response mapping;
 - an offline acquisition replay over the Core response surface.
 
 Follow-on work:
@@ -135,19 +135,19 @@ Follow-on work:
 - live CFD scheduling;
 - richer 3D open-data benchmarks;
 - pressure-field or component-level metrics;
-- higher-fidelity custom AeroCliff transfer studies.
+- higher-fidelity custom 3D transfer studies.
 
 ## Artifact index
 
-- Core dataset: `docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json`
-- Core replay: `docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json`
+- Core dataset: `docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json`
+- Core replay: `docs/evidence/cfd/venturi_core/core_2d_response_map_active_replay_v0.json`
 - AirfRANS replay: `docs/evidence/aeromap/airfrans_decision_replay_v03.json`
 - DrivAerML bridge replay: `docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json`
 - Demo: `docs/demo/aeromap_mission_control.html`
 - Main figures:
   - `docs/assets/aeromap/aeromap_headline_geometry_heldout.png`
   - `docs/assets/aeromap/aeromap_system_architecture.png`
-  - `docs/assets/aeromap/aerocliff_core_response_surface.png`
-  - `docs/assets/aeromap/aerocliff_core_pressure_recovery_surface.png`
-  - `docs/assets/aeromap/aerocliff_core_active_replay.png`
-  - `docs/assets/aeromap/aeromap_aerocliff_core_story.png`
+  - `docs/assets/aeromap/venturi_core_response_surface.png`
+  - `docs/assets/aeromap/venturi_core_pressure_recovery_surface.png`
+  - `docs/assets/aeromap/venturi_core_active_replay.png`
+  - `docs/assets/aeromap/aeromap_venturi_core_story.png`

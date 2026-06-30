@@ -1,9 +1,9 @@
-# AeroCliff Core live acquisition loop
+# Venturi Core live acquisition loop
 
 ## Executive summary
 
 This report records the first minimal live/replay Mission Control loop on the
-structured AeroCliff Core pressure/load response map.
+structured Venturi Core pressure/load response map.
 
 The loop starts with three labelled Core cases, fits a lightweight response
 surrogate, selects the next case, ingests the committed Core evidence, and
@@ -69,12 +69,12 @@ Not claimed:
 - field-level surrogate;
 - wall-shear or continuous separation-fraction labels;
 - validated cliff boundary;
-- full 3D AeroCliff accuracy;
+- full 3D extension accuracy;
 - F1 floor accuracy;
 - DoMINO accuracy;
 - industrial live CFD savings.
 
 ## Artifacts
 
-- Manifest: `docs/evidence/cfd/aerocliff_core/live_core_loop_v0_1/live_core_loop_manifest.json`
-- Learning curve: `docs/evidence/cfd/aerocliff_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg`
+- Manifest: `docs/evidence/cfd/venturi_core/live_core_loop_v0_1/live_core_loop_manifest.json`
+- Learning curve: `docs/evidence/cfd/venturi_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg`

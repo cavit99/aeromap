@@ -1,22 +1,22 @@
 {
-  "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1",
+  "classification": "AEROMAP_VENTURI_CORE_MVP_V0_1",
   "established": [
     "AeroMap open-CFD decision benchmark on AirfRANS",
     "DrivAerML compact 3D practicability bridge",
-    "AeroCliff Core accepted attached pressure/load reference",
-    "AeroCliff Core accepted near-cliff/pre-cliff pressure/load reference",
-    "AeroCliff Core separated-candidate pressure/load screening reference",
-    "AeroCliff Core 2D pressure/load response-map active replay"
+    "Venturi Core accepted attached pressure/load reference",
+    "Venturi Core accepted near-cliff/pre-cliff pressure/load reference",
+    "Venturi Core separated-candidate pressure/load screening reference",
+    "Venturi Core 2D pressure/load response-map active replay"
   ],
   "extension_paths": [
     "live CFD scheduling",
     "field-level targets",
     "wall-shear and separation labels after matching validation data",
-    "full 3D AeroCliff transfer",
+    "full 3D extension transfer",
     "DoMINO comparison on accepted custom targets",
     "measured live solver savings"
   ],
-  "primary_headline": "AeroMap Mission Control learns aerodynamic maps under a CFD-label budget, proves the idea on open CFD data, and connects it to a structured AeroCliff Core Venturi-underfloor benchmark through a bounded pressure/load response-map replay.",
+  "primary_headline": "AeroMap Mission Control learns aerodynamic maps under a CFD-label budget, proves the idea on open CFD data, and connects it to a structured Venturi Core Venturi-underfloor benchmark through a bounded pressure/load response-map replay.",
   "source_artifacts": {
     "airfrans_replay": {
       "path": "docs/evidence/aeromap/airfrans_decision_replay_v03.json",
@@ -26,12 +26,12 @@
       "path": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json",
       "sha256": "b29c2e4a122f2cbaad60a5864d151f381364e05869986fb72b4317a6046dda41"
     },
-    "aerocliff_core_2d_dataset": {
-      "path": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json",
+    "venturi_core_2d_dataset": {
+      "path": "docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json",
       "sha256": "202a9e75159f2fbbe63cdc47502f3cde29c53dd66383500768afdfb1936d162a"
     },
-    "aerocliff_core_2d_replay": {
-      "path": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json",
+    "venturi_core_2d_replay": {
+      "path": "docs/evidence/cfd/venturi_core/core_2d_response_map_active_replay_v0.json",
       "sha256": "8394cf116a11292fdad00521a06c74a3cc4564a3769771ccd8e62e3babfac3ab"
     }
   },
@@ -39,7 +39,7 @@
     "release_package_ready": true,
     "open_cfd_result": true,
     "core_underfloor_result": true,
-    "full_3d_aerocliff_extension": true,
+    "full_3d_extension_lane": true,
     "cloud_required": false
   }
 }

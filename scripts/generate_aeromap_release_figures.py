@@ -16,10 +16,8 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "docs/evidence/aeromap/airfrans_decision_replay_v03.json"
 DRIVAER3D = ROOT / "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json"
-CORE_2D_DATASET = ROOT / "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json"
-CORE_2D_REPLAY = (
-    ROOT / "docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json"
-)
+CORE_2D_DATASET = ROOT / "docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json"
+CORE_2D_REPLAY = ROOT / "docs/evidence/cfd/venturi_core/core_2d_response_map_active_replay_v0.json"
 OUT_DIR = ROOT / "docs/assets/aeromap"
 MANIFEST = OUT_DIR / "figures_manifest.json"
 
@@ -32,10 +30,10 @@ FIGURES = {
     "architecture": "aeromap_system_architecture.png",
     "evidence_tiers": "aeromap_evidence_tiers.png",
     "drivaer3d": "drivaerml_3d_bridge_metrics.png",
-    "core_surface": "aerocliff_core_response_surface.png",
-    "core_recovery": "aerocliff_core_pressure_recovery_surface.png",
-    "core_replay": "aerocliff_core_active_replay.png",
-    "core_story": "aeromap_aerocliff_core_story.png",
+    "core_surface": "venturi_core_response_surface.png",
+    "core_recovery": "venturi_core_pressure_recovery_surface.png",
+    "core_replay": "venturi_core_active_replay.png",
+    "core_story": "aeromap_venturi_core_story.png",
 }
 
 METHOD_LABELS = {
@@ -466,7 +464,7 @@ def figure_system_architecture() -> Path:
         (x_cols[0], y_top),
         (box_w, box_h),
         "Evidence sources",
-        "AirfRANS scalars\nDrivAerML metadata\nAeroCliff Core map",
+        "AirfRANS scalars\nDrivAerML metadata\nVenturi Core map",
         color="#eef2ff",
     )
     architecture_box(
@@ -546,7 +544,7 @@ def figure_system_architecture() -> Path:
         0.16,
         (
             "The acquisition policy is separate from the dataset. AirfRANS, "
-            "DrivAerML and AeroCliff Core share the same replay contract."
+            "DrivAerML and Venturi Core share the same replay contract."
         ),
         fontsize=12,
         color=TEXT,
@@ -599,7 +597,7 @@ def figure_evidence_tiers() -> Path:
         ),
         (
             (0.69, 0.50),
-            "AeroCliff\nCore",
+            "Venturi\nCore",
             (
                 "structured Venturi-underfloor map\n"
                 "15 medium cases, 3 fine checks\ncustom pressure/load replay"
@@ -756,7 +754,7 @@ def figure_core_response_surface(dataset: dict[str, Any]) -> Path:
     fig.subplots_adjust(top=0.80, left=0.14, right=0.92, bottom=0.14)
     title(
         fig,
-        "AeroCliff Core response surface: suction/downforce",
+        "Venturi Core response surface: suction/downforce",
         (
             "Structured Core medium map: 15/15 cases passed gates. Values are "
             "pressure/load response targets for the offline replay."
@@ -795,7 +793,7 @@ def figure_core_pressure_recovery(dataset: dict[str, Any]) -> Path:
     fig.subplots_adjust(top=0.80, left=0.14, right=0.92, bottom=0.14)
     title(
         fig,
-        "AeroCliff Core pressure recovery map",
+        "Venturi Core pressure recovery map",
         (
             "Pressure recovery is one of the accepted Core pressure/load response "
             "targets used by the active replay."
@@ -848,7 +846,7 @@ def figure_core_active_replay(replay: dict[str, Any]) -> Path:
     fig.subplots_adjust(top=0.78, left=0.08, right=0.98, bottom=0.18, wspace=0.26)
     title(
         fig,
-        "AeroCliff Core active replay",
+        "Venturi Core active replay",
         (
             "Offline budgeted replay on the 3 x 5 structured Core pressure/load "
             "response map. Lower curve-error area is better."
@@ -910,7 +908,7 @@ def figure_core_story() -> Path:
     ax.set_axis_off()
     title(
         fig,
-        "AeroMap connects to AeroCliff Core",
+        "AeroMap connects to Venturi Core",
         (
             "The project now links simulation-budget selection to a custom structured "
             "Venturi-underfloor pressure/load benchmark."
@@ -925,7 +923,7 @@ def figure_core_story() -> Path:
         ),
         (
             (0.38, 0.52),
-            "AeroCliff Core\nVenturi Lab",
+            "Venturi Core\nVenturi Lab",
             "structured blockMesh benchmark\naccepted pressure/load references",
             "#ecfdf5",
         ),
@@ -1016,29 +1014,29 @@ def write_manifest(paths: list[Path]) -> None:
         ),
         FIGURES[
             "evidence_tiers"
-        ]: "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
+        ]: "AeroMap evidence story: AirfRANS, DrivAerML bridge and Venturi Core.",
         FIGURES[
             "drivaer3d"
         ]: "DrivAerML compact 3D scalar replay metrics; diversity is currently recommended.",
-        FIGURES["core_surface"]: "AeroCliff Core 3 x 5 suction/downforce response surface.",
+        FIGURES["core_surface"]: "Venturi Core 3 x 5 suction/downforce response surface.",
         FIGURES[
             "core_recovery"
-        ]: "AeroCliff Core pressure recovery surface over ride height and diffuser angle.",
+        ]: "Venturi Core pressure recovery surface over ride height and diffuser angle.",
         FIGURES[
             "core_replay"
-        ]: "AeroCliff Core offline response-map active replay method comparison.",
+        ]: "Venturi Core offline response-map active replay method comparison.",
         FIGURES[
             "core_story"
-        ]: "AeroMap to AeroCliff Core workflow for bounded pressure/load response mapping.",
+        ]: "AeroMap to Venturi Core workflow for bounded pressure/load response mapping.",
     }
     payload = {
         "schema_version": "aeromap_release_figures_v1",
-        "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_RELEASE_FIGURES",
+        "classification": "AEROMAP_VENTURI_CORE_MVP_V0_1_RELEASE_FIGURES",
         "source_evidence": {
             "airfrans": str(EVIDENCE.relative_to(ROOT)),
             "drivaerml_bridge": str(DRIVAER3D.relative_to(ROOT)),
-            "aerocliff_core_dataset": str(CORE_2D_DATASET.relative_to(ROOT)),
-            "aerocliff_core_replay": str(CORE_2D_REPLAY.relative_to(ROOT)),
+            "venturi_core_dataset": str(CORE_2D_DATASET.relative_to(ROOT)),
+            "venturi_core_replay": str(CORE_2D_REPLAY.relative_to(ROOT)),
         },
         "evidence_generation_git_sha": current_commit(),
         "git_sha_note": (
@@ -1058,8 +1056,8 @@ def write_manifest(paths: list[Path]) -> None:
 
 
 def _figure_source_case(path_name: str) -> str:
-    if path_name.startswith(("aerocliff_core", "aeromap_aerocliff")):
-        return "AeroCliff Core 2D pressure/load response replay"
+    if path_name.startswith(("venturi_core", "aeromap_venturi")):
+        return "Venturi Core 2D pressure/load response replay"
     if "drivaerml" in path_name or "evidence_tiers" in path_name or "architecture" in path_name:
         return "AeroMap 3D bridge and release context"
     return "AirfRANS v0.3 open-CFD replay"

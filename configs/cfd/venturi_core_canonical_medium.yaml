@@ -1,4 +1,4 @@
-classification: AEROCLIFF_CORE_VENTURI_LAB
+classification: VENTURI_CORE_VENTURI_LAB
 geometry:
   ride_height_mm: 60.0
   diffuser_angle_deg: 1.5

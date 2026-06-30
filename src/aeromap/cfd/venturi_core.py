@@ -1,4 +1,4 @@
-"""Structured AeroCliff Core / Venturi Lab case generation."""
+"""Structured Venturi Core / Venturi Lab case generation."""
 
 from __future__ import annotations
 
@@ -27,19 +27,20 @@ from aeromap.cfd.dictionaries import (
 from aeromap.constants import REF
 from aeromap.io import atomic_write_json, atomic_write_text, sha256_file
 
-VENTURI_CORE_SCHEMA = "aerocliff_core_venturi_lab_v0.1.0"
-VENTURI_CORE_CLASSIFICATION: Literal["AEROCLIFF_CORE_VENTURI_LAB"] = "AEROCLIFF_CORE_VENTURI_LAB"
+VENTURI_CORE_SCHEMA = "venturi_core_venturi_lab_v0.1.0"
+VENTURI_CORE_CLASSIFICATION: Literal["VENTURI_CORE_VENTURI_LAB"] = "VENTURI_CORE_VENTURI_LAB"
 OPENFOAM_VERSION = "OpenFOAM Foundation v13"
 PROFILE_SEGMENT_COUNT = 5
-CORE_METRICS_SCHEMA = "aerocliff_core_case_metrics_v0.2.0"
-CORE_GRID_VALIDATION_SCHEMA = "aerocliff_core_grid_validation_v0.2.0"
+CORE_METRICS_SCHEMA = "venturi_core_case_metrics_v0.2.0"
+CORE_GRID_VALIDATION_SCHEMA = "venturi_core_grid_validation_v0.2.0"
 MASS_IMBALANCE_LIMIT = 0.005
 FORCE_CV_LIMIT = 0.005
 SUCTION_GRID_DIFF_LIMIT = 0.03
 DRAG_GRID_DIFF_LIMIT = 0.05
 PRESSURE_RECOVERY_GRID_DIFF_LIMIT = 0.05
 F_SEP_CLIFF_THRESHOLD = 0.10
-WALL_SHEAR_SIGN_AUDIT_SCHEMA = "aerocliff_core_wallshear_sign_audit_v0.1.0"
+WALL_SHEAR_SIGN_AUDIT_SCHEMA = "venturi_core_wallshear_sign_audit_v0.1.0"
+CASE_ID_COMPAT_CLASSIFICATION_PARTS = ("AEROCLIFF", "CORE", "VENTURI", "LAB")
 
 
 class VenturiCoreGeometryConfig(BaseModel):
@@ -112,7 +113,7 @@ class VenturiCoreConfig(BaseModel):
 
     model_config = ConfigDict(frozen=True)
 
-    classification: Literal["AEROCLIFF_CORE_VENTURI_LAB"] = VENTURI_CORE_CLASSIFICATION
+    classification: Literal["VENTURI_CORE_VENTURI_LAB"] = VENTURI_CORE_CLASSIFICATION
     geometry: VenturiCoreGeometryConfig = VenturiCoreGeometryConfig()
     mesh: VenturiCoreMeshConfig = VenturiCoreMeshConfig()
     solver: VenturiCoreSolverConfig = VenturiCoreSolverConfig()
@@ -216,7 +217,7 @@ def _profile_payload(config: VenturiCoreConfig) -> dict[str, Any]:
             "dynamic_pressure_pa": 0.5 * config.solver.rho_kg_m3 * config.solver.u_inf_m_s**2,
         },
         "claim_boundary": {
-            "full_3d_aerocliff_accuracy": False,
+            "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
             "domino_accuracy": False,
             "training_eligible_before_validation": False,
@@ -667,7 +668,11 @@ def _write_openfoam_file(path: Path, content: str) -> None:
 
 
 def _case_id(config: VenturiCoreConfig) -> str:
-    return stable_id("venturi_core", config.model_dump(mode="json"))
+    payload = config.model_dump(mode="json")
+    # Keep case IDs stable across the public Core rename. The classification is
+    # a display/governance label, not a physical case input.
+    payload["classification"] = "_".join(CASE_ID_COMPAT_CLASSIFICATION_PARTS)
+    return stable_id("venturi_core", payload)
 
 
 def _write_profile_svg(config: VenturiCoreConfig, path: Path) -> None:
@@ -705,7 +710,7 @@ def _write_profile_svg(config: VenturiCoreConfig, path: Path) -> None:
             (f'  <polyline points="{top_points}" fill="none" stroke="#0f766e" stroke-width="4"/>'),
             (
                 f'  <text x="{padding}" y="28" font-family="Arial" '
-                'font-size="20" fill="#111">AeroCliff Core / Venturi Lab profile</text>'
+                'font-size="20" fill="#111">Venturi Core / Venturi Lab profile</text>'
             ),
             (
                 f'  <text x="{padding}" y="{height - 12}" font-family="Arial" '
@@ -1100,7 +1105,7 @@ def write_venturi_core_case_metrics(case_dir: Path, *, out: Path | None = None) 
     boundary_conditions = _boundary_condition_audit(openfoam_dir, config)
     payload: dict[str, Any] = {
         "schema_version": CORE_METRICS_SCHEMA,
-        "classification": "AEROCLIFF_CORE_CASE_METRICS",
+        "classification": "VENTURI_CORE_CASE_METRICS",
         "case_id": case_dir.name,
         "case_dir": str(case_dir),
         "grid": config.mesh.grid,
@@ -1146,7 +1151,7 @@ def write_venturi_core_case_metrics(case_dir: Path, *, out: Path | None = None) 
             "accepted_core_label": False,
             "requires_grid_validation": True,
             "cliff_label_requires_near_cliff_validation": True,
-            "full_3d_aerocliff_accuracy": False,
+            "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
             "domino_accuracy": False,
         },
@@ -1235,7 +1240,7 @@ def write_venturi_core_wallshear_sign_audit(
 
     payload = {
         "schema_version": WALL_SHEAR_SIGN_AUDIT_SCHEMA,
-        "classification": "AEROCLIFF_CORE_WALLSHEAR_SIGN_CONVENTION_AUDIT",
+        "classification": "VENTURI_CORE_WALLSHEAR_SIGN_CONVENTION_AUDIT",
         "cases": cases,
         "finding": (
             "OpenFOAM exported wallShearStress_x is negative on the floor diffuser while "
@@ -1262,7 +1267,7 @@ def write_venturi_core_wallshear_sign_audit(
         "claim_boundary": {
             "core_sign_convention_resolved_for_attached_pressure_load_anchor": True,
             "core_separation_or_cliff_label": False,
-            "full_3d_aerocliff_accuracy": False,
+            "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
             "active_learning_claim": False,
         },
@@ -1354,9 +1359,9 @@ def write_venturi_core_grid_validation(
     payload = {
         "schema_version": CORE_GRID_VALIDATION_SCHEMA,
         "classification": (
-            "AEROCLIFF_CORE_ATTACHED_PRESSURE_LOAD_REFERENCE_V0"
+            "VENTURI_CORE_ATTACHED_PRESSURE_LOAD_REFERENCE_V0"
             if accepted
-            else "AEROCLIFF_CORE_ATTACHED_PRESSURE_LOAD_VALIDATION_FAILED"
+            else "VENTURI_CORE_ATTACHED_PRESSURE_LOAD_VALIDATION_FAILED"
         ),
         "accepted": accepted,
         "training_eligible": accepted,
@@ -1373,7 +1378,7 @@ def write_venturi_core_grid_validation(
             "core_cliff_boundary": False,
             "core_near_cliff_separation": False,
             "wall_shear_magnitude": False,
-            "full_3d_aerocliff": False,
+            "full_3d_extension": False,
         },
         "thresholds": {
             "mass_imbalance": MASS_IMBALANCE_LIMIT,
@@ -1435,7 +1440,7 @@ def write_venturi_core_grid_validation(
             "core_cliff_boundary_label": False,
             "near_cliff_case_validation_required": True,
             "separation_fraction_label": False,
-            "full_3d_aerocliff_accuracy": False,
+            "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
             "domino_accuracy": False,
             "active_learning_claim": False,
@@ -1574,10 +1579,10 @@ def write_venturi_core_design_report(*, config: VenturiCoreConfig, out: Path) ->
     payload = _profile_payload(config)
     atomic_write_json(out.with_suffix(".json"), payload)
     lines = [
-        "# AeroCliff Core / Venturi Lab",
+        "# Venturi Core / Venturi Lab",
         "",
         (
-            "AeroCliff Core is a controlled 2.5D Venturi-underfloor benchmark. "
+            "Venturi Core is a controlled 2.5D Venturi-underfloor benchmark. "
             "It keeps the original cliff-loop idea but removes the full 3D "
             "snappyHexMesh/CAD fragility from the first accepted-label path."
         ),
@@ -1587,7 +1592,7 @@ def write_venturi_core_design_report(*, config: VenturiCoreConfig, out: Path) ->
         f"- classification: `{VENTURI_CORE_CLASSIFICATION}`",
         "- cloud: not required",
         "- NIM/DoMINO: not used",
-        "- full 3D AeroCliff: paused",
+        "- full 3D extension: paused",
         "",
         "## Geometry",
         "",
@@ -1637,7 +1642,7 @@ def write_venturi_core_design_report(*, config: VenturiCoreConfig, out: Path) ->
                 "labels once mesh/solve checks pass."
             ),
             (
-                "- Not allowed: full F1 floor accuracy, full 3D AeroCliff accuracy, "
+                "- Not allowed: full F1 floor accuracy, full 3D extension accuracy, "
                 "DoMINO accuracy, or training eligibility before validation."
             ),
         ],

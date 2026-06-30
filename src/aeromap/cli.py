@@ -534,7 +534,7 @@ def cfd_build(
 @cfd_app.command("build-venturi-core")
 def cfd_build_venturi_core(
     out: Annotated[Path, typer.Option("--out", file_okay=False)] = Path(
-        "artifacts/aerocliff_core/cases",
+        "artifacts/venturi_core/cases",
     ),
     config_path: Annotated[
         Path | None,
@@ -543,7 +543,7 @@ def cfd_build_venturi_core(
     *,
     overwrite: Annotated[bool, typer.Option("--overwrite/--no-overwrite")] = False,
 ) -> None:
-    """Build a structured AeroCliff Core / Venturi Lab case without snappyHexMesh."""
+    """Build a structured Venturi Core / Venturi Lab case without snappyHexMesh."""
 
     try:
         artifacts = build_venturi_core_case(
@@ -574,14 +574,14 @@ def cfd_build_venturi_core(
 @cfd_app.command("venturi-core-report")
 def cfd_venturi_core_report(
     out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "docs/reports/aerocliff_core_venturi_lab.md",
+        "docs/reports/venturi_core_venturi_lab.md",
     ),
     config_path: Annotated[
         Path | None,
         typer.Option("--config", exists=True, dir_okay=False),
     ] = Path("configs/cfd/venturi_core_canonical_medium.yaml"),
 ) -> None:
-    """Write the AeroCliff Core design and claim-boundary report."""
+    """Write the Venturi Core design and claim-boundary report."""
 
     report_path = write_venturi_core_design_report(
         config=_load_venturi_core_config(config_path),
@@ -611,7 +611,7 @@ def cfd_validate_venturi_core_grids(
     medium_case: Annotated[Path, typer.Option("--medium", exists=True, file_okay=False)],
     fine_case: Annotated[Path, typer.Option("--fine", exists=True, file_okay=False)],
     out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "docs/evidence/cfd/aerocliff_core/canonical_three_grid_validation.json",
+        "docs/evidence/cfd/venturi_core/canonical_three_grid_validation.json",
     ),
 ) -> None:
     """Validate the canonical Core anchor against a coarse/medium/fine grid family."""
@@ -635,7 +635,7 @@ def cfd_audit_venturi_core_wallshear(
     medium_case: Annotated[Path, typer.Option("--medium", exists=True, file_okay=False)],
     fine_case: Annotated[Path, typer.Option("--fine", exists=True, file_okay=False)],
     out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "docs/evidence/cfd/aerocliff_core/wallshear_sign_convention_audit.json",
+        "docs/evidence/cfd/venturi_core/wallshear_sign_convention_audit.json",
     ),
 ) -> None:
     """Audit Core wallShearStress sign convention against near-wall velocity."""
@@ -2282,7 +2282,7 @@ def benchmark_live_core_loop(
     overwrite: Annotated[bool, typer.Option("--overwrite/--no-overwrite")] = False,
     random_seed: Annotated[int, typer.Option("--random-seed")] = 20260630,
 ) -> None:
-    """Run a local live/replay acquisition loop on the AeroCliff Core map."""
+    """Run a local live/replay acquisition loop on the Venturi Core map."""
 
     try:
         manifest_path = write_live_core_acquisition_loop(

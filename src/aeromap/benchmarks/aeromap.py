@@ -190,14 +190,14 @@ def build_aeromap_plan(config: AeroMapConfig) -> dict[str, Any]:
                 "purpose": "learn aerodynamic behaviour under limited CFD labels",
             },
             "lane_b": {
-                "name": "AEROCLIFF_CORE_EXTENSION",
+                "name": "VENTURI_CORE_EXTENSION",
                 "purpose": "custom underfloor Core benchmark and future 3D transfer lane",
             },
         },
         "dataset_order": [
             "AirfRANS first if scalar coefficient contract is defensible",
             "3D automotive open data only after the first learning curve",
-            "AeroCliff Core extension after custom targets are available",
+            "Venturi Core extension after custom targets are available",
         ],
         "cost_policy": {
             "cloud": "forbidden_for_this_goal",

@@ -240,7 +240,7 @@ def summarize_reference_lane(*, case_name: str, mode: str, out_dir: Path) -> Pat
         "source": "OpenFOAM Foundation v13 installed tutorials",
         "non_headline": True,
         "purpose": (
-            "Reference-lane diagnostics only; outside the AeroCliff Core benchmark "
+            "Reference-lane diagnostics only; outside the Venturi Core benchmark "
             "and public scientific results."
         ),
         "case_dir": str(case_dir),

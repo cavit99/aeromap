@@ -227,18 +227,18 @@
   </section>
 
   <section id="core">
-    <h2>AeroCliff Core response map</h2>
-    <p class="lead">AeroCliff Core is a structured Venturi-underfloor benchmark. It gives Mission Control a custom pressure/load response surface for the public MVP.</p>
+    <h2>Venturi Core response map</h2>
+    <p class="lead">Venturi Core is a structured Venturi-underfloor benchmark. It gives Mission Control a custom pressure/load response surface for the public MVP.</p>
     <div class="three flow">
       <div class="stat"><p>Medium map</p><strong>15/15</strong></div>
       <div class="stat"><p>Fine sanity</p><strong>3/3</strong></div>
       <div class="stat"><p>Best replay</p><strong>Utility</strong></div>
     </div>
     <div class="two flow">
-      <img class="img-frame" src="../assets/aeromap/aerocliff_core_response_surface.png" alt="AeroCliff Core suction response surface">
-      <img class="img-frame" src="../assets/aeromap/aerocliff_core_pressure_recovery_surface.png" alt="AeroCliff Core pressure recovery surface">
+      <img class="img-frame" src="../assets/aeromap/venturi_core_response_surface.png" alt="Venturi Core suction response surface">
+      <img class="img-frame" src="../assets/aeromap/venturi_core_pressure_recovery_surface.png" alt="Venturi Core pressure recovery surface">
     </div>
-    <img class="img-frame flow" src="../assets/aeromap/aerocliff_core_active_replay.png" alt="AeroCliff Core active replay">
+    <img class="img-frame flow" src="../assets/aeromap/venturi_core_active_replay.png" alt="Venturi Core active replay">
     <div class="two flow">
       <div class="panel claim">
         <h3>Core result</h3>
@@ -281,13 +281,13 @@
         </ul>
       </div>
     </div>
-    <img class="img-frame flow" src="../evidence/cfd/aerocliff_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg" alt="AeroCliff Core live acquisition loop learning curve">
+    <img class="img-frame flow" src="../evidence/cfd/venturi_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg" alt="Venturi Core live acquisition loop learning curve">
   </section>
 
   <section id="extension">
     <h2>Core benchmark and 3D extension</h2>
-    <p class="lead">AeroCliff Core is the custom underfloor benchmark inside AeroMap. The full 3D extension lane builds from the same data contracts when higher-fidelity targets are available.</p>
-    <img class="img-frame flow" src="../assets/aeromap/aeromap_aerocliff_core_story.png" alt="AeroMap to AeroCliff Core story">
+    <p class="lead">Venturi Core is the custom underfloor benchmark inside AeroMap. The full 3D extension lane builds from the same data contracts when higher-fidelity targets are available.</p>
+    <img class="img-frame flow" src="../assets/aeromap/aeromap_venturi_core_story.png" alt="AeroMap to Venturi Core story">
   </section>
 
   <section id="scope">
@@ -301,7 +301,7 @@
           <li>Regret-aware utility v2 leads multiple geometry-generalisation decision metrics.</li>
           <li>Compact DrivAerML 3D scalar bridge with real STL geometry ingestion.</li>
           <li>Domain-specific acquisition policy selector.</li>
-          <li>Structured AeroCliff Core pressure/load response-map replay.</li>
+          <li>Structured Venturi Core pressure/load response-map replay.</li>
           <li>Local Core live/replay acquisition loop with committed evidence ingestion.</li>
           <li>Runs locally for this benchmark replay.</li>
         </ul>
@@ -312,14 +312,14 @@
           <li>Generate new local Core CFD cases when selected evidence is missing.</li>
           <li>Richer 3D or field-level targets.</li>
           <li>Wall-shear or separation labels after matching validation data.</li>
-          <li>Full 3D AeroCliff transfer.</li>
+          <li>Full 3D extension transfer.</li>
         </ul>
       </div>
     </div>
   </section>
 
   <footer>
-    AeroMap + AeroCliff Core MVP v0.1. Evidence sources: AirfRANS open-CFD replay, DrivAerML compact 3D scalar bridge and structured AeroCliff Core pressure/load response replay.
+    AeroMap + Venturi Core MVP v0.1. Evidence sources: AirfRANS open-CFD replay, DrivAerML compact 3D scalar bridge and structured Venturi Core pressure/load response replay.
   </footer>
 </body>
 </html>

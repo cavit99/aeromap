@@ -1,4 +1,4 @@
-"""Minimal live/replay acquisition loop for the structured AeroCliff Core map."""
+"""Minimal live/replay acquisition loop for the structured Venturi Core map."""
 
 from __future__ import annotations
 
@@ -14,9 +14,9 @@ from aeromap.io import atomic_write_json, atomic_write_text, sha256_file
 
 SCHEMA_VERSION = "aeromap_live_core_acquisition_loop_v0.1.0"
 CLASSIFICATION = "AEROMAP_LIVE_CORE_ACQUISITION_LOOP_V0_1"
-DEFAULT_DATASET_PATH = Path("docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json")
-DEFAULT_OUTPUT_DIR = Path("docs/evidence/cfd/aerocliff_core/live_core_loop_v0_1")
-DEFAULT_REPORT_PATH = Path("docs/reports/aerocliff_core_live_acquisition_loop.md")
+DEFAULT_DATASET_PATH = Path("docs/evidence/cfd/venturi_core/core_2d_response_map_dataset_v0.json")
+DEFAULT_OUTPUT_DIR = Path("docs/evidence/cfd/venturi_core/live_core_loop_v0_1")
+DEFAULT_REPORT_PATH = Path("docs/reports/venturi_core_live_acquisition_loop.md")
 TARGET_NAMES = ("C_D", "suction_downforce", "pressure_recovery")
 DEFAULT_INITIAL_CASES = ("50mm/3deg", "60mm/5deg", "70mm/7deg")
 DEFAULT_POLICIES = (
@@ -122,7 +122,7 @@ def write_live_core_acquisition_loop(
             "classification": dataset.get("classification"),
             "clean_case_count": len(cases),
         },
-        "target_family": "AEROCLIFF_CORE_PRESSURE_LOAD_RESPONSE_MAP",
+        "target_family": "VENTURI_CORE_PRESSURE_LOAD_RESPONSE_MAP",
         "allowed_targets": list(TARGET_NAMES),
         "diagnostic_only": [
             "diagnostic_corrected_f_sep",
@@ -593,7 +593,7 @@ def _claim_boundary() -> dict[str, bool]:
         "continuous_f_sep_label": False,
         "cliff_boundary_label": False,
         "field_level_surrogate": False,
-        "full_3d_aerocliff_accuracy": False,
+        "full_3d_extension_accuracy": False,
         "f1_floor_accuracy": False,
         "domino_accuracy": False,
         "industrial_live_cfd_savings": False,
@@ -661,7 +661,7 @@ def _write_learning_curve_svg(summary_by_method: dict[str, dict[str, Any]], path
         '<rect width="100%" height="100%" fill="#ffffff"/>',
         (
             f'<text x="{left}" y="24" font-family="Arial" font-size="20" '
-            'font-weight="700" fill="#111">AeroCliff Core live/replay '
+            'font-weight="700" fill="#111">Venturi Core live/replay '
             "acquisition loop</text>"
         ),
         (
@@ -736,12 +736,12 @@ def _write_report(path: Path, payload: dict[str, Any]) -> None:
         selection_rows.append(
             f"| {selection['iteration']} | {selected_case['case_key']} | {selection['reason']} |"
         )
-    report = f"""# AeroCliff Core live acquisition loop
+    report = f"""# Venturi Core live acquisition loop
 
 ## Executive summary
 
 This report records the first minimal live/replay Mission Control loop on the
-structured AeroCliff Core pressure/load response map.
+structured Venturi Core pressure/load response map.
 
 The loop starts with three labelled Core cases, fits a lightweight response
 surrogate, selects the next case, ingests the committed Core evidence, and
@@ -795,7 +795,7 @@ Not claimed:
 - field-level surrogate;
 - wall-shear or continuous separation-fraction labels;
 - validated cliff boundary;
-- full 3D AeroCliff accuracy;
+- full 3D extension accuracy;
 - F1 floor accuracy;
 - DoMINO accuracy;
 - industrial live CFD savings.

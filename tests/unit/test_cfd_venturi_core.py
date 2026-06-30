@@ -68,7 +68,7 @@ def test_build_venturi_core_case_writes_structured_openfoam_layout(tmp_path: Pat
     manifest = json.loads((case_dir / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["classification"] == VENTURI_CORE_CLASSIFICATION
     assert manifest["status"] == "BUILT_NOT_RUN"
-    assert manifest["claim_boundary"]["full_3d_aerocliff_accuracy"] is False
+    assert manifest["claim_boundary"]["full_3d_extension_accuracy"] is False
     assert manifest["claim_boundary"]["structured_venturi_underfloor_benchmark"] is True
 
 
@@ -89,7 +89,7 @@ def test_write_venturi_core_design_report_has_claim_boundary(tmp_path: Path) -> 
 
     text = report.read_text(encoding="utf-8")
     payload = json.loads((tmp_path / "core.json").read_text(encoding="utf-8"))
-    assert "AeroCliff Core / Venturi Lab" in text
+    assert "Venturi Core / Venturi Lab" in text
     assert "No `snappyHexMesh`" in text
     assert payload["classification"] == VENTURI_CORE_CLASSIFICATION
     assert payload["claim_boundary"]["training_eligible_before_validation"] is False
@@ -192,11 +192,11 @@ def test_write_venturi_core_grid_validation_accepts_target_specific_core_referen
     )
 
     payload = json.loads(result.read_text(encoding="utf-8"))
-    assert payload["classification"] == "AEROCLIFF_CORE_ATTACHED_PRESSURE_LOAD_REFERENCE_V0"
+    assert payload["classification"] == "VENTURI_CORE_ATTACHED_PRESSURE_LOAD_REFERENCE_V0"
     assert payload["accepted"] is True
     assert payload["eligible_targets"]["core_attached_drag"] is True
     assert payload["eligible_targets"]["core_cliff_boundary"] is False
-    assert payload["eligible_targets"]["full_3d_aerocliff"] is False
+    assert payload["eligible_targets"]["full_3d_extension"] is False
 
 
 def test_write_venturi_core_grid_validation_rejects_grid_sensitive_core_reference(
@@ -235,6 +235,6 @@ def test_write_venturi_core_grid_validation_rejects_grid_sensitive_core_referenc
     )
 
     payload = json.loads(result.read_text(encoding="utf-8"))
-    assert payload["classification"] == "AEROCLIFF_CORE_ATTACHED_PRESSURE_LOAD_VALIDATION_FAILED"
+    assert payload["classification"] == "VENTURI_CORE_ATTACHED_PRESSURE_LOAD_VALIDATION_FAILED"
     assert payload["accepted"] is False
     assert payload["eligible_targets"]["core_attached_drag"] is False

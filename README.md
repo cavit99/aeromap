@@ -130,9 +130,9 @@ Venturi Core is a structured underfloor benchmark built to connect Mission Contr
 | Replay result | engineering utility and cost-aware utility tie for best curve-error area |
 | Live/replay loop | model selects Core cases, committed evidence is ingested, map metrics update |
 
-![Venturi Core suction response](docs/assets/aeromap/aerocliff_core_response_surface.png)
+![Venturi Core suction response](docs/assets/aeromap/venturi_core_response_surface.png)
 
-![Venturi Core active replay](docs/assets/aeromap/aerocliff_core_active_replay.png)
+![Venturi Core active replay](docs/assets/aeromap/venturi_core_active_replay.png)
 
 This Core tier gives the project a custom underfloor response surface while keeping the claim focused on pressure/load mapping.
 
@@ -142,7 +142,7 @@ the response-map metrics after each selection. Diversity is still slightly best
 by curve-error area on this small pool, while engineering utility and cost-aware
 utility reduce error versus the averaged random baseline.
 
-Details: [docs/reports/aerocliff_core_live_acquisition_loop.md](docs/reports/aerocliff_core_live_acquisition_loop.md)
+Details: [docs/reports/venturi_core_live_acquisition_loop.md](docs/reports/venturi_core_live_acquisition_loop.md)
 
 ## Reproduce the main results
 

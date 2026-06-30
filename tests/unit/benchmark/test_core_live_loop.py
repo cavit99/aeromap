@@ -38,7 +38,7 @@ def _write_dataset(path: Path) -> None:
     ]
     payload = {
         "schema_version": "unit",
-        "classification": "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
+        "classification": "VENTURI_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
         "accepted": True,
         "training_eligible": False,
         "cases": cases,

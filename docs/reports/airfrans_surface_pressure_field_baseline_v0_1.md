@@ -104,7 +104,7 @@ Allowed:
 Not claimed:
 
 - F1 geometry;
-- AeroCliff accuracy;
+- custom 3D accuracy;
 - DoMINO replacement;
 - field-level state of the art;
 - live CFD savings;
