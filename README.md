@@ -1,8 +1,8 @@
 # AeroMap Mission Control
 
-**AeroMap Mission Control is a simulation-budget decision system for aerodynamic maps.**
+**AeroMap Mission Control is an active-learning system for aerodynamic maps under a limited CFD budget.**
 
-It trains a surrogate on the CFD cases available so far, estimates where the map is uncertain or decision-sensitive, and recommends the next simulation to run. The current release proves that loop on open CFD data, checks a compact 3D automotive bridge, and connects the same workflow to a structured Venturi-underfloor benchmark.
+It trains a surrogate on existing CFD cases, estimates where predictions are uncertain or important for design decisions, and recommends the next simulation to run. The current release demonstrates the workflow on AirfRANS, adds a compact DrivAerML 3D bridge, and connects the same loop to a structured Venturi-underfloor benchmark.
 
 ![Geometry-disjoint benchmark](docs/assets/aeromap/aeromap_headline_geometry_heldout.png)
 
