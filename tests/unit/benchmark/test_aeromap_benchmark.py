@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import numpy as np
+import pyvista as pv
 from typer.testing import CliRunner
 
 from aeromap.benchmarks.aeromap import (
@@ -25,6 +26,7 @@ from aeromap.benchmarks.aeromap3d import (
     build_drivaerml_scalar_bridge_dataset_from_paths,
     write_geometry_readiness_sample,
 )
+from aeromap.benchmarks.airfrans_field import run_airfrans_surface_pressure_baseline
 from aeromap.cli import app
 
 
@@ -229,6 +231,70 @@ def test_decision_replay_v03_reports_statistics_and_regret_aware_method(
     assert report["statistics"]["geometry_heldout"]["learning_curve_area"]
     assert "portfolio_headline_ready" in report["headline_readiness"]
     assert (tmp_path / "airfrans_v03_map_completion_regret.svg").exists()
+
+
+def _write_airfrans_surface_fixture(root: Path, case_id: str, *, pressure_offset: float) -> None:
+    case_dir = root / case_id
+    case_dir.mkdir(parents=True)
+    x = np.linspace(0.0, 1.0, 9)
+    y = 0.04 * np.sin(np.pi * x) + 0.001 * pressure_offset
+    points = np.column_stack([x, y, np.full_like(x, 0.5)])
+    lines = []
+    for idx in range(points.shape[0] - 1):
+        lines.extend([2, idx, idx + 1])
+    mesh = pv.PolyData(points, lines=np.asarray(lines))
+    cell_count = points.shape[0] - 1
+    centers_x = 0.5 * (x[:-1] + x[1:])
+    pressure = pressure_offset + 5.0 * centers_x + 0.5 * centers_x**2
+    mesh.cell_data["p"] = pressure.astype(np.float32)
+    mesh.cell_data["Normals"] = np.tile(
+        np.array([[0.0, 1.0, 0.0]], dtype=np.float32), (cell_count, 1)
+    )
+    mesh.cell_data["Length"] = np.full(cell_count, 1.0 / cell_count, dtype=np.float64)
+    mesh.save(case_dir / f"{case_id}_aerofoil.vtp")
+
+
+def test_airfrans_surface_pressure_baseline_runs_on_fixture(tmp_path: Path) -> None:
+    dataset_root = tmp_path / "processed" / "Dataset"
+    train = [
+        "airFoil2D_SST_40.0_0.0_0.5_3.0_0.0_8.0",
+        "airFoil2D_SST_42.0_2.0_0.6_3.5_1.0_9.0",
+        "airFoil2D_SST_44.0_4.0_0.7_4.0_0.0_10.0",
+        "airFoil2D_SST_46.0_6.0_0.8_4.5_1.0_11.0",
+    ]
+    test = [
+        "airFoil2D_SST_48.0_8.0_0.9_5.0_0.0_12.0",
+        "airFoil2D_SST_50.0_10.0_1.0_5.5_1.0_13.0",
+    ]
+    for idx, case_id in enumerate([*train, *test]):
+        _write_airfrans_surface_fixture(dataset_root, case_id, pressure_offset=float(idx))
+    (dataset_root / "manifest.json").write_text(
+        json.dumps({"full_train": train, "full_test": test}),
+        encoding="utf-8",
+    )
+
+    report_path = run_airfrans_surface_pressure_baseline(
+        root=tmp_path / "processed",
+        out=tmp_path / "field.json",
+        visual_out=tmp_path / "field.png",
+        summary_plot_out=tmp_path / "summary.png",
+        train_cases=3,
+        val_cases=1,
+        test_cases=2,
+        epochs=1,
+        batch_size=16,
+        hidden_width=8,
+        seed=123,
+    )
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    assert report["classification"] == "AEROMAP_AIRFRANS_SURFACE_PRESSURE_FIELD_BASELINE_V0_1"
+    assert report["split"]["train_cases"] == 3
+    assert report["split"]["test_cases"] == 2
+    assert set(report["metrics"]["by_method"]) == {"train_mean", "nearest_case", "pointwise_mlp"}
+    assert report["claim_boundary"]["field_level_baseline"] is True
+    assert (tmp_path / "field.png").exists()
+    assert (tmp_path / "summary.png").exists()
 
 
 def test_aeromap3d_scalar_bridge_dataset_uses_compact_drivaerml_csvs(

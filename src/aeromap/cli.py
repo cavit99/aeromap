@@ -40,6 +40,7 @@ from aeromap.benchmarks.aeromap_cost import (
     write_cost_proxy_audit,
     write_surface_field_feasibility_precheck,
 )
+from aeromap.benchmarks.airfrans_field import run_airfrans_surface_pressure_baseline
 from aeromap.benchmarks.core_live_loop import (
     DEFAULT_DATASET_PATH as LIVE_CORE_DEFAULT_DATASET_PATH,
 )
@@ -1939,6 +1940,63 @@ def benchmark_aeromap_decision_replay_v03(
         ],
         "open_cfd_result": payload["claim_boundary"]["open_cfd_result"],
         "svg_dir": str(svg_dir) if svg_dir is not None else None,
+    }
+    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
+
+
+@benchmark_app.command("airfrans-field-baseline")
+def benchmark_airfrans_field_baseline(
+    root: Annotated[
+        Path,
+        typer.Option("--root", exists=True, file_okay=False, readable=True),
+    ] = Path("artifacts/benchmark/airfrans/processed"),
+    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
+        "docs/evidence/field/airfrans_surface_pressure_baseline_v0_1.json",
+    ),
+    visual_out: Annotated[Path, typer.Option("--visual-out", dir_okay=False)] = Path(
+        "docs/assets/aeromap/airfrans_surface_pressure_field_examples.png",
+    ),
+    summary_plot_out: Annotated[Path, typer.Option("--summary-plot-out", dir_okay=False)] = Path(
+        "docs/assets/aeromap/airfrans_surface_pressure_baseline_metrics.png",
+    ),
+    train_cases: Annotated[int, typer.Option("--train-cases", min=2)] = 80,
+    val_cases: Annotated[int, typer.Option("--val-cases", min=1)] = 16,
+    test_cases: Annotated[int, typer.Option("--test-cases", min=1)] = 32,
+    epochs: Annotated[int, typer.Option("--epochs", min=1)] = 80,
+    batch_size: Annotated[int, typer.Option("--batch-size", min=16)] = 8192,
+    hidden_width: Annotated[int, typer.Option("--hidden-width", min=8)] = 64,
+    seed: Annotated[int, typer.Option("--seed")] = 20260630,
+) -> None:
+    """Train a compact AirfRANS surface-pressure field baseline."""
+
+    try:
+        report_path = run_airfrans_surface_pressure_baseline(
+            root=root,
+            out=out,
+            visual_out=visual_out,
+            summary_plot_out=summary_plot_out,
+            train_cases=train_cases,
+            val_cases=val_cases,
+            test_cases=test_cases,
+            epochs=epochs,
+            batch_size=batch_size,
+            hidden_width=hidden_width,
+            seed=seed,
+        )
+    except (OSError, RuntimeError, ValueError, FileNotFoundError) as exc:
+        typer.echo(f"AirfRANS field baseline failed: {exc}", err=True)
+        raise typer.Exit(2) from exc
+    payload = json.loads(report_path.read_text(encoding="utf-8"))
+    summary = {
+        "path": str(report_path),
+        "classification": payload["classification"],
+        "train_cases": payload["split"]["train_cases"],
+        "test_cases": payload["split"]["test_cases"],
+        "best_method_by_rmse": payload["metrics"]["best_method_by_rmse"],
+        "pointwise_mlp_rmse": payload["metrics"]["by_method"]["pointwise_mlp"]["rmse"],
+        "nearest_case_rmse": payload["metrics"]["by_method"]["nearest_case"]["rmse"],
+        "visual_panel": payload["artifacts"]["visual_panel"],
+        "summary_plot": payload["artifacts"]["summary_plot"],
     }
     typer.echo(json.dumps(summary, indent=2, sort_keys=True))
 

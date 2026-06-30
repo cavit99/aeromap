@@ -1,0 +1,337 @@
+{
+  "artifacts": {
+    "summary_plot": "docs/assets/aeromap/airfrans_surface_pressure_baseline_metrics.png",
+    "visual_panel": "docs/assets/aeromap/airfrans_surface_pressure_field_examples.png"
+  },
+  "baselines": {
+    "nearest_case": "nearest training case in standardised case-feature space, then nearest surface coordinate on that case",
+    "train_mean": "length-weighted mean pressure coefficient from training surface points"
+  },
+  "claim_boundary": {
+    "airfrans_surface_pressure_only": true,
+    "field_level_baseline": true,
+    "not_aerocliff_accuracy": true,
+    "not_domino_replacement": true,
+    "not_f1_geometry": true,
+    "not_live_cfd_savings": true,
+    "not_sota": true,
+    "open_cfd_result": true
+  },
+  "classification": "AEROMAP_AIRFRANS_SURFACE_PRESSURE_FIELD_BASELINE_V0_1",
+  "field_contract": {
+    "inputs": [
+      "surface cell center x",
+      "surface cell center y",
+      "surface normal x",
+      "surface normal y",
+      "case operating-condition features",
+      "compact airfoil geometry descriptors"
+    ],
+    "normalisation_basis": "matches the AirfRANS package convention used for pressure in boundary_layer() with compressible=False",
+    "surface_file": "<case>/<case>_aerofoil.vtp",
+    "target": "surface_pressure_coefficient_like",
+    "target_formula": "Cp_like = p / (0.5 * U_inf**2)",
+    "target_raw_field": "cell_data['p']",
+    "weights": "surface cell Length; metrics are length-weighted"
+  },
+  "metrics": {
+    "best_method_by_rmse": "pointwise_mlp",
+    "by_method": {
+      "nearest_case": {
+        "mae": 0.16141887541651945,
+        "max_abs_error": 7.342390074066978,
+        "nrmse_p95_p05": 0.1668045388520127,
+        "rmse": 0.32812799384268665
+      },
+      "pointwise_mlp": {
+        "mae": 0.07045822823623651,
+        "max_abs_error": 2.0876601786514986,
+        "nrmse_p95_p05": 0.06013538410695665,
+        "rmse": 0.11829476033311773
+      },
+      "train_mean": {
+        "mae": 0.4558217574468555,
+        "max_abs_error": 10.987506726838532,
+        "nrmse_p95_p05": 0.3700560417904532,
+        "rmse": 0.7279522933713123
+      }
+    },
+    "formulae": {
+      "mae": "sum_i w_i |prediction_i - target_i| / sum_i w_i",
+      "nrmse_p95_p05": "rmse / (weighted_p95(target) - weighted_p05(target))",
+      "rmse": "sqrt(sum_i w_i (prediction_i - target_i)^2 / sum_i w_i)"
+    },
+    "nearest_case_mapping_sample": {
+      "airFoil2D_SST_31.812_1.334_0.371_3.287_0.0_19.548": "airFoil2D_SST_33.854_5.282_1.425_3.167_15.694",
+      "airFoil2D_SST_37.251_6.299_1.193_5.155_17.506": "airFoil2D_SST_33.854_5.282_1.425_3.167_15.694",
+      "airFoil2D_SST_39.741_14.642_3.175_3.316_1.0_10.583": "airFoil2D_SST_44.858_13.36_1.546_3.174_1.0_10.604",
+      "airFoil2D_SST_43.677_-1.764_0.243_7.109_0.0_19.17": "airFoil2D_SST_42.444_-2.735_2.719_5.132_0.0_18.918",
+      "airFoil2D_SST_58.451_-4.262_3.372_4.615_1.0_19.965": "airFoil2D_SST_53.127_-0.9_3.678_4.25_0.0_19.817",
+      "airFoil2D_SST_61.728_9.994_3.311_7.957_1.0_7.685": "airFoil2D_SST_62.922_8.801_2.248_5.618_1.0_8.267",
+      "airFoil2D_SST_65.202_-3.411_1.499_5.063_12.467": "airFoil2D_SST_68.639_-1.768_1.619_3.151_13.57",
+      "airFoil2D_SST_80.247_1.078_1.298_5.983_0.0_5.593": "airFoil2D_SST_86.207_1.627_2.492_4.557_9.268",
+      "airFoil2D_SST_85.752_6.341_0.382_6.715_8.448": "airFoil2D_SST_67.2_1.74_0.558_5.716_0.0_11.005",
+      "airFoil2D_SST_86.75_14.13_0.471_5.71_17.904": "airFoil2D_SST_90.26_10.644_0.076_3.962_1.0_18.874"
+    },
+    "pointwise_mlp_per_case": [
+      {
+        "case_id": "airFoil2D_SST_31.812_1.334_0.371_3.287_0.0_19.548",
+        "mae": 0.06410229488844531,
+        "max_abs_error": 0.16024873151138738,
+        "nrmse_p95_p05": 0.06858943508000892,
+        "rmse": 0.07288186362684132
+      },
+      {
+        "case_id": "airFoil2D_SST_39.741_14.642_3.175_3.316_1.0_10.583",
+        "mae": 0.14777399155760032,
+        "max_abs_error": 1.58650667506503,
+        "nrmse_p95_p05": 0.05504445289972273,
+        "rmse": 0.2570763202102693
+      },
+      {
+        "case_id": "airFoil2D_SST_85.752_6.341_0.382_6.715_8.448",
+        "mae": 0.11110735667811253,
+        "max_abs_error": 0.5587665798787702,
+        "nrmse_p95_p05": 0.07768694203201781,
+        "rmse": 0.12936058453091565
+      },
+      {
+        "case_id": "airFoil2D_SST_80.247_1.078_1.298_5.983_0.0_5.593",
+        "mae": 0.06154465314973211,
+        "max_abs_error": 1.7374826047210417,
+        "nrmse_p95_p05": 0.2461484268366104,
+        "rmse": 0.11753465718226717
+      },
+      {
+        "case_id": "airFoil2D_SST_61.728_9.994_3.311_7.957_1.0_7.685",
+        "mae": 0.07826871537635019,
+        "max_abs_error": 1.7732382085134422,
+        "nrmse_p95_p05": 0.05066878353743525,
+        "rmse": 0.14350703070289406
+      },
+      {
+        "case_id": "airFoil2D_SST_65.202_-3.411_1.499_5.063_12.467",
+        "mae": 0.06647171085017525,
+        "max_abs_error": 0.5089362886346118,
+        "nrmse_p95_p05": 0.09697171272679056,
+        "rmse": 0.0984293386583669
+      },
+      {
+        "case_id": "airFoil2D_SST_58.451_-4.262_3.372_4.615_1.0_19.965",
+        "mae": 0.09473726078381434,
+        "max_abs_error": 0.5425311332817627,
+        "nrmse_p95_p05": 0.11122383615165155,
+        "rmse": 0.13245930243548315
+      },
+      {
+        "case_id": "airFoil2D_SST_86.75_14.13_0.471_5.71_17.904",
+        "mae": 0.09852637798747757,
+        "max_abs_error": 0.6709444966778841,
+        "nrmse_p95_p05": 0.040060616840937896,
+        "rmse": 0.15834871851514823
+      },
+      {
+        "case_id": "airFoil2D_SST_37.251_6.299_1.193_5.155_17.506",
+        "mae": 0.04693891025822201,
+        "max_abs_error": 0.3288809175916323,
+        "nrmse_p95_p05": 0.03844598346732597,
+        "rmse": 0.07080084019096014
+      },
+      {
+        "case_id": "airFoil2D_SST_43.677_-1.764_0.243_7.109_0.0_19.17",
+        "mae": 0.10339034667929584,
+        "max_abs_error": 0.202914137991558,
+        "nrmse_p95_p05": 0.10243634637823933,
+        "rmse": 0.10892773471412251
+      },
+      {
+        "case_id": "airFoil2D_SST_90.574_8.095_5.69_1.526_10.267",
+        "mae": 0.14487361559738038,
+        "max_abs_error": 0.65508441853104,
+        "nrmse_p95_p05": 0.05578604327295738,
+        "rmse": 0.1837374575164371
+      },
+      {
+        "case_id": "airFoil2D_SST_90.102_0.155_4.394_4.125_19.322",
+        "mae": 0.08405122496626895,
+        "max_abs_error": 0.343426278402277,
+        "nrmse_p95_p05": 0.09030034144447041,
+        "rmse": 0.10767398433644057
+      },
+      {
+        "case_id": "airFoil2D_SST_40.676_-2.366_6.027_6.14_15.943",
+        "mae": 0.11731744684047477,
+        "max_abs_error": 0.6255373896978557,
+        "nrmse_p95_p05": 0.16546054222225187,
+        "rmse": 0.16425579686062927
+      },
+      {
+        "case_id": "airFoil2D_SST_57.682_-2.023_5.676_5.094_12.787",
+        "mae": 0.07140701505740805,
+        "max_abs_error": 0.6682713422129791,
+        "nrmse_p95_p05": 0.13488464390156438,
+        "rmse": 0.12259827336211591
+      },
+      {
+        "case_id": "airFoil2D_SST_60.295_-0.953_1.701_6.885_1.0_6.221",
+        "mae": 0.045022347466087326,
+        "max_abs_error": 0.8645821392946672,
+        "nrmse_p95_p05": 0.2594700915889828,
+        "rmse": 0.0963940411285929
+      },
+      {
+        "case_id": "airFoil2D_SST_82.537_6.598_2.148_5.703_1.0_12.892",
+        "mae": 0.04567597890984033,
+        "max_abs_error": 0.31772377399212937,
+        "nrmse_p95_p05": 0.02978688364404591,
+        "rmse": 0.06155435886391107
+      },
+      {
+        "case_id": "airFoil2D_SST_61.676_0.83_2.7_0.0_12.742",
+        "mae": 0.033749792676707906,
+        "max_abs_error": 0.16628656653604854,
+        "nrmse_p95_p05": 0.061906573535487924,
+        "rmse": 0.04141897239257501
+      },
+      {
+        "case_id": "airFoil2D_SST_37.191_5.448_2.812_0.0_12.933",
+        "mae": 0.03352921185013701,
+        "max_abs_error": 0.4389148820968185,
+        "nrmse_p95_p05": 0.03775747753919194,
+        "rmse": 0.05676042711784518
+      },
+      {
+        "case_id": "airFoil2D_SST_62.644_9.845_4.588_0.0_7.441",
+        "mae": 0.0798267958964678,
+        "max_abs_error": 2.0876601786514986,
+        "nrmse_p95_p05": 0.0653798593212928,
+        "rmse": 0.15816935445826372
+      },
+      {
+        "case_id": "airFoil2D_SST_86.326_9.572_2.09_6.863_0.0_12.995",
+        "mae": 0.03620406329901383,
+        "max_abs_error": 0.2432381369350507,
+        "nrmse_p95_p05": 0.015559142910987016,
+        "rmse": 0.04420582430073466
+      },
+      {
+        "case_id": "airFoil2D_SST_79.502_3.387_4.058_0.0_17.153",
+        "mae": 0.045814079180069224,
+        "max_abs_error": 0.24948640649986703,
+        "nrmse_p95_p05": 0.050293709154303035,
+        "rmse": 0.06316266282574959
+      },
+      {
+        "case_id": "airFoil2D_SST_33.33_14.375_1.036_3.451_12.655",
+        "mae": 0.07176103596897876,
+        "max_abs_error": 1.662857849193868,
+        "nrmse_p95_p05": 0.04823373859691581,
+        "rmse": 0.1852360767460362
+      },
+      {
+        "case_id": "airFoil2D_SST_88.307_-4.328_3.461_7.533_0.0_15.226",
+        "mae": 0.08037687899083863,
+        "max_abs_error": 0.844397062777877,
+        "nrmse_p95_p05": 0.13376875577549205,
+        "rmse": 0.1568141348541696
+      },
+      {
+        "case_id": "airFoil2D_SST_39.019_-2.224_0.696_4.875_13.154",
+        "mae": 0.04555175648846026,
+        "max_abs_error": 0.2597199179641039,
+        "nrmse_p95_p05": 0.0699561250955595,
+        "rmse": 0.060499767728344526
+      },
+      {
+        "case_id": "airFoil2D_SST_65.717_9.69_2.928_3.947_15.912",
+        "mae": 0.0346987987371869,
+        "max_abs_error": 0.2928850385059979,
+        "nrmse_p95_p05": 0.016137108588106786,
+        "rmse": 0.046014210927741654
+      },
+      {
+        "case_id": "airFoil2D_SST_73.967_-1.295_1.592_4.266_1.0_16.148",
+        "mae": 0.055937136456273066,
+        "max_abs_error": 0.20771999698655347,
+        "nrmse_p95_p05": 0.08216538376172254,
+        "rmse": 0.06611935677191684
+      },
+      {
+        "case_id": "airFoil2D_SST_93.213_3.79_0.418_0.0_9.665",
+        "mae": 0.04248344216552067,
+        "max_abs_error": 0.39911310938375555,
+        "nrmse_p95_p05": 0.058394304254000454,
+        "rmse": 0.06049749812213256
+      },
+      {
+        "case_id": "airFoil2D_SST_68.096_11.613_1.485_4.441_1.0_11.892",
+        "mae": 0.039770493464930244,
+        "max_abs_error": 0.37141933310746394,
+        "nrmse_p95_p05": 0.01642363560301125,
+        "rmse": 0.056283718499886705
+      },
+      {
+        "case_id": "airFoil2D_SST_55.312_11.209_2.831_6.36_12.435",
+        "mae": 0.06539878996862138,
+        "max_abs_error": 0.5322599071208884,
+        "nrmse_p95_p05": 0.02532747786813088,
+        "rmse": 0.0819571162728862
+      },
+      {
+        "case_id": "airFoil2D_SST_50.26_6.348_0.664_2.664_6.806",
+        "mae": 0.045616889690088536,
+        "max_abs_error": 0.7233681005686524,
+        "nrmse_p95_p05": 0.0530205250336049,
+        "rmse": 0.0872938820777715
+      },
+      {
+        "case_id": "airFoil2D_SST_56.549_-4.731_1.476_6.357_0.0_17.547",
+        "mae": 0.08220874707353451,
+        "max_abs_error": 0.588857594790608,
+        "nrmse_p95_p05": 0.08519022043355728,
+        "rmse": 0.12042060252622751
+      },
+      {
+        "case_id": "airFoil2D_SST_56.39_-3.195_4.964_2.726_18.605",
+        "mae": 0.07767556715608422,
+        "max_abs_error": 0.5480440209869584,
+        "nrmse_p95_p05": 0.11350628694654341,
+        "rmse": 0.12285191347085257
+      }
+    ]
+  },
+  "model": {
+    "batch_size": 8192,
+    "epochs": 80,
+    "feature_normalisation": "fit on training surface points only",
+    "framework": "PyTorch",
+    "hidden_width": 64,
+    "kind": "pointwise_mlp",
+    "seed": 20260630,
+    "target_normalisation": "fit on training surface targets only",
+    "training_summary": {
+      "train_mse_standardized": 0.03771726042032242,
+      "val_mse_standardized": 0.040948912501335144
+    }
+  },
+  "schema_version": "aeromap_airfrans_surface_pressure_field_baseline_v0.1.0",
+  "source": {
+    "citation_key": "bonnet2022airfrans",
+    "dataset": "AirfRANS",
+    "docs_url": "https://airfrans.readthedocs.io/en/latest/notes/dataset.html",
+    "license": "ODbL-1.0",
+    "local_source": "local AirfRANS processed cache; bulky VTK files are not committed"
+  },
+  "split": {
+    "source_manifest": "AirfRANS full_train/full_test",
+    "test_case_ids_sha256_prefix": "d0f91076d9045388",
+    "test_cases": 32,
+    "test_surface_points": 32184,
+    "train_case_ids_sha256_prefix": "e577469280c09751",
+    "train_cases": 80,
+    "train_surface_points": 80494,
+    "validation_case_ids_sha256_prefix": "40e6e7eb29fb7eef",
+    "validation_cases": 16,
+    "validation_surface_points": 16121
+  }
+}

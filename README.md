@@ -31,6 +31,7 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 |---|---|---|
 | AirfRANS | open-CFD active-learning benchmark | v2 leads several geometry-disjoint decision metrics |
 | DrivAerML | compact 3D automotive-aero bridge | 484 scalar cases, 16 geometry features, real STL ingestion |
+| AirfRANS field baseline | neural-CFD credibility check | surface-pressure MLP beats mean and nearest-case baselines |
 | AeroCliff Core | structured Venturi-underfloor benchmark | 3 x 5 pressure/load response-map replay |
 
 ![AeroMap evidence tiers](docs/assets/aeromap/aeromap_evidence_tiers.png)
@@ -45,9 +46,10 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | Custom OpenFOAM Venturi-underfloor response map | Implemented |
 | Cost-proxy replay | Implemented |
 | Local AeroCliff Core live/replay loop | Implemented |
+| AirfRANS surface-pressure field baseline | Implemented |
 | New local CFD case generation from selected missing Core cases | Next extension |
 | Live industrial CFD scheduling | Not claimed |
-| Field-level neural surrogate | Next extension |
+| 3D field-level neural surrogate | Next extension |
 | Trained DoMINO/PhysicsNeMo aero model | Not claimed |
 | F1 geometry or F1 accuracy | Not claimed |
 
@@ -102,6 +104,26 @@ Cost-aware utility selects the lowest cumulative proxy-cost labelled set in both
 
 Details: [docs/reports/aeromap_cost_aware_v0_5_report.md](docs/reports/aeromap_cost_aware_v0_5_report.md)
 
+## Field-level baseline
+
+AeroMap now includes a small AirfRANS surface-pressure field baseline. It trains
+a point-wise PyTorch MLP on airfoil surface coordinates, normals,
+operating-condition features and compact geometry descriptors.
+
+| Method | MAE | RMSE | NRMSE p95-p05 |
+|---|---:|---:|---:|
+| Train mean | 0.4558 | 0.7280 | 0.3701 |
+| Nearest case | 0.1614 | 0.3281 | 0.1668 |
+| Point-wise MLP | **0.0705** | **0.1183** | **0.0601** |
+
+This is a field-target baseline, not a DoMINO replacement or state-of-the-art
+claim. The value is the contract: held-out surface-pressure targets, train-only
+normalisation, length-weighted metrics and true/predicted/error maps.
+
+![AirfRANS surface pressure examples](docs/assets/aeromap/airfrans_surface_pressure_field_examples.png)
+
+Details: [docs/reports/airfrans_surface_pressure_field_baseline_v0_1.md](docs/reports/airfrans_surface_pressure_field_baseline_v0_1.md)
+
 ## AeroCliff Core response map
 
 AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mission Control to a custom underfloor response problem. The current Core release is pressure/load response mapping over ride height and diffuser angle.
@@ -150,6 +172,14 @@ uv run aeromap benchmark aeromap-decision-replay-v03 \
   --dataset-npz docs/evidence/aeromap/airfrans_geometry_scalar_dataset.npz \
   --out docs/evidence/aeromap/airfrans_decision_replay_v03.json \
   --svg-dir docs/evidence/aeromap
+```
+
+Run the AirfRANS surface-pressure field baseline from a materialised local
+AirfRANS cache:
+
+```sh
+uv run aeromap benchmark airfrans-field-baseline \
+  --root artifacts/benchmark/airfrans/processed
 ```
 
 Run the compact DrivAerML bridge:
@@ -204,7 +234,7 @@ This release is an offline replay benchmark and structured Core response-map dem
 Follow-on work:
 
 - extend the Core loop from committed evidence ingestion to new local CFD case generation;
-- add richer 3D or field-level targets;
+- add richer 3D field-level targets;
 - extend AeroCliff Core toward live closed-loop simulation selection;
 - extend the custom AeroCliff lane toward higher-fidelity transfer studies.
 
@@ -214,7 +244,7 @@ This repository uses compact, committed evidence derived from public datasets an
 
 | Source | How it is used here | Attribution |
 |---|---|---|
-| AirfRANS | 1,000-case open-CFD scalar benchmark for the main AeroMap active-learning replay | AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier-Stokes Solutions. Dataset license: ODbL-1.0. See the [AirfRANS documentation](https://airfrans.readthedocs.io/en/latest/notes/introduction.html), [dataset description](https://airfrans.readthedocs.io/en/latest/notes/dataset.html), and [paper](https://arxiv.org/abs/2212.07564). |
+| AirfRANS | 1,000-case open-CFD scalar benchmark for the main AeroMap active-learning replay and surface-pressure field baseline | AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier-Stokes Solutions. Dataset license: ODbL-1.0. See the [AirfRANS documentation](https://airfrans.readthedocs.io/en/latest/notes/introduction.html), [dataset description](https://airfrans.readthedocs.io/en/latest/notes/dataset.html), and [paper](https://arxiv.org/abs/2212.07564). |
 | DrivAerML | Compact 3D automotive scalar bridge using root metadata and a small STL readiness sample | DrivAerML: High-Fidelity Computational Fluid Dynamics Dataset for Road-Car External Aerodynamics. Dataset license: CC BY-SA 4.0. See the [Hugging Face dataset](https://huggingface.co/datasets/neashton/drivaerml), [dataset page](https://neilashton.github.io/caemldatasets/drivaerml/), and [paper](https://arxiv.org/abs/2408.11969). |
 | OpenFOAM | CFD-oriented case structure and AeroCliff Core structured Venturi benchmark workflow | OpenFOAM is open-source CFD software distributed under GPL terms. See [openfoam.org licence](https://openfoam.org/licence/) and [openfoam.com licensing](https://www.openfoam.com/documentation/licencing). |
 | NVIDIA DoMINO / PhysicsNeMo references | Source of architectural context for automotive surrogate and predictor workflows; no DoMINO accuracy claim is made in this public release | See NVIDIA's [DoMINO Automotive Aero NIM overview](https://docs.nvidia.com/nim/physicsnemo/domino-automotive-aero/latest/overview.html), [NGC model page](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero), and [PhysicsNeMo DoMINO documentation](https://docs.nvidia.com/physicsnemo/25.11/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html). |

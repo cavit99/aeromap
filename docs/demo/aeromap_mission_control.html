@@ -101,6 +101,7 @@
   <nav>
     <a href="#overview">Overview</a>
     <a href="#benchmark">Benchmark</a>
+    <a href="#field">Field Baseline</a>
     <a href="#bridge">3D Bridge</a>
     <a href="#decision">Decision View</a>
     <a href="#core">Core Map</a>
@@ -156,6 +157,30 @@
           <tr><td>Regret-aware utility v2</td><td class="good">0.001966</td><td>0.050445</td><td class="good">0.632</td><td class="good">0.410</td><td class="good">0.953</td><td>14.526</td></tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <section id="field">
+    <h2>Surface-pressure field baseline</h2>
+    <p class="lead">A compact AirfRANS field-level baseline trains a point-wise PyTorch MLP on airfoil surface coordinates, normals, operating conditions and geometry descriptors.</p>
+    <div class="two flow">
+      <img class="img-frame" src="../assets/aeromap/airfrans_surface_pressure_field_examples.png" alt="AirfRANS surface pressure true prediction and error examples">
+      <img class="img-frame" src="../assets/aeromap/airfrans_surface_pressure_baseline_metrics.png" alt="AirfRANS surface pressure baseline metrics">
+    </div>
+    <div class="panel flow">
+      <table>
+        <thead>
+          <tr><th>Method</th><th>MAE</th><th>RMSE</th><th>NRMSE p95-p05</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Train mean</td><td>0.4558</td><td>0.7280</td><td>0.3701</td></tr>
+          <tr><td>Nearest case</td><td>0.1614</td><td>0.3281</td><td>0.1668</td></tr>
+          <tr><td>Point-wise MLP</td><td class="good">0.0705</td><td class="good">0.1183</td><td class="good">0.0601</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel flow">
+      <p><strong>Interpretation:</strong> this is a held-out AirfRANS field baseline, not a DoMINO replacement or F1 model. It proves field-target ingestion, train-only normalisation, length-weighted metrics and true/predicted/error maps.</p>
     </div>
   </section>
 
