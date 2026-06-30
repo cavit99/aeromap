@@ -47,6 +47,10 @@ labelled CFD cases
 
 ![Mission Control flow](docs/assets/aeromap/mission_control_flow.png)
 
+The public architecture separates evidence, dataset contracts, acquisition policy, replay evaluation and output artifacts:
+
+![AeroMap system architecture](docs/assets/aeromap/aeromap_system_architecture.png)
+
 The benchmark reports engineering metrics as well as RMSE:
 
 - top-k design recovery;

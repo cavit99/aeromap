@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
+from itertools import pairwise
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +29,7 @@ FIGURES = {
     "comparison": "acquisition_method_comparison.png",
     "decision": "decision_metrics_panel.png",
     "flow": "mission_control_flow.png",
+    "architecture": "aeromap_system_architecture.png",
     "evidence_tiers": "aeromap_evidence_tiers.png",
     "drivaer3d": "drivaerml_3d_bridge_metrics.png",
     "core_surface": "aerocliff_core_response_surface.png",
@@ -394,6 +396,173 @@ def figure_flow() -> Path:
         color=MUTED,
     )
     path = OUT_DIR / FIGURES["flow"]
+    save(fig, path)
+    return path
+
+
+def architecture_box(
+    ax: plt.Axes,
+    xy: tuple[float, float],
+    size: tuple[float, float],
+    header: str,
+    body: str,
+    *,
+    color: str,
+) -> None:
+    x, y = xy
+    width, height = size
+    rect = FancyBboxPatch(
+        (x, y),
+        width,
+        height,
+        boxstyle="round,pad=0.016,rounding_size=0.025",
+        linewidth=1.2,
+        edgecolor="#cbd5e1",
+        facecolor=color,
+    )
+    ax.add_patch(rect)
+    ax.text(
+        x + width / 2,
+        y + height - 0.045,
+        header,
+        ha="center",
+        va="top",
+        fontsize=11.8,
+        fontweight="bold",
+        color=TEXT,
+    )
+    ax.text(
+        x + width / 2,
+        y + 0.070,
+        body,
+        ha="center",
+        va="center",
+        fontsize=8.9,
+        color=MUTED,
+        linespacing=1.25,
+    )
+
+
+def figure_system_architecture() -> Path:
+    fig, ax = plt.subplots(figsize=(15, 8.5))
+    ax.set_axis_off()
+    title(
+        fig,
+        "AeroMap system architecture",
+        (
+            "Compact evidence enters a shared decision layer and produces "
+            "replay metrics, figures and reports."
+        ),
+    )
+
+    x_cols = [0.04, 0.27, 0.50, 0.73]
+    box_w = 0.19
+    box_h = 0.22
+    y_top = 0.56
+    y_bottom = 0.25
+
+    architecture_box(
+        ax,
+        (x_cols[0], y_top),
+        (box_w, box_h),
+        "Evidence sources",
+        "AirfRANS scalars\nDrivAerML metadata\nAeroCliff Core map",
+        color="#eef2ff",
+    )
+    architecture_box(
+        ax,
+        (x_cols[0], y_bottom),
+        (box_w, box_h),
+        "Claim boundaries",
+        "offline replay\ncompact datasets\npressure/load targets",
+        color="#f8fafc",
+    )
+    architecture_box(
+        ax,
+        (x_cols[1], y_top),
+        (box_w, box_h),
+        "Dataset contracts",
+        "case IDs\nfeature names\nsplit groups\ntarget definitions",
+        color="#ecfdf5",
+    )
+    architecture_box(
+        ax,
+        (x_cols[1], y_bottom),
+        (box_w, box_h),
+        "Feature views",
+        "geometry descriptors\noperating conditions\nCore design variables",
+        color="#ecfdf5",
+    )
+    architecture_box(
+        ax,
+        (x_cols[2], y_top),
+        (box_w, box_h),
+        "Decision core",
+        "surrogate ensemble\nuncertainty\ndiversity\nengineering utility",
+        color="#fff7ed",
+    )
+    architecture_box(
+        ax,
+        (x_cols[2], y_bottom),
+        (box_w, box_h),
+        "Replay evaluator",
+        "RMSE\nrank / top-k / Pareto\nregret\ncost proxy",
+        color="#fff7ed",
+    )
+    architecture_box(
+        ax,
+        (x_cols[3], y_top),
+        (box_w, box_h),
+        "Recommended case",
+        "next CFD label\nchosen from the pool\nwith policy rationale",
+        color="#fdf2f8",
+    )
+    architecture_box(
+        ax,
+        (x_cols[3], y_bottom),
+        (box_w, box_h),
+        "Public artifacts",
+        "README figures\ndemo page\ntechnical reports\nJSON evidence",
+        color="#fdf2f8",
+    )
+
+    for start_x, end_x in pairwise(x_cols):
+        arrow(ax, (start_x + box_w, y_top + box_h / 2), (end_x, y_top + box_h / 2))
+        arrow(ax, (start_x + box_w, y_bottom + box_h / 2), (end_x, y_bottom + box_h / 2))
+    arrow(ax, (x_cols[2] + box_w / 2, y_top), (x_cols[2] + box_w / 2, y_bottom + box_h))
+    arrow(ax, (x_cols[3] + box_w / 2, y_top), (x_cols[3] + box_w / 2, y_bottom + box_h))
+    arrow(ax, (x_cols[3], y_top + 0.04), (x_cols[2] + box_w, y_top + 0.04))
+
+    ax.text(
+        0.735,
+        0.83,
+        "offline replay now; live CFD scheduler later",
+        fontsize=10,
+        color=MUTED,
+        ha="left",
+    )
+    ax.text(
+        0.04,
+        0.16,
+        (
+            "The acquisition policy is separate from the dataset. AirfRANS, "
+            "DrivAerML and AeroCliff Core share the same replay contract."
+        ),
+        fontsize=12,
+        color=TEXT,
+        weight="bold",
+    )
+    ax.text(
+        0.04,
+        0.10,
+        (
+            "The current release publishes compact evidence, plots and reports "
+            "rather than bulky CFD fields."
+        ),
+        fontsize=10.5,
+        color=MUTED,
+    )
+    path = OUT_DIR / FIGURES["architecture"]
     save(fig, path)
     return path
 
@@ -841,6 +1010,10 @@ def write_manifest(paths: list[Path]) -> None:
         FIGURES[
             "flow"
         ]: "Mission Control decision loop from labelled cases to recommended next CFD simulation.",
+        FIGURES["architecture"]: (
+            "AeroMap system architecture: evidence, contracts, decision core, "
+            "replay and public outputs."
+        ),
         FIGURES[
             "evidence_tiers"
         ]: "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
@@ -887,7 +1060,7 @@ def write_manifest(paths: list[Path]) -> None:
 def _figure_source_case(path_name: str) -> str:
     if path_name.startswith(("aerocliff_core", "aeromap_aerocliff")):
         return "AeroCliff Core 2D pressure/load response replay"
-    if "drivaerml" in path_name or "evidence_tiers" in path_name:
+    if "drivaerml" in path_name or "evidence_tiers" in path_name or "architecture" in path_name:
         return "AeroMap 3D bridge and portfolio context"
     return "AirfRANS v0.3 open-CFD replay"
 
@@ -904,6 +1077,7 @@ def main() -> None:
         figure_acquisition_comparison(data),
         figure_decision_panel(data),
         figure_flow(),
+        figure_system_architecture(),
         figure_evidence_tiers(),
         figure_drivaer3d_metrics(drivaer3d),
         figure_core_response_surface(core_dataset),

@@ -146,6 +146,7 @@ Follow-on work:
 - Demo: `docs/demo/aeromap_mission_control.html`
 - Main figures:
   - `docs/assets/aeromap/aeromap_headline_geometry_heldout.png`
+  - `docs/assets/aeromap/aeromap_system_architecture.png`
   - `docs/assets/aeromap/aerocliff_core_response_surface.png`
   - `docs/assets/aeromap/aerocliff_core_pressure_recovery_surface.png`
   - `docs/assets/aeromap/aerocliff_core_active_replay.png`

@@ -1,6 +1,6 @@
 {
   "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_PORTFOLIO_FIGURES",
-  "evidence_generation_git_sha": "4d741f1",
+  "evidence_generation_git_sha": "609719a",
   "figures": [
     {
       "caption": "Geometry-disjoint final metrics summary for AeroMap Mission Control v0.3.",
@@ -26,6 +26,11 @@
       "caption": "Mission Control decision loop from labelled cases to recommended next CFD simulation.",
       "path": "docs/assets/aeromap/mission_control_flow.png",
       "source_case": "AirfRANS v0.3 open-CFD replay"
+    },
+    {
+      "caption": "AeroMap system architecture: evidence, contracts, decision core, replay and public outputs.",
+      "path": "docs/assets/aeromap/aeromap_system_architecture.png",
+      "source_case": "AeroMap 3D bridge and portfolio context"
     },
     {
       "caption": "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
