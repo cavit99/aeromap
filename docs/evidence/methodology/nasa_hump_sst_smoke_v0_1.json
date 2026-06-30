@@ -1,0 +1,154 @@
+{
+  "case_dir": "artifacts/methodology/nasa_hump/sst_smoke_case",
+  "claim_boundary": {
+    "grid_convergence_claim": false,
+    "hump_wall_pressure_and_shear_exported": true,
+    "openfoam_sst_smoke_run": true,
+    "openfoam_vs_experiment_correlation": false,
+    "production_cfd_accuracy": false,
+    "turbulence_model_recommendation": false
+  },
+  "classification": "OPENFOAM_NASA_HUMP_SST_SMOKE_V0_1",
+  "flow_setup": {
+    "chord": 1.0,
+    "initialisation": "potentialFoam",
+    "nu": 1.0683760683760685e-06,
+    "reynolds_number": 936000,
+    "solver": "incompressibleFluid",
+    "turbulence_model": "kOmegaSST",
+    "u_inf": 1.0
+  },
+  "mesh": {
+    "checkmesh": {
+      "boundary_patches": 6,
+      "cells": 2754,
+      "determinant_warning_faces": 3054,
+      "failed_mesh_checks": 2,
+      "log_path": "artifacts/methodology/nasa_hump/sst_smoke_case/logs/checkMesh_meshQuality.log",
+      "max_aspect_ratio": 19660.642,
+      "mesh_ok": false,
+      "small_determinant_cells": 0
+    },
+    "methodology_policy": {
+      "accepted_for": [
+        "conversion_smoke",
+        "boundary_condition_smoke",
+        "single_solver_smoke"
+      ],
+      "fatal_checks": [
+        "negative_or_zero_cell_volume",
+        "invalid_or_nonfinite_coordinates",
+        "broken_boundary_patch_topology",
+        "missing_hump_wall_patch",
+        "failed_plot3d_conversion",
+        "solver_crash_before_first_iteration"
+      ],
+      "gate": "NASA_TMR_BOUNDARY_LAYER_METHODOLOGY_GATE_V0_1",
+      "global_aeromap_gate_passed": false,
+      "mesh_quality": "accepted_with_methodology_warning",
+      "methodology_gate_passed": true,
+      "not_accepted_for": [
+        "headline_correlation",
+        "turbulence_model_recommendation",
+        "grid_convergence_claim"
+      ],
+      "official_tmr_boundary_layer_grid": true,
+      "rationale": "The official 103 x 28 TMR boundary-layer grid is intentionally stretched. High aspect ratio and small determinant warnings are therefore treated as methodology warnings for smoke work only, not as correlation eligibility.",
+      "waived_warnings": [
+        "high_aspect_ratio_expected_for_near_wall_RANS_grid",
+        "small_determinant_cells_expected_from_boundary_layer_stretching"
+      ]
+    }
+  },
+  "next_step": "Use the same recipe on medium/fine NASA/TMR grids before any Cp/Cf correlation or turbulence-model statement.",
+  "postprocess": {
+    "hump_wall_vtk": {
+      "cell_count": 102,
+      "fields": {
+        "U": {
+          "component_max": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "component_min": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "components": 3,
+          "magnitude_max": 0.0,
+          "magnitude_mean": 0.0,
+          "magnitude_min": 0.0,
+          "tuple_count": 102
+        },
+        "p": {
+          "components": 1,
+          "max": 0.34513,
+          "mean": 0.004540691549019622,
+          "min": -1.14653,
+          "tuple_count": 102
+        },
+        "wallShearStress": {
+          "component_max": [
+            -0.000127333,
+            0.00261296,
+            4.1589e-19
+          ],
+          "component_min": [
+            -0.00723225,
+            -0.00147686,
+            -4.05779e-19
+          ],
+          "components": 3,
+          "magnitude_max": 0.007439505603640607,
+          "magnitude_mean": 0.002868877313996255,
+          "magnitude_min": 0.00035778602615809356,
+          "tuple_count": 102
+        }
+      },
+      "path": "artifacts/methodology/nasa_hump/sst_smoke_case/VTK/hump_wall/hump_wall_80.vtk",
+      "sha256": "bbdc0ad243bfad9415aa39a9e333b0ed70176a80947a3158fd8cc7390eb07058"
+    },
+    "wall_shear": {
+      "completed": true,
+      "hump_wall_max": [
+        -0.00012733299,
+        0.0026129569,
+        4.1588951e-19
+      ],
+      "hump_wall_min": [
+        -0.007232248,
+        -0.0014768575,
+        -4.0577909e-19
+      ],
+      "log_path": "artifacts/methodology/nasa_hump/sst_smoke_case/logs/wallShearStress.log"
+    }
+  },
+  "run_mode": "local Docker/OpenFOAM v13 smoke",
+  "schema_version": "nasa_hump_sst_smoke_v0.1.0",
+  "selected_case": "NASA/TMR 2D wall-mounted hump, no-flow-control, 103 x 28 no-plenum grid",
+  "solver": {
+    "foam_run": {
+      "completed": true,
+      "final_continuity": {
+        "cumulative": -0.0017448538,
+        "global": -1.9138737e-05,
+        "sum_local": 0.00012311464
+      },
+      "final_time": 80.0,
+      "iteration_count": 80,
+      "log_path": "artifacts/methodology/nasa_hump/sst_smoke_case/logs/foamRun.log",
+      "nonfinite_residuals_detected": false
+    },
+    "potential_foam": {
+      "completed": true,
+      "continuity_error": 0.00053780078,
+      "log_path": "artifacts/methodology/nasa_hump/sst_smoke_case/logs/potentialFoam.log",
+      "phi_final_residual": 0.0055226404,
+      "phi_initial_residual": 1.0,
+      "phi_iterations": 58
+    },
+    "smoke_passed": true
+  }
+}

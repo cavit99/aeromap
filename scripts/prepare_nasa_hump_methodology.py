@@ -303,8 +303,8 @@ def build_payload(paths: dict[str, Path]) -> dict[str, Any]:
         },
         "next_step": (
             "Use scripts/convert_tmr_nasa_hump_to_openfoam.py to materialise a local "
-            "conversion scaffold, then run one SST smoke case only after boundary "
-            "conditions and post-processing are audited."
+            "conversion scaffold. The follow-up SST smoke artifact records the bounded "
+            "single-grid OpenFOAM run; medium/fine grid correlation remains future work."
         ),
     }
 
@@ -401,9 +401,9 @@ def write_report(payload: dict[str, Any], path: Path) -> None:
         "",
         (
             "Materialise the tracked conversion scaffold with "
-            "`scripts/convert_tmr_nasa_hump_to_openfoam.py`. Then run one SST smoke "
-            "case on the `103 x 28` grid only to prove end-to-end setup and `Cp/Cf` "
-            "extraction. A model recommendation requires medium/fine grid correlation."
+            "`scripts/convert_tmr_nasa_hump_to_openfoam.py`. The follow-up SST smoke "
+            "artifact records a bounded single-grid OpenFOAM run and wall-field export. "
+            "A model recommendation requires medium/fine grid correlation."
         ),
         "",
         "## Claim Boundary",

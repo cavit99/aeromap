@@ -56,15 +56,15 @@ Do not weaken the global AeroMap mesh gate. The NASA/TMR hump uses a separate me
 | `plot3d_grid_converted` | Pass |
 | `patch_split_audited` | Pass |
 | `methodology_mesh_gate_defined` | Pass |
-| `openfoam_sst_setup_generated` | Pending |
-| `solver_run_completed` | Not yet |
-| `cp_cf_extracted_from_openfoam` | Not yet |
+| `openfoam_sst_setup_generated` | Pass: single-grid smoke setup |
+| `solver_run_completed` | Pass: single-grid smoke only |
+| `cp_cf_extracted_from_openfoam` | Partial: wall pressure/shear field export only |
 | `openfoam_vs_experiment_compared` | Not yet |
 | `grid_sensitivity_checked` | Not yet |
 
 ## Next Step
 
-Materialise the tracked conversion scaffold with `scripts/convert_tmr_nasa_hump_to_openfoam.py`. Then run one SST smoke case on the `103 x 28` grid only to prove end-to-end setup and `Cp/Cf` extraction. A model recommendation requires medium/fine grid correlation.
+Materialise the tracked conversion scaffold with `scripts/convert_tmr_nasa_hump_to_openfoam.py`. The follow-up SST smoke artifact records a bounded single-grid OpenFOAM run and wall-field export. A model recommendation requires medium/fine grid correlation.
 
 ## Claim Boundary
 

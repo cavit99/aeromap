@@ -40,15 +40,15 @@
     },
     {
       "requirement": "openfoam_sst_setup_generated",
-      "status": "Pending"
+      "status": "Pass: single-grid smoke setup"
     },
     {
       "requirement": "solver_run_completed",
-      "status": "Not yet"
+      "status": "Pass: single-grid smoke only"
     },
     {
       "requirement": "cp_cf_extracted_from_openfoam",
-      "status": "Not yet"
+      "status": "Partial: wall pressure/shear field export only"
     },
     {
       "requirement": "openfoam_vs_experiment_compared",
@@ -101,7 +101,7 @@
       "small_determinant_cells_expected_from_boundary_layer_stretching"
     ]
   },
-  "next_step": "Use scripts/convert_tmr_nasa_hump_to_openfoam.py to materialise a local conversion scaffold, then run one SST smoke case only after boundary conditions and post-processing are audited.",
+  "next_step": "Use scripts/convert_tmr_nasa_hump_to_openfoam.py to materialise a local conversion scaffold. The follow-up SST smoke artifact records the bounded single-grid OpenFOAM run; medium/fine grid correlation remains future work.",
   "openfoam_ingest_smoke": {
     "patch_split_status": "prototype_successful",
     "patches": {
@@ -110,7 +110,7 @@
       "hump_wall": "wall",
       "inlet": "patch",
       "outlet": "patch",
-      "top_slip": "slip wall candidate"
+      "top_slip": "patch/slip"
     },
     "plot3d_to_foam_command": "plot3dToFoam -noBlank -2D 0.1 hump2newtop_noplenumZ103x28.p2dfmt",
     "solver_blocker": "The global AeroMap mesh gate does not pass because the tiny official boundary-layer grid reports high-aspect-ratio and low-determinant warnings. The NASA/TMR methodology gate permits smoke work with an explicit warning, but not correlation claims.",

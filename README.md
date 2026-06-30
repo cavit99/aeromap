@@ -33,7 +33,7 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | DrivAerML | compact 3D automotive-aero bridge | 484 scalar cases, 16 geometry features, real STL ingestion |
 | AirfRANS field baseline | neural-CFD credibility check | surface-pressure MLP beats mean and nearest-case baselines |
 | AeroCliff Core | structured Venturi-underfloor benchmark | 3 x 5 pressure/load response-map replay |
-| NASA hump methodology | separated-flow validation preflight | TMR data ingestion, mesh-policy gate and OpenFOAM conversion scaffold |
+| NASA hump methodology | separated-flow CFD-methodology smoke | TMR data ingestion, mesh-policy gate, local SST smoke and wall-field export |
 
 ![AeroMap evidence tiers](docs/assets/aeromap/aeromap_evidence_tiers.png)
 
@@ -48,7 +48,7 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | Cost-proxy replay | Implemented |
 | Local AeroCliff Core live/replay loop | Implemented |
 | AirfRANS surface-pressure field baseline | Implemented |
-| NASA/TMR hump methodology preflight | Reference ingest, mesh-policy gate and OpenFOAM conversion scaffold |
+| NASA/TMR hump methodology smoke | Reference ingest, mesh-policy gate, local SST smoke and wall-field export |
 | New local CFD case generation from selected missing Core cases | Next extension |
 | Live industrial CFD scheduling | Not claimed |
 | 3D field-level neural surrogate | Next extension |
@@ -228,6 +228,15 @@ Materialise the local OpenFOAM conversion scaffold:
 uv run python scripts/convert_tmr_nasa_hump_to_openfoam.py
 ```
 
+Run and summarise the local SST smoke case:
+
+```sh
+uv run python scripts/run_nasa_hump_sst_smoke.py --overwrite
+uv run python scripts/report_nasa_hump_sst_smoke.py
+```
+
+Details: [docs/reports/nasa_hump_sst_smoke_v0_1.md](docs/reports/nasa_hump_sst_smoke_v0_1.md)
+
 ## Repository map
 
 | Path | Purpose |
@@ -238,6 +247,8 @@ uv run python scripts/convert_tmr_nasa_hump_to_openfoam.py
 | `configs/cfd/venturi_core_*.yaml` | Core structured-grid configs |
 | `scripts/prepare_nasa_hump_methodology.py` | NASA/TMR hump reference-ingest and mesh-policy preflight |
 | `scripts/convert_tmr_nasa_hump_to_openfoam.py` | local OpenFOAM conversion scaffold for the NASA/TMR hump grid |
+| `scripts/run_nasa_hump_sst_smoke.py` | local Docker/OpenFOAM SST smoke run |
+| `scripts/report_nasa_hump_sst_smoke.py` | local OpenFOAM SST smoke evidence summary |
 | `docs/assets/aeromap/` | public figures |
 | `docs/demo/aeromap_mission_control.html` | no-server demo |
 | `docs/reports/` | technical reports |
@@ -245,7 +256,7 @@ uv run python scripts/convert_tmr_nasa_hump_to_openfoam.py
 
 ## Scope
 
-This release is a reproducible offline replay and field-baseline package: AirfRANS scalar decision replay, AirfRANS surface-pressure baseline, compact DrivAerML scalar bridge, structured AeroCliff Core response-map/live-replay demo and NASA/TMR separated-flow methodology preflight. It does not require cloud compute.
+This release is a reproducible offline replay and field-baseline package: AirfRANS scalar decision replay, AirfRANS surface-pressure baseline, compact DrivAerML scalar bridge, structured AeroCliff Core response-map/live-replay demo and NASA/TMR separated-flow methodology smoke. It does not require cloud compute.
 
 Follow-on work:
 
@@ -262,7 +273,7 @@ This repository uses compact, committed evidence derived from public datasets an
 |---|---|---|
 | AirfRANS | 1,000-case open-CFD scalar benchmark for the main AeroMap active-learning replay and surface-pressure field baseline | AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier-Stokes Solutions. Dataset license: ODbL-1.0. See the [AirfRANS documentation](https://airfrans.readthedocs.io/en/latest/notes/introduction.html), [dataset description](https://airfrans.readthedocs.io/en/latest/notes/dataset.html), and [paper](https://arxiv.org/abs/2212.07564). |
 | DrivAerML | Compact 3D automotive scalar bridge using root metadata and a small STL readiness sample | DrivAerML: High-Fidelity Computational Fluid Dynamics Dataset for Road-Car External Aerodynamics. Dataset license: CC BY-SA 4.0. See the [Hugging Face dataset](https://huggingface.co/datasets/neashton/drivaerml), [dataset page](https://neilashton.github.io/caemldatasets/drivaerml/), and [paper](https://arxiv.org/abs/2408.11969). |
-| NASA/TMR wall-mounted hump | Separated-flow CFD-methodology preflight: reference data ingestion, published SA/SST curve comparison, methodology mesh gate and OpenFOAM conversion scaffold | NASA/TMR 2D wall-mounted hump validation case and reference data. See the [case page](https://tmbwg.github.io/turbmodels/nasahump_val.html), [SA comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sa.html), and [SST comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sst.html). |
+| NASA/TMR wall-mounted hump | Separated-flow CFD-methodology smoke: reference data ingestion, published SA/SST curve comparison, methodology mesh gate, local OpenFOAM SST smoke and wall-field export | NASA/TMR 2D wall-mounted hump validation case and reference data. See the [case page](https://tmbwg.github.io/turbmodels/nasahump_val.html), [SA comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sa.html), and [SST comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sst.html). |
 | OpenFOAM | CFD-oriented case structure, AeroCliff Core structured Venturi benchmark workflow, and NASA/TMR hump conversion scaffold | OpenFOAM is open-source CFD software distributed under GPL terms. See [openfoam.org licence](https://openfoam.org/licence/) and [openfoam.com licensing](https://www.openfoam.com/documentation/licencing). |
 | NVIDIA DoMINO / PhysicsNeMo references | Source of architectural context for automotive surrogate and predictor workflows; no DoMINO accuracy claim is made in this public release | See NVIDIA's [DoMINO Automotive Aero NIM overview](https://docs.nvidia.com/nim/physicsnemo/domino-automotive-aero/latest/overview.html), [NGC model page](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero), and [PhysicsNeMo DoMINO documentation](https://docs.nvidia.com/physicsnemo/25.11/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html). |
 
