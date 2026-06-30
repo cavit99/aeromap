@@ -11,6 +11,7 @@ build/
 __pycache__/
 
 # Local review/tool state
+.local/
 .clawpatch/
 clawpatch-report.md
 
