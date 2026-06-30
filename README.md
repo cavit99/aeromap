@@ -177,6 +177,17 @@ Follow-on work:
 - extend AeroCliff Core toward live closed-loop simulation selection;
 - extend the custom AeroCliff lane toward higher-fidelity transfer studies.
 
+## Datasets and citations
+
+This repository uses compact, committed evidence derived from public datasets and open-source tooling. It does not redistribute the full upstream datasets.
+
+| Source | How it is used here | Attribution |
+|---|---|---|
+| AirfRANS | 1,000-case open-CFD scalar benchmark for the main AeroMap active-learning replay | AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier-Stokes Solutions. Dataset license: ODbL-1.0. See the [AirfRANS documentation](https://airfrans.readthedocs.io/en/latest/notes/introduction.html), [dataset description](https://airfrans.readthedocs.io/en/latest/notes/dataset.html), and [paper](https://arxiv.org/abs/2212.07564). |
+| DrivAerML | Compact 3D automotive scalar bridge using root metadata and a small STL readiness sample | DrivAerML: High-Fidelity Computational Fluid Dynamics Dataset for Road-Car External Aerodynamics. Dataset license: CC BY-SA 4.0. See the [Hugging Face dataset](https://huggingface.co/datasets/neashton/drivaerml), [dataset page](https://neilashton.github.io/caemldatasets/drivaerml/), and [paper](https://arxiv.org/abs/2408.11969). |
+| OpenFOAM | CFD-oriented case structure and AeroCliff Core structured Venturi benchmark workflow | OpenFOAM is open-source CFD software distributed under GPL terms. See [openfoam.org licence](https://openfoam.org/licence/) and [openfoam.com licensing](https://www.openfoam.com/documentation/licencing). |
+| NVIDIA DoMINO / PhysicsNeMo references | Source of architectural context for automotive surrogate and predictor workflows; no DoMINO accuracy claim is made in this public release | See NVIDIA's [DoMINO Automotive Aero NIM overview](https://docs.nvidia.com/nim/physicsnemo/domino-automotive-aero/latest/overview.html), [NGC model page](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero), and [PhysicsNeMo DoMINO documentation](https://docs.nvidia.com/physicsnemo/25.11/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html). |
+
 ## Verification
 
 Current release checks:
