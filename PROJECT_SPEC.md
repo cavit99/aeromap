@@ -123,7 +123,8 @@ The NASA hump extension does not claim OpenFOAM correlation accuracy or a
 turbulence-model recommendation. The current evidence includes a single-grid
 smoke run, smoke-grid Cp/Cf overlay and a `409 x 109` SST candidate that is not
 yet correlation-plausible. Boundary-condition, grid or numerics work is required
-before any SA/SST model-comparison branch.
+before any SA/SST model-comparison branch. The public closure artifact is
+`docs/reports/nasa_hump_methodology_finding_v0_1.md`.
 
 ## Reproduction Targets
 

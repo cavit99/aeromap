@@ -254,6 +254,8 @@ uv run python scripts/report_nasa_hump_medium_grid_sst.py
 
 Details: [docs/reports/nasa_hump_medium_grid_sst_v0_1.md](docs/reports/nasa_hump_medium_grid_sst_v0_1.md)
 
+Methodology finding: [docs/reports/nasa_hump_methodology_finding_v0_1.md](docs/reports/nasa_hump_methodology_finding_v0_1.md)
+
 ## Repository map
 
 | Path | Purpose |
