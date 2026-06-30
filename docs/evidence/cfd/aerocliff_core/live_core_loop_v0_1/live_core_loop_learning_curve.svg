@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="80" y="24" font-family="Arial" font-size="20" font-weight="700" fill="#111">AeroCliff Core live/replay acquisition loop</text>
+<line x1="80" y1="450" x2="880" y2="450" stroke="#333"/>
+<line x1="80" y1="40" x2="80" y2="450" stroke="#333"/>
+<text x="390.0" y="496" font-family="Arial" font-size="14" fill="#333">labelled Core cases</text>
+<text x="18" y="260.0" font-family="Arial" font-size="14" fill="#333" transform="rotate(-90 18 260.0)">mean normalised RMSE</text>
+<text x="80" y="474" font-family="Arial" font-size="12" fill="#555">3</text>
+<text x="868" y="474" font-family="Arial" font-size="12" fill="#555">7</text>
+<text x="42" y="40.0" font-family="Arial" font-size="12" fill="#555">0.272</text>
+<text x="48" y="450.0" font-family="Arial" font-size="12" fill="#555">0</text>
+<polyline points="80.0,59.5 280.0,81.2 480.0,115.1 680.0,133.2 880.0,141.1" fill="none" stroke="#8b8f97" stroke-width="3" /><polyline points="80.0,59.5 280.0,142.4 480.0,202.5 680.0,190.5 880.0,232.1" fill="none" stroke="#2574a9" stroke-width="3" /><polyline points="80.0,59.5 280.0,142.4 480.0,159.4 680.0,224.0 880.0,234.6" fill="none" stroke="#1b8a5a" stroke-width="3" /><polyline points="80.0,59.5 280.0,142.4 480.0,159.4 680.0,224.0 880.0,234.6" fill="none" stroke="#b45f06" stroke-width="3" />
+<rect x="650" y="58" width="16" height="4" fill="#8b8f97" /><text x="674" y="68" font-family="Arial" font-size="13" fill="#222">random</text><rect x="650" y="82" width="16" height="4" fill="#2574a9" /><text x="674" y="92" font-family="Arial" font-size="13" fill="#222">diversity</text><rect x="650" y="106" width="16" height="4" fill="#1b8a5a" /><text x="674" y="116" font-family="Arial" font-size="13" fill="#222">engineering_utility</text><rect x="650" y="130" width="16" height="4" fill="#b45f06" /><text x="674" y="140" font-family="Arial" font-size="13" fill="#222">cost_aware_utility</text>
+<text x="80" y="512" font-family="Arial" font-size="12" fill="#555">Local replay-live loop over accepted Core pressure/load evidence. Lower is better.</text>
+</svg>

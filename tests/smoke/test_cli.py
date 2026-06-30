@@ -117,6 +117,29 @@ def test_cfd_venturi_core_report_cli_writes_report(tmp_path: Path) -> None:
     assert "Venturi Lab" in report.read_text(encoding="utf-8")
 
 
+def test_live_core_loop_cli_writes_manifest(tmp_path: Path) -> None:
+    result = CliRunner().invoke(
+        app,
+        [
+            "benchmark",
+            "live-core-loop",
+            "--max-iterations",
+            "1",
+            "--output-dir",
+            str(tmp_path / "live"),
+            "--report",
+            str(tmp_path / "live.md"),
+        ],
+    )
+
+    assert result.exit_code == 0
+    payload = json.loads(result.stdout)
+    assert payload["classification"] == "AEROMAP_LIVE_CORE_ACQUISITION_LOOP_V0_1"
+    assert payload["completed_iterations"] == 1
+    assert Path(payload["path"]).exists()
+    assert (tmp_path / "live.md").exists()
+
+
 def test_geometry_generate_cli_rejects_out_of_range_parameters() -> None:
     result = CliRunner().invoke(app, ["geometry", "generate", "--ride-height-mm", "10"])
 

@@ -44,7 +44,9 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | Compact 3D DrivAerML scalar bridge | Implemented |
 | Custom OpenFOAM Venturi-underfloor response map | Implemented |
 | Cost-proxy replay | Implemented |
-| Live CFD scheduling | Next extension |
+| Local AeroCliff Core live/replay loop | Implemented |
+| New local CFD case generation from selected missing Core cases | Next extension |
+| Live industrial CFD scheduling | Not claimed |
 | Field-level neural surrogate | Next extension |
 | Trained DoMINO/PhysicsNeMo aero model | Not claimed |
 | F1 geometry or F1 accuracy | Not claimed |
@@ -110,12 +112,21 @@ AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mis
 | Medium cases | `15 / 15` passed mesh, mass and force gates |
 | Fine checks | `3 / 3` representative fine checks passed |
 | Replay result | engineering utility and cost-aware utility tie for best curve-error area |
+| Live/replay loop | model selects Core cases, committed evidence is ingested, map metrics update |
 
 ![AeroCliff Core suction response](docs/assets/aeromap/aerocliff_core_response_surface.png)
 
 ![AeroCliff Core active replay](docs/assets/aeromap/aerocliff_core_active_replay.png)
 
 This Core tier gives the project a custom underfloor response surface while keeping the claim focused on pressure/load mapping.
+
+The local live-loop MVP starts from three labelled Core cases, selects four more
+cases with `engineering_utility`, ingests the committed Core evidence and updates
+the response-map metrics after each selection. Diversity is still slightly best
+by curve-error area on this small pool, while engineering utility and cost-aware
+utility reduce error versus the averaged random baseline.
+
+Details: [docs/reports/aerocliff_core_live_acquisition_loop.md](docs/reports/aerocliff_core_live_acquisition_loop.md)
 
 ## Demo
 
@@ -167,6 +178,12 @@ uv run scripts/run_venturi_core_2d_response_map_replay.py
 Pass `--overwrite` only when you want to regenerate the OpenFOAM cases with
 Docker rather than replaying the committed Core evidence.
 
+Run the local Core live/replay acquisition loop:
+
+```sh
+uv run aeromap benchmark live-core-loop --max-iterations 4
+```
+
 ## Repository map
 
 | Path | Purpose |
@@ -186,7 +203,7 @@ This release is an offline replay benchmark and structured Core response-map dem
 
 Follow-on work:
 
-- wire the acquisition loop to live CFD scheduling;
+- extend the Core loop from committed evidence ingestion to new local CFD case generation;
 - add richer 3D or field-level targets;
 - extend AeroCliff Core toward live closed-loop simulation selection;
 - extend the custom AeroCliff lane toward higher-fidelity transfer studies.

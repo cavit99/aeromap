@@ -104,6 +104,7 @@
     <a href="#bridge">3D Bridge</a>
     <a href="#decision">Decision View</a>
     <a href="#core">Core Map</a>
+    <a href="#live-loop">Live Loop</a>
     <a href="#extension">Core + Extension</a>
     <a href="#scope">Scope</a>
   </nav>
@@ -233,6 +234,31 @@
     </div>
   </section>
 
+  <section id="live-loop">
+    <h2>Live Core loop</h2>
+    <p class="lead">The Core loop turns the replay into a local Mission Control workflow: fit the current map, select the next Core case, ingest the evidence and update the pressure/load metrics.</p>
+    <div class="two flow">
+      <div class="panel claim">
+        <h3>What ran</h3>
+        <ul>
+          <li>Initial labelled set: 50 mm / 3 deg, 60 mm / 5 deg and 70 mm / 7 deg.</li>
+          <li>Primary policy: engineering utility.</li>
+          <li>Four selected Core cases were revealed from committed evidence.</li>
+          <li>No OpenFOAM case was regenerated because all selected results already existed.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Result</h3>
+        <ul>
+          <li>Engineering utility and cost-aware utility reduce error versus averaged random.</li>
+          <li>Diversity remains slightly best by curve-error area on this 15-case pool.</li>
+          <li>The supported claim is a local Core acquisition workflow, not industrial live CFD savings.</li>
+        </ul>
+      </div>
+    </div>
+    <img class="img-frame flow" src="../evidence/cfd/aerocliff_core/live_core_loop_v0_1/live_core_loop_learning_curve.svg" alt="AeroCliff Core live acquisition loop learning curve">
+  </section>
+
   <section id="extension">
     <h2>Core benchmark and 3D extension</h2>
     <p class="lead">AeroCliff Core is the custom underfloor benchmark inside AeroMap. The full 3D extension lane builds from the same data contracts when higher-fidelity targets are available.</p>
@@ -251,13 +277,14 @@
           <li>Compact DrivAerML 3D scalar bridge with real STL geometry ingestion.</li>
           <li>Domain-specific acquisition policy selector.</li>
           <li>Structured AeroCliff Core pressure/load response-map replay.</li>
+          <li>Local Core live/replay acquisition loop with committed evidence ingestion.</li>
           <li>Runs locally for this benchmark replay.</li>
         </ul>
       </div>
       <div class="panel">
         <h3>Follow-on work</h3>
         <ul>
-          <li>Live CFD scheduling and automatic result ingestion.</li>
+          <li>Generate new local Core CFD cases when selected evidence is missing.</li>
           <li>Richer 3D or field-level targets.</li>
           <li>Wall-shear or separation labels after matching validation data.</li>
           <li>Full 3D AeroCliff transfer.</li>

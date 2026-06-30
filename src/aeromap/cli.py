@@ -40,6 +40,21 @@ from aeromap.benchmarks.aeromap_cost import (
     write_cost_proxy_audit,
     write_surface_field_feasibility_precheck,
 )
+from aeromap.benchmarks.core_live_loop import (
+    DEFAULT_DATASET_PATH as LIVE_CORE_DEFAULT_DATASET_PATH,
+)
+from aeromap.benchmarks.core_live_loop import (
+    DEFAULT_INITIAL_CASES as LIVE_CORE_DEFAULT_INITIAL_CASES,
+)
+from aeromap.benchmarks.core_live_loop import (
+    DEFAULT_OUTPUT_DIR as LIVE_CORE_DEFAULT_OUTPUT_DIR,
+)
+from aeromap.benchmarks.core_live_loop import (
+    DEFAULT_REPORT_PATH as LIVE_CORE_DEFAULT_REPORT_PATH,
+)
+from aeromap.benchmarks.core_live_loop import (
+    write_live_core_acquisition_loop,
+)
 from aeromap.benchmarks.drivaerml import (
     DrivAerMLBenchmarkConfig,
     validate_drivaerml_asset_manifest,
@@ -2171,6 +2186,76 @@ def benchmark_aeromap_cost_aware_replay_v05(
         "method_winners": payload["method_winners"],
         "cost_metric_winners": payload["cost_metric_winners"],
         "live_cfd_savings": payload["claim_boundary"]["live_cfd_savings"],
+    }
+    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
+
+
+@benchmark_app.command("live-core-loop")
+def benchmark_live_core_loop(
+    dataset_path: Annotated[
+        Path,
+        typer.Option("--dataset", exists=True, dir_okay=False, readable=True),
+    ] = LIVE_CORE_DEFAULT_DATASET_PATH,
+    output_dir: Annotated[Path, typer.Option("--output-dir", file_okay=False)] = (
+        LIVE_CORE_DEFAULT_OUTPUT_DIR
+    ),
+    report_path: Annotated[Path, typer.Option("--report", dir_okay=False)] = (
+        LIVE_CORE_DEFAULT_REPORT_PATH
+    ),
+    acquisition_policy: Annotated[
+        Literal["random", "diversity", "engineering_utility", "cost_aware_utility"],
+        typer.Option("--acquisition-policy"),
+    ] = "engineering_utility",
+    mode: Annotated[
+        Literal["replay-live", "real-live"],
+        typer.Option("--mode"),
+    ] = "replay-live",
+    max_iterations: Annotated[int, typer.Option("--max-iterations", min=1, max=12)] = 4,
+    initial_case: Annotated[
+        list[str] | None,
+        typer.Option("--initial-case"),
+    ] = None,
+    candidate_case: Annotated[
+        list[str] | None,
+        typer.Option("--candidate-case"),
+    ] = None,
+    *,
+    dry_run: Annotated[bool, typer.Option("--dry-run/--no-dry-run")] = False,
+    overwrite: Annotated[bool, typer.Option("--overwrite/--no-overwrite")] = False,
+    random_seed: Annotated[int, typer.Option("--random-seed")] = 20260630,
+) -> None:
+    """Run a local live/replay acquisition loop on the AeroCliff Core map."""
+
+    try:
+        manifest_path = write_live_core_acquisition_loop(
+            dataset_path=dataset_path,
+            output_dir=output_dir,
+            report_path=report_path,
+            acquisition_policy=acquisition_policy,
+            max_iterations=max_iterations,
+            mode=mode,
+            initial_cases=tuple(initial_case or LIVE_CORE_DEFAULT_INITIAL_CASES),
+            candidate_cases=tuple(candidate_case or ()),
+            dry_run=dry_run,
+            overwrite=overwrite,
+            random_seed=random_seed,
+        )
+    except (OSError, RuntimeError, TypeError, ValueError) as exc:
+        typer.echo(f"AeroMap live Core loop failed: {exc}", err=True)
+        raise typer.Exit(2) from exc
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    summary = {
+        "path": str(manifest_path),
+        "classification": payload["classification"],
+        "mode_requested": payload["mode_requested"],
+        "mode_executed": payload["mode_executed"],
+        "primary_policy": payload["primary_policy"],
+        "completed_iterations": payload["primary_loop"]["completed_iterations"],
+        "best_method_by_curve_error_area": payload["policy_comparison"][
+            "best_method_by_curve_error_area"
+        ],
+        "report": payload["artifacts"]["report"],
+        "learning_curve_svg": payload["artifacts"]["learning_curve_svg"],
     }
     typer.echo(json.dumps(summary, indent=2, sort_keys=True))
 
