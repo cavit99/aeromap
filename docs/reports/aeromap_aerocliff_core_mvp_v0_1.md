@@ -1,6 +1,6 @@
 # AeroMap + AeroCliff Core MVP v0.1
 
-## Executive Summary
+## Executive summary
 
 `AEROMAP_AEROCLIFF_CORE_MVP_V0_1` combines three pieces:
 
@@ -12,7 +12,7 @@ The headline claim is:
 
 > AeroMap learns aerodynamic maps under a CFD-label budget and connects that decision loop to a structured Venturi-underfloor pressure/load response map.
 
-## Why AeroCliff Core Exists
+## Why AeroCliff Core exists
 
 The full AeroCliff geometry is the custom 3D transfer lane. AeroCliff Core is the controlled benchmark tier: it keeps the underfloor throat/diffuser mechanism and replaces the unstructured 3D meshing burden with a structured `blockMesh` setup.
 
@@ -27,7 +27,7 @@ Core is intentionally small:
 
 That makes it suitable for a public MVP: the response surface is small enough to audit case by case, but still connected to the underfloor physics that motivated the project.
 
-## AirfRANS Decision Benchmark
+## AirfRANS decision benchmark
 
 The open-CFD benchmark uses 1,000 AirfRANS RANS cases. The feature contract contains 27 geometry and operating-condition features, and the harder split is geometry-disjoint over deterministic geometry descriptors.
 
@@ -40,7 +40,7 @@ On that split, regret-aware utility v2 leads:
 
 Utility v1 remains best for C_L RMSE, while diversity remains best for absolute best-design regret. This is used directly in the policy selector rather than hidden.
 
-## DrivAerML 3D Bridge
+## DrivAerML 3D bridge
 
 The DrivAerML bridge uses compact root metadata:
 
@@ -51,7 +51,7 @@ The DrivAerML bridge uses compact root metadata:
 
 Diversity is currently the recommended acquisition policy for this bridge. The point of the bridge is practicability: the same replay machinery handles compact 3D automotive-aero data without downloading volume fields or boundary fields.
 
-## AeroCliff Core Response Map
+## AeroCliff Core response map
 
 The Core response map spans:
 
@@ -75,7 +75,7 @@ Fine-check differences:
 | `50/7` | 2.84% | 1.53% | 1.54% |
 | `50/6` | 1.28% | 0.76% | 0.76% |
 
-## Core Replay Protocol
+## Core replay protocol
 
 The offline replay treats the 15 Core cases as a finite pool of expensive CFD labels.
 
@@ -101,7 +101,7 @@ Methods:
 
 The surrogate is a deterministic inverse-distance response interpolator. That keeps the result focused on the decision loop rather than model architecture.
 
-## Core Replay Result
+## Core replay result
 
 Classification:
 
@@ -137,7 +137,7 @@ Follow-on work:
 - pressure-field or component-level metrics;
 - higher-fidelity custom AeroCliff transfer studies.
 
-## Artifact Index
+## Artifact index
 
 - Core dataset: `docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json`
 - Core replay: `docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json`

@@ -6,7 +6,7 @@ It trains a surrogate on the CFD labels available so far, estimates where the ae
 
 ![Geometry-disjoint benchmark](docs/assets/aeromap/aeromap_headline_geometry_heldout.png)
 
-## Key Result
+## Key result
 
 On AirfRANS, a real open-CFD benchmark with 1,000 RANS cases, AeroMap uses geometry-aware features and a geometry-disjoint split over deterministic shape descriptors. The regret-aware acquisition policy leads the main design-decision metrics:
 
@@ -19,7 +19,7 @@ On AirfRANS, a real open-CFD benchmark with 1,000 RANS cases, AeroMap uses geome
 
 The practical reading is simple: v2 is the recommended AirfRANS geometry-disjoint policy for drag error, top-k recovery, Pareto recall and ranking. Utility v1 remains best for lift RMSE, and diversity remains best for absolute regret.
 
-## Evidence Tiers
+## Evidence tiers
 
 The release package is:
 
@@ -33,9 +33,9 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | DrivAerML | compact 3D automotive-aero bridge | 484 scalar cases, 16 geometry features, real STL ingestion |
 | AeroCliff Core | structured Venturi-underfloor benchmark | 3 x 5 pressure/load response-map replay |
 
-![AeroMap evidence tiers](docs/assets/aeromap/aeromap_two_tier_evidence.png)
+![AeroMap evidence tiers](docs/assets/aeromap/aeromap_evidence_tiers.png)
 
-## How Mission Control Works
+## How Mission Control works
 
 ```text
 labelled CFD cases
@@ -57,7 +57,7 @@ The benchmark reports engineering metrics as well as RMSE:
 
 ![Label-budget learning curves](docs/assets/aeromap/label_budget_learning_curves.png)
 
-## 3D Automotive Bridge
+## 3D automotive bridge
 
 The DrivAerML bridge checks that the same decision loop can work beyond the 2D AirfRANS setting. It uses compact root metadata only: geometry parameters and integrated force/moment summaries.
 
@@ -72,9 +72,9 @@ The DrivAerML bridge checks that the same decision loop can work beyond the 2D A
 
 ![DrivAerML bridge metrics](docs/assets/aeromap/drivaerml_3d_bridge_metrics.png)
 
-The 3D bridge is deliberately lightweight: no volume fields, no boundary-field training and no cloud compute are needed for this replay.
+The bridge is deliberately lightweight: no volume fields, no boundary-field training and no cloud compute are needed for this replay.
 
-## Cost-Proxy Extension
+## Cost-proxy extension
 
 AeroMap v0.5 adds a bounded cost-aware check. AirfRANS uses observed local `internal.vtu` file size as a case-size proxy. DrivAerML uses a geometry-complexity proxy because full per-case solver cost is not available in the compact metadata.
 
@@ -82,7 +82,7 @@ Cost-aware utility selects the lowest cumulative proxy-cost labelled set in both
 
 Details: [docs/reports/aeromap_cost_aware_v0_5_report.md](docs/reports/aeromap_cost_aware_v0_5_report.md)
 
-## AeroCliff Core Response Map
+## AeroCliff Core response map
 
 AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mission Control to a custom underfloor response problem. The current Core release is pressure/load response mapping over ride height and diffuser angle.
 
@@ -97,7 +97,7 @@ AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mis
 
 ![AeroCliff Core active replay](docs/assets/aeromap/aerocliff_core_active_replay.png)
 
-This Core tier gives the project a custom underfloor response surface while keeping the public claim focused on pressure/load mapping.
+This Core tier gives the project a custom underfloor response surface while keeping the claim focused on pressure/load mapping.
 
 ## Demo
 
@@ -149,7 +149,7 @@ uv run scripts/run_venturi_core_2d_response_map_replay.py
 Pass `--overwrite` only when you want to regenerate the OpenFOAM cases with
 Docker rather than replaying the committed Core evidence.
 
-## Repository Map
+## Repository map
 
 | Path | Purpose |
 |---|---|

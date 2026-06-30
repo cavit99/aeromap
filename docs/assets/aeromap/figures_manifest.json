@@ -1,6 +1,6 @@
 {
   "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_PORTFOLIO_FIGURES",
-  "evidence_generation_git_sha": "445a056",
+  "evidence_generation_git_sha": "4d741f1",
   "figures": [
     {
       "caption": "Geometry-disjoint final metrics summary for AeroMap Mission Control v0.3.",
@@ -29,7 +29,7 @@
     },
     {
       "caption": "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
-      "path": "docs/assets/aeromap/aeromap_two_tier_evidence.png",
+      "path": "docs/assets/aeromap/aeromap_evidence_tiers.png",
       "source_case": "AeroMap 3D bridge and portfolio context"
     },
     {

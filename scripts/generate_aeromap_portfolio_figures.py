@@ -28,7 +28,7 @@ FIGURES = {
     "comparison": "acquisition_method_comparison.png",
     "decision": "decision_metrics_panel.png",
     "flow": "mission_control_flow.png",
-    "two_tier": "aeromap_two_tier_evidence.png",
+    "evidence_tiers": "aeromap_evidence_tiers.png",
     "drivaer3d": "drivaerml_3d_bridge_metrics.png",
     "core_surface": "aerocliff_core_response_surface.png",
     "core_recovery": "aerocliff_core_pressure_recovery_surface.png",
@@ -398,7 +398,7 @@ def figure_flow() -> Path:
     return path
 
 
-def figure_two_tier_evidence() -> Path:
+def figure_evidence_tiers() -> Path:
     fig, ax = plt.subplots(figsize=(12, 6.6))
     ax.set_axis_off()
     title(
@@ -430,7 +430,7 @@ def figure_two_tier_evidence() -> Path:
         ),
         (
             (0.69, 0.50),
-            "Core\nAeroCliff",
+            "AeroCliff\nCore",
             (
                 "structured Venturi-underfloor map\n"
                 "15 medium cases, 3 fine checks\ncustom pressure/load replay"
@@ -457,8 +457,8 @@ def figure_two_tier_evidence() -> Path:
         0.05,
         0.25,
         (
-            "Product lesson: Mission Control does not force one acquisition policy everywhere.\n"
-            "It selects the strategy supported by the current aero domain evidence."
+            "Mission Control selects the acquisition policy supported by each aero domain.\n"
+            "AirfRANS, DrivAerML and Core use the same decision layer with different evidence."
         ),
         fontsize=13,
         color=TEXT,
@@ -474,7 +474,7 @@ def figure_two_tier_evidence() -> Path:
         fontsize=11,
         color=MUTED,
     )
-    path = OUT_DIR / FIGURES["two_tier"]
+    path = OUT_DIR / FIGURES["evidence_tiers"]
     save(fig, path)
     return path
 
@@ -842,7 +842,7 @@ def write_manifest(paths: list[Path]) -> None:
             "flow"
         ]: "Mission Control decision loop from labelled cases to recommended next CFD simulation.",
         FIGURES[
-            "two_tier"
+            "evidence_tiers"
         ]: "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
         FIGURES[
             "drivaer3d"
@@ -887,7 +887,7 @@ def write_manifest(paths: list[Path]) -> None:
 def _figure_source_case(path_name: str) -> str:
     if path_name.startswith(("aerocliff_core", "aeromap_aerocliff")):
         return "AeroCliff Core 2D pressure/load response replay"
-    if "drivaerml" in path_name or "two_tier" in path_name:
+    if "drivaerml" in path_name or "evidence_tiers" in path_name:
         return "AeroMap 3D bridge and portfolio context"
     return "AirfRANS v0.3 open-CFD replay"
 
@@ -904,7 +904,7 @@ def main() -> None:
         figure_acquisition_comparison(data),
         figure_decision_panel(data),
         figure_flow(),
-        figure_two_tier_evidence(),
+        figure_evidence_tiers(),
         figure_drivaer3d_metrics(drivaer3d),
         figure_core_response_surface(core_dataset),
         figure_core_pressure_recovery(core_dataset),
