@@ -1,0 +1,166 @@
+{
+  "aerocliff_comparison": null,
+  "aerocliff_comparison_note": "AeroCliff STL comparison is generated on demand from artifacts/geometry/evidence/canonical/article.stl and is not required for the committed DrivAerML bridge sample.",
+  "claim_boundary": {
+    "accuracy_result": false,
+    "aerocliff_accuracy": false,
+    "f1_accuracy": false,
+    "field_prediction": false,
+    "geometry_ingestion": true
+  },
+  "classification": "AEROMAP_3D_GEOMETRY_READINESS_SAMPLE",
+  "points_npz_path": "docs/evidence/aeromap3d/drivaerml_geometry_readiness_sample.points.npz",
+  "points_npz_sha256": "223975c4a7db2f7096d000c6e45d31381b5058e008b68a0b59f48146daefb8ae",
+  "schema_version": "aerocliff_aeromap3d_geometry_readiness_v0.1.0",
+  "source_dataset": "DrivAerML",
+  "stl_count": 3,
+  "stl_summaries": [
+    {
+      "bbox_max": [
+        3.85444,
+        1.07359,
+        1.06455
+      ],
+      "bbox_min": [
+        -0.87379,
+        -1.07359,
+        -0.319649
+      ],
+      "bbox_size": [
+        4.72823,
+        2.14718,
+        1.3841990000000002
+      ],
+      "bytes": 142346440,
+      "embedding": {
+        "bbox_dx": 4.72823,
+        "bbox_dy": 2.14718,
+        "bbox_dz": 1.3841990000000002,
+        "normal_abs_x_mean": 0.42986901391598453,
+        "normal_abs_y_mean": 0.4926333209738827,
+        "normal_abs_z_mean": 0.5049412641028973,
+        "surface_area": 37.67206494868895,
+        "triangle_area_mean": 5.0012963824154326e-05,
+        "triangle_area_std": 0.00032114764595919356
+      },
+      "normal_abs_mean": [
+        0.42986901391598453,
+        0.4926333209738827,
+        0.5049412641028973
+      ],
+      "normal_abs_std": [
+        0.32172352782619706,
+        0.32800567197127395,
+        0.32629068718714443
+      ],
+      "path": "artifacts/benchmark/drivaerml_cache/run_2/drivaer_2.stl",
+      "sample_point_count": 512,
+      "scale_diagonal": 5.374248576024466,
+      "sha256": "1c911495893a27bc248921f679082515b6e2828290c0df810563ecf979076b68",
+      "source_format": "ascii_stl",
+      "surface_area": 37.67206494868895,
+      "triangle_area_max": 0.07085094005667034,
+      "triangle_area_mean": 5.0012963824154326e-05,
+      "triangle_area_std": 0.00032114764595919356,
+      "triangle_count": 753246
+    },
+    {
+      "bbox_max": [
+        3.89309,
+        0.94817,
+        1.12824
+      ],
+      "bbox_min": [
+        -0.913634,
+        -0.94817,
+        -0.319628
+      ],
+      "bbox_size": [
+        4.806724,
+        1.89634,
+        1.447868
+      ],
+      "bytes": 142406577,
+      "embedding": {
+        "bbox_dx": 4.806724,
+        "bbox_dy": 1.89634,
+        "bbox_dz": 1.447868,
+        "normal_abs_x_mean": 0.42237386841377783,
+        "normal_abs_y_mean": 0.5133361151665886,
+        "normal_abs_z_mean": 0.4927022768619298,
+        "surface_area": 35.05296843981204,
+        "triangle_area_mean": 4.6536748889866654e-05,
+        "triangle_area_std": 0.0002826341991151598
+      },
+      "normal_abs_mean": [
+        0.42237386841377783,
+        0.5133361151665886,
+        0.4927022768619298
+      ],
+      "normal_abs_std": [
+        0.318504070316851,
+        0.3294688648480414,
+        0.3245554479735162
+      ],
+      "path": "artifacts/benchmark/drivaerml_cache/run_10/drivaer_10.stl",
+      "sample_point_count": 512,
+      "scale_diagonal": 5.366285750237309,
+      "sha256": "88db0376d1cc99b56c8fe77ce8cd1c8e263b027e39e1960ab0066702b02c74ca",
+      "source_format": "ascii_stl",
+      "surface_area": 35.05296843981204,
+      "triangle_area_max": 0.06152129759762982,
+      "triangle_area_mean": 4.6536748889866654e-05,
+      "triangle_area_std": 0.0002826341991151598,
+      "triangle_count": 753232
+    },
+    {
+      "bbox_max": [
+        3.91902,
+        1.06514,
+        1.14213
+      ],
+      "bbox_min": [
+        -0.75162,
+        -1.06514,
+        -0.319621
+      ],
+      "bbox_size": [
+        4.670640000000001,
+        2.13028,
+        1.461751
+      ],
+      "bytes": 142257008,
+      "embedding": {
+        "bbox_dx": 4.670640000000001,
+        "bbox_dy": 2.13028,
+        "bbox_dz": 1.461751,
+        "normal_abs_x_mean": 0.42979157886178343,
+        "normal_abs_y_mean": 0.49941367341996734,
+        "normal_abs_z_mean": 0.4971109228723359,
+        "surface_area": 37.345033959357444,
+        "triangle_area_mean": 4.9579328126511735e-05,
+        "triangle_area_std": 0.0003070340507356211
+      },
+      "normal_abs_mean": [
+        0.42979157886178343,
+        0.49941367341996734,
+        0.4971109228723359
+      ],
+      "normal_abs_std": [
+        0.3210296438227426,
+        0.3300659863918188,
+        0.32671443848706944
+      ],
+      "path": "artifacts/benchmark/drivaerml_cache/run_102/drivaer_102.stl",
+      "sample_point_count": 512,
+      "scale_diagonal": 5.3375731258691905,
+      "sha256": "11db0d3c39bc4cd57f7729a657ab34da73921eafe62c03eb891a1eb3cac268cd",
+      "source_format": "ascii_stl",
+      "surface_area": 37.345033959357444,
+      "triangle_area_max": 0.059634792529110255,
+      "triangle_area_mean": 4.9579328126511735e-05,
+      "triangle_area_std": 0.0003070340507356211,
+      "triangle_count": 753238
+    }
+  ]
+}

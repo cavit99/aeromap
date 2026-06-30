@@ -1,0 +1,90 @@
+[project]
+name = "aeromap"
+version = "0.1.0"
+description = "Simulation-budget decision system for aerodynamic maps"
+authors = [
+    { name = "Cavit Erginsoy", email = "cavit@erginsoy.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "cadquery>=2.8.0",
+    "numpy>=2.4.6",
+    "omegaconf>=2.3.1",
+    "pandas>=3.0.3",
+    "plotly>=6.8.0",
+    "pyarrow>=24.0.0",
+    "pydantic>=2.13.4",
+    "pyvista>=0.48.4",
+    "pyyaml>=6.0.3",
+    "rich>=15.0.0",
+    "scipy>=1.17.1",
+    "structlog>=26.1.0",
+    "torch>=2.12.1",
+    "trimesh>=4.12.2",
+    "typer>=0.26.7",
+    "vtk>=9.6.2",
+]
+
+[project.scripts]
+aeromap = "aeromap.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.1.0",
+    "pre-commit>=4.6.0",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.18",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",
+    "C901",
+    "D",
+    "EM101",
+    "ISC001",
+    "PLR0913",
+    "PLR0912",
+    "S101",
+    "T201",
+    "TC001",
+    "TC003",
+    "TRY003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR2004"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = [
+    "cadquery",
+    "cadquery.*",
+    "pandas",
+    "plotly.*",
+    "pyvista",
+    "scipy.*",
+    "trimesh",
+    "trimesh.*",
+    "yaml",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

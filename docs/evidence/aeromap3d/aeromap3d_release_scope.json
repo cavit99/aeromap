@@ -1,0 +1,27 @@
+{
+  "schema_version": "aerocliff_aeromap3d_release_scope_v0.1.0",
+  "classification": "AEROMAP_3D_OPEN_CFD_SCALAR_BRIDGE",
+  "source_dataset": "DrivAerML",
+  "included": [
+    "compact DrivAerML 3D scalar metadata bridge",
+    "offline active-learning replay on 3D automotive open-CFD scalar labels",
+    "real 3D STL ingestion readiness sample",
+    "diversity is currently recommended for the DrivAerML geometry-heldout bridge"
+  ],
+  "extension_paths": [
+    "field-level prediction",
+    "live solver-cost measurement",
+    "full custom AeroCliff transfer",
+    "additional 3D datasets",
+    "domain-specific acquisition retuning on a calibration split"
+  ],
+  "artifact_paths": {
+    "triage": "docs/evidence/aeromap3d/metadata_triage.json",
+    "scalar_dataset_manifest": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.json",
+    "scalar_dataset_npz": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.npz",
+    "geometry_readiness": "docs/evidence/aeromap3d/drivaerml_geometry_readiness_sample.json",
+    "replay_report": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json",
+    "policy_selector": "docs/evidence/aeromap/acquisition_policy_selector_v0_1.json",
+    "technical_report": "docs/reports/aeromap_3d_practicability_bridge.md"
+  }
+}

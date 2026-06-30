@@ -1,0 +1,44 @@
+{
+  "schema_version": "aerocliff_aeromap_acquisition_policy_selector_v0.1.0",
+  "classification": "AEROMAP_ACQUISITION_POLICY_SELECTOR",
+  "purpose": "Select the acquisition policy supported by the current aero-domain evidence instead of forcing one policy everywhere.",
+  "domains": {
+    "airfrans_geometry_disjoint": {
+      "source_report": "docs/evidence/aeromap/airfrans_decision_replay_v03.json",
+      "recommended_policy": "engineering_decision_utility_v2_regret_aware",
+      "rationale": [
+        "best C_D RMSE on the AirfRANS geometry-disjoint split",
+        "best top-k high-efficiency recovery on the AirfRANS geometry-disjoint split",
+        "best Pareto recall on the AirfRANS geometry-disjoint split",
+        "best Spearman efficiency rank correlation on the AirfRANS geometry-disjoint split"
+      ],
+      "required_caveats": [
+        "engineering_decision_utility_v1 still leads C_L RMSE",
+        "diversity still leads absolute best-design regret"
+      ]
+    },
+    "drivaerml_compact_3d_scalar_bridge": {
+      "source_report": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json",
+      "recommended_policy": "diversity",
+      "rationale": [
+        "best C_L RMSE on the DrivAerML geometry-heldout bridge",
+        "best top-k overlap on the DrivAerML geometry-heldout bridge",
+        "tied best Pareto recall on the DrivAerML geometry-heldout bridge",
+        "best Spearman efficiency rank correlation on the DrivAerML geometry-heldout bridge",
+        "best best-design regret on the DrivAerML geometry-heldout bridge"
+      ],
+      "v2_status": {
+        "recommended_as_default": false,
+        "interpretation": "engineering_decision_utility_v2_regret_aware improves regret versus random, but does not beat diversity on this compact 3D scalar bridge.",
+        "use_case": "exploratory regret-aware variant only"
+      }
+    }
+  },
+  "public_claim": "Mission Control chooses the acquisition strategy supported by current domain evidence.",
+  "release_scope": [
+    "policy selection is domain-specific",
+    "AirfRANS and DrivAerML use different recommended policies",
+    "DrivAerML is used as a compact 3D scalar bridge",
+    "field prediction and live solver scheduling are extension paths"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "base_feature_count": 11,
+  "benchmark_class": "OPEN_CFD_AEROMAP_BUDGET_BENCHMARK",
+  "case_count": 1000,
+  "claim_boundary": {
+    "aerocliff_result": false,
+    "f1_geometry": false,
+    "open_cfd_result": true
+  },
+  "classification": "AIRFRANS_REAL_GEOMETRY_SCALAR_DATASET",
+  "feature_count": 27,
+  "feature_names": [
+    "inlet_velocity_m_s",
+    "aoa_deg",
+    "sin_aoa",
+    "cos_aoa",
+    "log10_reynolds",
+    "shape_param_0",
+    "shape_param_1",
+    "shape_param_2",
+    "shape_param_3",
+    "shape_param_4",
+    "shape_param_5",
+    "geom_thickness_cos_0",
+    "geom_thickness_cos_1",
+    "geom_thickness_cos_2",
+    "geom_thickness_cos_3",
+    "geom_thickness_cos_4",
+    "geom_thickness_cos_5",
+    "geom_camber_cos_0",
+    "geom_camber_cos_1",
+    "geom_camber_cos_2",
+    "geom_camber_cos_3",
+    "geom_camber_cos_4",
+    "geom_camber_cos_5",
+    "geom_max_thickness",
+    "geom_max_abs_camber",
+    "geom_leading_station_thickness",
+    "geom_trailing_station_thickness"
+  ],
+  "geometry_descriptor": {
+    "cosine_modes_per_signal": 6,
+    "method": "fixed-station upper/lower boundary resampling plus cosine coefficients",
+    "normalisation": "x and y coordinates normalised by chord length per case",
+    "signals": [
+      "thickness",
+      "camber"
+    ],
+    "station_count": 16
+  },
+  "geometry_feature_count": 16,
+  "npz_path": "docs/evidence/aeromap/airfrans_geometry_scalar_dataset.npz",
+  "npz_sha256": "417488c92841611c2e5ca9a482aed6ad468e17cf3d94ad5237853652911813a8",
+  "root": "artifacts/benchmark/airfrans/processed/Dataset",
+  "schema_version": "aerocliff_aeromap_airfrans_geometry_dataset_v0.2.0",
+  "source_scalar_npz": null,
+  "source_note": "Built directly from the local AirfRANS processed cases; the compact geometry-aware NPZ is the release artifact.",
+  "target_names": [
+    "integrated_cd",
+    "integrated_cl"
+  ],
+  "unique_geometry_group_count": 1000
+}

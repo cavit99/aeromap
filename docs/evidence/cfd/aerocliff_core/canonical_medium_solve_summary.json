@@ -1,0 +1,94 @@
+{
+  "accepted": false,
+  "artifact_hashes": {
+    "blockMesh_log": "c147b4b3ec2119eaaca391483d7d9777861124d58d03f0c0007b42cee47499d8",
+    "checkMesh_extended_log": "06ba335c5679342ac3334c16d6aa32071db0932b6adab95a15bfe75516861cbc",
+    "checkMesh_meshQuality_log": "9d1bfbf78a30ea06df2fc3ed0271dfaf20e71c5d123e3c62891160031ef5f7e7",
+    "forceCoeffs": "9197703685af9b99114905d6bfff4f4eb4c85d0122efbe2e65325240f2192991",
+    "manifest": "17f492c1c3bd6309a40ac26ab4e9bc7617e1c1148b9f51a691711c8c165929cc",
+    "profile": "ee1be7f6d3bb5cdc97803099d8bb3cef0139c00458ce9df97b88df4d502647d4",
+    "solver_log": "dae40d146167406026e8014a5eaf3b7f7fb824fa57f930a8055e5ccf26777d1f"
+  },
+  "artifacts": {
+    "blockMesh_log": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/logs/blockMesh.log",
+    "checkMesh_extended_log": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/logs/checkMesh.log",
+    "checkMesh_meshQuality_log": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/logs/checkMesh_meshQuality.log",
+    "forceCoeffs": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/openfoam/postProcessing/forceCoeffs/0/forceCoeffs.dat",
+    "manifest": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/manifest.json",
+    "profile": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/profile.json",
+    "profile_svg": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/profile.svg",
+    "solver_log": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77/logs/solver.log"
+  },
+  "case_dir": "artifacts/aerocliff_core/cases/venturi_core_f706ed5f72dcde77",
+  "case_id": "venturi_core_f706ed5f72dcde77",
+  "claim_boundary": {
+    "accepted_core_label": false,
+    "core_medium_candidate": true,
+    "domino_accuracy": false,
+    "f1_floor_accuracy": false,
+    "full_3d_aerocliff_accuracy": false,
+    "requires_fine_confirmation": true,
+    "requires_parameter_map_before_active_learning": true
+  },
+  "classification": "AEROCLIFF_CORE_CANONICAL_MEDIUM_SOLVE_CANDIDATE",
+  "config_path": "configs/cfd/venturi_core_canonical_medium.yaml",
+  "force_coefficients_final_window": {
+    "Cd": {
+      "cv": 3.299387610800518e-07,
+      "max": 0.016339052,
+      "mean": 0.01633904486,
+      "min": 0.016339034,
+      "relative_drift": 2.4481235198493874e-07,
+      "std": 5.390884218339788e-09
+    },
+    "Cl": {
+      "cv": 2.1744998798455246e-05,
+      "max": 1.098468,
+      "mean": 1.0984255280000002,
+      "min": 1.098397,
+      "relative_drift": -6.354550055568057e-05,
+      "std": 2.3885261786552572e-05
+    },
+    "Cm": {
+      "cv": 4.00436059893739e-05,
+      "max": 0.031140406,
+      "mean": 0.031138086819999997,
+      "min": 0.031136573,
+      "relative_drift": -0.00012171589159953545,
+      "std": 1.2468812798829963e-06
+    }
+  },
+  "mass_balance": {
+    "inlet_phi": -0.36,
+    "outlet_phi": 0.35999991,
+    "relative_imbalance": 2.500000000226087e-07
+  },
+  "mesh": {
+    "cells": 34560,
+    "extended_failed_checks": 0,
+    "extended_mesh_ok": true,
+    "fatal_mesh_quality_ok": true,
+    "hexahedra": 34560,
+    "max_aspect_ratio": 25.24215,
+    "max_non_orthogonality_deg": 2.117785,
+    "max_skewness": 0.09244792,
+    "min_determinant": 0.005883198,
+    "points": 40293
+  },
+  "openfoam": {
+    "mesh_generator": "blockMesh",
+    "snappyHexMesh_used": false,
+    "solver": "foamRun -solver incompressibleFluid",
+    "version": "OpenFOAM Foundation v13"
+  },
+  "reason_not_training_eligible": "medium-only structured Core result; fine confirmation and separation/cliff-map validation still required",
+  "schema_version": "aerocliff_core_canonical_solve_summary_v0.1.0",
+  "solve": {
+    "clock_time_seconds_approx": 20,
+    "completed": true,
+    "final_window_rows": 50,
+    "force_rows": 251,
+    "iterations": 250
+  },
+  "training_eligible": false
+}

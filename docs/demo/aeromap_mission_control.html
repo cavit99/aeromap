@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AeroMap Mission Control</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #64717d;
+      --line: #d7dee7;
+      --soft: #f6f8fb;
+      --blue: #2563eb;
+      --green: #059669;
+      --purple: #5b21b6;
+      --rose: #be185d;
+      --amber: #d97706;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    a { color: inherit; text-decoration: none; }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      font-size: 14px;
+      color: var(--muted);
+    }
+    header, section { max-width: 1180px; margin: 0 auto; padding: 34px 24px; }
+    header {
+      min-height: 88vh;
+      display: grid;
+      align-content: center;
+      gap: 22px;
+    }
+    h1 { margin: 0; max-width: 920px; font-size: clamp(38px, 6vw, 76px); line-height: 0.95; letter-spacing: 0; }
+    h2 { margin: 0 0 16px; font-size: 30px; line-height: 1.05; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .lead { max-width: 740px; font-size: 19px; }
+    .hero-grid, .two, .three { display: grid; gap: 18px; }
+    .hero-grid { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 18px;
+    }
+    .stat {
+      display: grid;
+      gap: 6px;
+      border-left: 4px solid var(--purple);
+      padding-left: 14px;
+    }
+    .stat strong { font-size: 34px; line-height: 1; }
+    .img-frame {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+    th, td { text-align: right; border-bottom: 1px solid var(--line); padding: 11px 12px; font-size: 14px; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--muted); font-weight: 700; background: #f9fafb; }
+    .good { color: var(--green); font-weight: 700; }
+    .warn { color: var(--amber); font-weight: 700; }
+    .bad { color: #b42318; font-weight: 700; }
+    .flow { margin-top: 18px; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.55; }
+    .claim { border-left: 4px solid var(--blue); background: #f5f8ff; }
+    footer { max-width: 1180px; margin: 0 auto; padding: 32px 24px 54px; color: var(--muted); }
+    @media (max-width: 860px) {
+      nav { justify-content: flex-start; overflow-x: auto; }
+      header { min-height: auto; }
+      .hero-grid, .two, .three { grid-template-columns: 1fr; }
+      h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#overview">Overview</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#bridge">3D Bridge</a>
+    <a href="#decision">Decision View</a>
+    <a href="#core">Core Map</a>
+    <a href="#extension">Core + Extension</a>
+    <a href="#scope">Scope</a>
+  </nav>
+
+  <header id="overview">
+    <div class="hero-grid">
+      <div>
+        <h1>AeroMap Mission Control</h1>
+        <p class="lead">An AI aerodynamicist for the hook; formally, a simulation-budget decision system for aerodynamic maps.</p>
+      </div>
+      <div class="panel">
+        <div class="three">
+          <div class="stat"><p>Open CFD cases</p><strong>1000</strong></div>
+          <div class="stat"><p>Geometry features</p><strong>27</strong></div>
+          <div class="stat"><p>Core map cases</p><strong>15</strong></div>
+        </div>
+      </div>
+    </div>
+    <img class="img-frame" src="../assets/aeromap/mission_control_flow.png" alt="Mission Control flow">
+    <div class="two">
+      <div class="panel">
+        <h3>Headline tier</h3>
+        <p>AirfRANS proves simulation-budget decision learning on a real open-CFD benchmark. Regret-aware utility v2 is recommended for this geometry-disjoint domain.</p>
+      </div>
+      <div class="panel">
+        <h3>3D bridge tier</h3>
+        <p>DrivAerML proves compact 3D automotive scalar practicability. Diversity is currently recommended there, showing Mission Control selects policies by domain evidence.</p>
+      </div>
+    </div>
+  </header>
+
+  <section id="benchmark">
+    <h2>Geometry-Heldout Benchmark</h2>
+    <p class="lead">The benchmark uses a geometry-disjoint split over deterministic descriptors/hashes and asks which acquisition method builds the best aero map under the same label budget.</p>
+    <div class="flow">
+      <img class="img-frame" src="../assets/aeromap/aeromap_headline_geometry_heldout.png" alt="Geometry-heldout final metrics">
+    </div>
+    <div class="panel flow">
+      <table>
+        <thead>
+          <tr><th>Method</th><th>C_D RMSE</th><th>C_L RMSE</th><th>Top-k</th><th>Pareto</th><th>Rank</th><th>Regret</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Random</td><td>0.003119</td><td>0.182288</td><td>0.464</td><td>0.210</td><td>0.866</td><td>16.389</td></tr>
+          <tr><td>Diversity</td><td>0.002714</td><td>0.050832</td><td>0.520</td><td>0.310</td><td>0.907</td><td class="good">11.195</td></tr>
+          <tr><td>Utility v1</td><td>0.002525</td><td class="good">0.047634</td><td>0.544</td><td>0.340</td><td>0.913</td><td>22.886</td></tr>
+          <tr><td>Regret-aware utility v2</td><td class="good">0.001966</td><td>0.050445</td><td class="good">0.632</td><td class="good">0.410</td><td class="good">0.953</td><td>14.526</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="bridge">
+    <h2>3D Practicability Bridge</h2>
+    <p class="lead">The DrivAerML bridge answers the practical-use objection: AeroMap is no longer only a 2D AirfRANS exercise. It can ingest compact 3D automotive-aero scalar metadata and real STL geometry.</p>
+    <img class="img-frame flow" src="../assets/aeromap/aeromap_two_tier_evidence.png" alt="AeroMap two-tier evidence">
+    <div class="three flow">
+      <div class="panel">
+        <h3>Selected dataset</h3>
+        <p>DrivAerML was selected from HiLiftAeroML, DrivAerML and AhmedML because compact all-case geometry parameters and force/moment summaries were available.</p>
+      </div>
+      <div class="panel">
+        <h3>Compact bridge</h3>
+        <p>484 cases, 16 geometry/design features, C_D and C_L scalar targets, and a compact NPZ. No boundary fields, volume fields, NIM, cloud or full clone.</p>
+      </div>
+      <div class="panel">
+        <h3>Geometry sample</h3>
+        <p>Three cached DrivAerML STLs, about 753k triangles each, were parsed into surface descriptors and sampled point clouds.</p>
+      </div>
+    </div>
+    <img class="img-frame flow" src="../assets/aeromap/drivaerml_3d_bridge_metrics.png" alt="DrivAerML compact 3D bridge metrics">
+    <div class="panel flow">
+      <p><strong>Interpretation:</strong> diversity is currently recommended for the DrivAerML compact 3D scalar bridge. Regret-aware utility v2 improves regret versus random, but it does not beat diversity here.</p>
+    </div>
+  </section>
+
+  <section id="decision">
+    <h2>Design Decision View</h2>
+    <div class="two">
+      <img class="img-frame" src="../assets/aeromap/label_budget_learning_curves.png" alt="Label-budget learning curves">
+      <img class="img-frame" src="../assets/aeromap/decision_metrics_panel.png" alt="Decision metrics panel">
+    </div>
+    <div class="two flow">
+      <div class="panel">
+        <h3>Policy selector</h3>
+        <p>Use regret-aware utility v2 for AirfRANS geometry-disjoint. Use diversity for the DrivAerML compact 3D bridge. Mission Control follows the evidence for each domain.</p>
+      </div>
+      <div class="panel">
+        <h3>Policy detail</h3>
+        <p>There is no universal winner. Utility v1 has the best AirfRANS lift RMSE, and diversity is strongest on DrivAerML broad decision quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="core">
+    <h2>AeroCliff Core Response Map</h2>
+    <p class="lead">AeroCliff Core is a structured Venturi-underfloor benchmark. It gives Mission Control a custom pressure/load response surface for the public MVP.</p>
+    <div class="three flow">
+      <div class="stat"><p>Medium map</p><strong>15/15</strong></div>
+      <div class="stat"><p>Fine sanity</p><strong>3/3</strong></div>
+      <div class="stat"><p>Best replay</p><strong>Utility</strong></div>
+    </div>
+    <div class="two flow">
+      <img class="img-frame" src="../assets/aeromap/aerocliff_core_response_surface.png" alt="AeroCliff Core suction response surface">
+      <img class="img-frame" src="../assets/aeromap/aerocliff_core_pressure_recovery_surface.png" alt="AeroCliff Core pressure recovery surface">
+    </div>
+    <img class="img-frame flow" src="../assets/aeromap/aerocliff_core_active_replay.png" alt="AeroCliff Core active replay">
+    <div class="two flow">
+      <div class="panel claim">
+        <h3>Core result</h3>
+        <ul>
+          <li>Structured Core 2D pressure/load response map.</li>
+          <li>C_D, suction/downforce and pressure recovery replay targets.</li>
+          <li>Engineering and cost-aware utility beat random by curve-error area.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Out of scope here</h3>
+        <ul>
+          <li>Wall-shear and continuous f_sep labels.</li>
+          <li>Validated cliff-boundary discovery.</li>
+          <li>Full 3D transfer accuracy.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="extension">
+    <h2>Core Benchmark And 3D Extension</h2>
+    <p class="lead">AeroCliff Core is the custom underfloor benchmark inside AeroMap. The full 3D extension lane builds from the same data contracts when higher-fidelity targets are available.</p>
+    <img class="img-frame flow" src="../assets/aeromap/aeromap_aerocliff_core_story.png" alt="AeroMap to AeroCliff Core story">
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <div class="two">
+      <div class="panel claim">
+        <h3>Included in this release</h3>
+        <ul>
+          <li>Real AirfRANS open-CFD scalar active-learning replay.</li>
+          <li>Geometry-aware feature contract and geometry-disjoint split.</li>
+          <li>Regret-aware utility v2 leads multiple geometry-generalisation decision metrics.</li>
+          <li>Compact DrivAerML 3D scalar bridge with real STL geometry ingestion.</li>
+          <li>Domain-specific acquisition policy selector.</li>
+          <li>Structured AeroCliff Core pressure/load response-map replay.</li>
+          <li>No cloud required for this benchmark replay.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Follow-on work</h3>
+        <ul>
+          <li>Live CFD scheduling and automatic result ingestion.</li>
+          <li>Richer 3D or field-level targets.</li>
+          <li>Wall-shear or separation labels after matching validation data.</li>
+          <li>Full 3D AeroCliff transfer.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    AeroMap + AeroCliff Core MVP v0.1. Evidence sources: AirfRANS open-CFD replay, DrivAerML compact 3D scalar bridge and structured AeroCliff Core pressure/load response replay.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+name: drivaerml_mvp_pool_v0
+benchmark_class: EXTERNAL_DRIVAERML_POOL_BENCHMARK
+source: DrivAerML
+dataset_url: https://huggingface.co/datasets/neashton/drivaerml
+dataset_page: https://neilashton.github.io/caemldatasets/drivaerml/
+license: CC BY-SA 4.0
+citation_key: ashton2024drivaer
+first_run_id: 1
+split:
+  initial_labelled: 16
+  acquisition_pool: 64
+  calibration: 32
+  heldout_test: 32
+  seed: 20260624
+assets:
+  stl: true
+  boundary_vtp: true
+  geometry_parameters: true
+  fixed_reference_forces: true
+  volume_vtu: false
+  images: false
+target_fields:
+  - surface_cp
+  - integrated_cd
+  - integrated_cl
+excluded_targets:
+  - integrated_cm_pitch
+  - volume_fields
+  - wall_shear
+  - separation_fraction
+  - ground_effect_cliff
+acquisition_methods:
+  - random
+  - maximum_ensemble_uncertainty
+  - geometry_parameter_maximin
+  - uncertainty_plus_diversity
+ensemble_members: 3
+initial_label_count: 16
+acquisition_batch_size: 8
+maximum_label_count: 48
+acquisition_seeds:
+  - 11
+  - 17
+  - 23

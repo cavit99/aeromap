@@ -1,0 +1,46 @@
+.DS_Store
+.venv/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+__pycache__/
+
+# Local review/tool state
+.clawpatch/
+clawpatch-report.md
+
+# AeroCliff generated artifacts
+artifacts/
+cases/
+data/registry.parquet
+data/raw/
+data/interim/
+data/processed/
+mlruns/
+reports/generated/
+*.stl
+*.vtp
+*.vtu
+*.foam
+*.ckpt
+*.pt
+*.pth
+
+# Committed compact gate evidence
+!docs/evidence/
+!docs/evidence/**
+!docs/evidence/**/*.stl
+!docs/evidence/**/*.vtp
+
+# Secrets and remote credentials
+.env
+.env.*
+secrets/
+*.secret
+*.pem
+*ngc*key*

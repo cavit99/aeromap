@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="80" y="28" font-family="Arial" font-size="22">AeroMap v0.3 map_completion: top-k overlap vs CFD labels</text>
+<line x1="80" y1="470" x2="920" y2="470" stroke="#111" stroke-width="1"/>
+<line x1="80" y1="40" x2="80" y2="470" stroke="#111" stroke-width="1"/>
+<text x="430.0" y="520" font-family="Arial" font-size="15">labelled CFD cases</text>
+<text x="18" y="315.0" transform="rotate(-90 18 315.0)" font-family="Arial" font-size="15">top-k overlap</text>
+<polyline points="80.0,398.3 220.0,422.2 360.0,326.7 500.0,278.9 640.0,159.4 780.0,111.7 920.0,40.0" fill="none" stroke="#2f6fed" stroke-width="3"/>
+<circle cx="920.0" cy="40.0" r="4" fill="#2f6fed"/>
+<rect x="650" y="53" width="14" height="4" fill="#2f6fed"/>
+<text x="672" y="64" font-family="Arial" font-size="13">diversity</text>
+<polyline points="80.0,398.3 220.0,374.4 360.0,374.4 500.0,255.0 640.0,159.4 780.0,159.4 920.0,87.8" fill="none" stroke="#5f3dc4" stroke-width="3"/>
+<circle cx="920.0" cy="87.8" r="4" fill="#5f3dc4"/>
+<rect x="650" y="73" width="14" height="4" fill="#5f3dc4"/>
+<text x="672" y="84" font-family="Arial" font-size="13">engineering_decision_utility_v2_regret_aware</text>
+<polyline points="80.0,470.0 220.0,374.4 360.0,398.3 500.0,302.8 640.0,159.4 780.0,111.7 920.0,111.7" fill="none" stroke="#69707a" stroke-width="3"/>
+<circle cx="920.0" cy="111.7" r="4" fill="#69707a"/>
+<rect x="650" y="93" width="14" height="4" fill="#69707a"/>
+<text x="672" y="104" font-family="Arial" font-size="13">random</text>
+<polyline points="80.0,374.4 220.0,326.7 360.0,231.1 500.0,207.2 640.0,207.2 780.0,111.7 920.0,40.0" fill="none" stroke="#d55e00" stroke-width="3"/>
+<circle cx="920.0" cy="40.0" r="4" fill="#d55e00"/>
+<rect x="650" y="113" width="14" height="4" fill="#d55e00"/>
+<text x="672" y="124" font-family="Arial" font-size="13">uncertainty</text>
+<polyline points="80.0,326.7 220.0,278.9 360.0,255.0 500.0,231.1 640.0,159.4 780.0,111.7 920.0,111.7" fill="none" stroke="#009e73" stroke-width="3"/>
+<circle cx="920.0" cy="111.7" r="4" fill="#009e73"/>
+<rect x="650" y="133" width="14" height="4" fill="#009e73"/>
+<text x="672" y="144" font-family="Arial" font-size="13">uncertainty_plus_diversity</text>
+<text x="80" y="494" font-family="Arial" font-size="12" fill="#555">Open-CFD 3D scalar replay; compact benchmark scope.</text>
+</svg>

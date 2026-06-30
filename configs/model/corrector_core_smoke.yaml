@@ -1,0 +1,28 @@
+schema_version: aerocliff_corrector_core_smoke_v0.1.0
+core:
+  input_dim: 6
+  output_dim: 4
+  hidden_dim: 16
+  depth: 2
+losses:
+  residual: residual_mse
+  load: load_coefficient_loss
+  physics: physics_residual_loss
+sensitivity:
+  interface: corrector_input_sensitivity
+load_interface:
+  interface: surface_load_coefficients
+  fields:
+    - surface_cp
+    - surface_cf
+    - surface_cell_normals
+    - surface_local_face_area_m2
+devices:
+  required:
+    - cpu
+  optional:
+    - mps
+  claim_scope: project_owned_pytorch_only_not_domino_cuda_evidence
+checkpoint:
+  device_neutral: true
+  tensor_storage_device: cpu

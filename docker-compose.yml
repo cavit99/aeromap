@@ -1,0 +1,11 @@
+services:
+  cfd:
+    build:
+      context: .
+      dockerfile: containers/cfd.Dockerfile
+    image: aeromap/openfoam13:dev
+    working_dir: /work
+    volumes:
+      - .:/work
+    environment:
+      FOAM_RUN: /work/cases

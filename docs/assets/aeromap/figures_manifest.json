@@ -1,0 +1,69 @@
+{
+  "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_PORTFOLIO_FIGURES",
+  "evidence_generation_git_sha": "7d16107",
+  "figures": [
+    {
+      "caption": "Geometry-disjoint final metrics summary for AeroMap Mission Control v0.3.",
+      "path": "docs/assets/aeromap/aeromap_headline_geometry_heldout.png",
+      "source_case": "AirfRANS v0.3 open-CFD replay"
+    },
+    {
+      "caption": "Label-budget learning curves for drag, lift, top-k recovery and Pareto recall.",
+      "path": "docs/assets/aeromap/label_budget_learning_curves.png",
+      "source_case": "AirfRANS v0.3 open-CFD replay"
+    },
+    {
+      "caption": "Composite acquisition method comparison over six final geometry-disjoint metrics.",
+      "path": "docs/assets/aeromap/acquisition_method_comparison.png",
+      "source_case": "AirfRANS v0.3 open-CFD replay"
+    },
+    {
+      "caption": "Decision-focused metric panel: top-k, Pareto recall, rank correlation and regret.",
+      "path": "docs/assets/aeromap/decision_metrics_panel.png",
+      "source_case": "AirfRANS v0.3 open-CFD replay"
+    },
+    {
+      "caption": "Mission Control decision loop from labelled cases to recommended next CFD simulation.",
+      "path": "docs/assets/aeromap/mission_control_flow.png",
+      "source_case": "AirfRANS v0.3 open-CFD replay"
+    },
+    {
+      "caption": "AeroMap evidence story: AirfRANS, DrivAerML bridge and AeroCliff Core.",
+      "path": "docs/assets/aeromap/aeromap_two_tier_evidence.png",
+      "source_case": "AeroMap 3D bridge and portfolio context"
+    },
+    {
+      "caption": "DrivAerML compact 3D scalar replay metrics; diversity is currently recommended.",
+      "path": "docs/assets/aeromap/drivaerml_3d_bridge_metrics.png",
+      "source_case": "AeroMap 3D bridge and portfolio context"
+    },
+    {
+      "caption": "AeroCliff Core 3 x 5 suction/downforce response surface.",
+      "path": "docs/assets/aeromap/aerocliff_core_response_surface.png",
+      "source_case": "AeroCliff Core 2D pressure/load response replay"
+    },
+    {
+      "caption": "AeroCliff Core pressure recovery surface over ride height and diffuser angle.",
+      "path": "docs/assets/aeromap/aerocliff_core_pressure_recovery_surface.png",
+      "source_case": "AeroCliff Core 2D pressure/load response replay"
+    },
+    {
+      "caption": "AeroCliff Core offline response-map active replay method comparison.",
+      "path": "docs/assets/aeromap/aerocliff_core_active_replay.png",
+      "source_case": "AeroCliff Core 2D pressure/load response replay"
+    },
+    {
+      "caption": "AeroMap to AeroCliff Core workflow for bounded pressure/load response mapping.",
+      "path": "docs/assets/aeromap/aeromap_aerocliff_core_story.png",
+      "source_case": "AeroCliff Core 2D pressure/load response replay"
+    }
+  ],
+  "git_sha_note": "This SHA records the commit used to generate the figure manifest; the containing release commit may be later.",
+  "schema_version": "aerocliff_aeromap_portfolio_figures_v1",
+  "source_evidence": {
+    "aerocliff_core_dataset": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json",
+    "aerocliff_core_replay": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json",
+    "airfrans": "docs/evidence/aeromap/airfrans_decision_replay_v03.json",
+    "drivaerml_bridge": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json"
+  }
+}

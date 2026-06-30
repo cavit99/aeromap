@@ -1,0 +1,72 @@
+{
+  "benchmark_class": "OPEN_CFD_AEROMAP_3D_BRIDGE",
+  "case_count": 484,
+  "citation": "DrivAerML dataset card / Ashton et al. scale-resolving DrivAer CFD dataset",
+  "claim_boundary": {
+    "aerocliff_result": false,
+    "compact_3d_scalar_bridge": true,
+    "domino_accuracy": false,
+    "f1_geometry": false,
+    "field_prediction": false,
+    "live_cfd_savings": false,
+    "open_cfd_result": true
+  },
+  "classification": "AEROMAP_3D_SCALAR_BRIDGE_DATASET",
+  "feature_count": 16,
+  "feature_names": [
+    "geom_vehicle_length",
+    "geom_vehicle_width",
+    "geom_vehicle_height",
+    "geom_front_overhang",
+    "geom_front_planview",
+    "geom_hood_angle",
+    "geom_approach_angle",
+    "geom_windscreen_angle",
+    "geom_greenhouse_tapering",
+    "geom_backlight_angle",
+    "geom_decklid_height",
+    "geom_rearend_tapering",
+    "geom_rear_overhang",
+    "geom_rear_diffusor_angle",
+    "geom_vehicle_ride_height",
+    "geom_vehicle_pitch"
+  ],
+  "licence": "cc-by-sa-4.0",
+  "npz_path": "docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.npz",
+  "npz_sha256": "b2be7e6161c66642fb69ff0205d1f7e1f355617587454e9e93da90ec64782d79",
+  "schema_version": "aerocliff_aeromap3d_scalar_bridge_dataset_v0.1.0",
+  "source_dataset": "DrivAerML",
+  "source_files": {
+    "force_mom_all.csv": {
+      "bytes": 33942,
+      "path": "artifacts/benchmark/aeromap3d/drivaerml/force_mom_all.csv",
+      "sha256": "360d0ea616ce5dec4c23f400e1d2e3436fcfab3837a5428688effd95f8f61dd8"
+    },
+    "force_mom_constref_all.csv": {
+      "bytes": 33947,
+      "path": "artifacts/benchmark/aeromap3d/drivaerml/force_mom_constref_all.csv",
+      "sha256": "4e9e003da38ccdcacad359451079888361eae221d3c8dad7fd5682250d257865"
+    },
+    "geo_parameters_all.csv": {
+      "bytes": 77574,
+      "path": "artifacts/benchmark/aeromap3d/drivaerml/geo_parameters_all.csv",
+      "sha256": "2d4e8b3f166d1facab2a38821af2c3cc1dbba47cfbb7bf0814e3e0bf1fe3e829"
+    }
+  },
+  "source_url": "https://huggingface.co/datasets/neashton/drivaerml",
+  "split_policy": "geometry-disjoint over DrivAerML run/design parameters",
+  "target_contract": {
+    "force_mom_all_csv_retained_as_diagnostic": true,
+    "primary_targets": [
+      "integrated_cd",
+      "integrated_cl"
+    ],
+    "reason": "constant-reference coefficients keep scalar labels comparable across geometry variants",
+    "source_force_file": "force_mom_constref_all.csv"
+  },
+  "target_count": 2,
+  "target_names": [
+    "integrated_cd",
+    "integrated_cl"
+  ]
+}

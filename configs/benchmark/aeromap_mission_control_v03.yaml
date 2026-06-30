@@ -1,0 +1,23 @@
+name: aeromap_mission_control_v03
+benchmark_class: OPEN_CFD_AEROMAP_BUDGET_BENCHMARK
+preferred_dataset: AirfRANS
+seed: 20260628
+replay_seeds:
+  - 20260628
+  - 20260629
+  - 20260630
+  - 20260631
+  - 20260632
+fixture_case_count: 240
+initial_labels: 32
+acquisition_batch: 16
+max_labels: 96
+test_fraction: 0.25
+ensemble_members: 5
+acquisition_methods:
+  - random
+  - diversity
+  - uncertainty
+  - uncertainty_plus_diversity
+  - engineering_decision_utility_v1
+  - engineering_decision_utility_v2_regret_aware

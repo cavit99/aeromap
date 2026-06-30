@@ -1,0 +1,266 @@
+{
+  "claim_boundary": {
+    "cloud_used": false,
+    "costs_are_proxy_values": true,
+    "live_cfd_savings": false,
+    "new_data_downloaded": false
+  },
+  "classification": "AEROMAP_COST_PROXY_AUDIT_V0_5",
+  "datasets": {
+    "airfrans": {
+      "case_count": 1000,
+      "local_mesh_count_sample": [
+        {
+          "bytes": 14778247,
+          "case_id": "airFoil2D_SST_31.283_-4.156_0.919_6.98_14.32",
+          "cells": 176178,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.283_-4.156_0.919_6.98_14.32/airFoil2D_SST_31.283_-4.156_0.919_6.98_14.32_internal.vtu",
+          "points": 177416
+        },
+        {
+          "bytes": 15013486,
+          "case_id": "airFoil2D_SST_31.382_3.588_1.994_6.206_0.0_13.271",
+          "cells": 179529,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.382_3.588_1.994_6.206_0.0_13.271/airFoil2D_SST_31.382_3.588_1.994_6.206_0.0_13.271_internal.vtu",
+          "points": 180790
+        },
+        {
+          "bytes": 14768806,
+          "case_id": "airFoil2D_SST_31.468_13.713_3.339_3.51_6.993",
+          "cells": 175941,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.468_13.713_3.339_3.51_6.993/airFoil2D_SST_31.468_13.713_3.339_3.51_6.993_internal.vtu",
+          "points": 177177
+        },
+        {
+          "bytes": 15003363,
+          "case_id": "airFoil2D_SST_31.534_-3.342_0.303_3.977_17.149",
+          "cells": 178712,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.534_-3.342_0.303_3.977_17.149/airFoil2D_SST_31.534_-3.342_0.303_3.977_17.149_internal.vtu",
+          "points": 179968
+        },
+        {
+          "bytes": 14571728,
+          "case_id": "airFoil2D_SST_31.577_2.75_2.604_4.088_17.312",
+          "cells": 173891,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.577_2.75_2.604_4.088_17.312/airFoil2D_SST_31.577_2.75_2.604_4.088_17.312_internal.vtu",
+          "points": 175114
+        },
+        {
+          "bytes": 13787838,
+          "case_id": "airFoil2D_SST_31.677_-0.742_2.926_5.236_5.651",
+          "cells": 163906,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.677_-0.742_2.926_5.236_5.651/airFoil2D_SST_31.677_-0.742_2.926_5.236_5.651_internal.vtu",
+          "points": 165059
+        },
+        {
+          "bytes": 15091815,
+          "case_id": "airFoil2D_SST_31.678_0.925_5.108_0.0_10.772",
+          "cells": 180459,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.678_0.925_5.108_0.0_10.772/airFoil2D_SST_31.678_0.925_5.108_0.0_10.772_internal.vtu",
+          "points": 181726
+        },
+        {
+          "bytes": 15096539,
+          "case_id": "airFoil2D_SST_31.68_0.424_0.273_4.301_1.0_11.616",
+          "cells": 180293,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.68_0.424_0.273_4.301_1.0_11.616/airFoil2D_SST_31.68_0.424_0.273_4.301_1.0_11.616_internal.vtu",
+          "points": 181559
+        },
+        {
+          "bytes": 14720037,
+          "case_id": "airFoil2D_SST_31.803_7.291_3.243_6.962_0.0_10.641",
+          "cells": 176373,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.803_7.291_3.243_6.962_0.0_10.641/airFoil2D_SST_31.803_7.291_3.243_6.962_0.0_10.641_internal.vtu",
+          "points": 177611
+        },
+        {
+          "bytes": 14936779,
+          "case_id": "airFoil2D_SST_31.812_1.334_0.371_3.287_0.0_19.548",
+          "cells": 177783,
+          "path": "artifacts/benchmark/airfrans/processed/Dataset/airFoil2D_SST_31.812_1.334_0.371_3.287_0.0_19.548/airFoil2D_SST_31.812_1.334_0.371_3.287_0.0_19.548_internal.vtu",
+          "points": 179033
+        }
+      ],
+      "proxy_description": "Observed local per-case volume-field file size. This is a real case-size proxy, not a measured solver wall-clock cost.",
+      "proxy_evidence": {
+        "bytes_max": 17310162,
+        "bytes_median": 14958914.5,
+        "bytes_min": 13021306,
+        "case_count": 1000,
+        "missing_case_count": 0,
+        "normalisation": "case_size_bytes / median_case_size_bytes, clipped to [0.1, 10]"
+      },
+      "proxy_kind": "real_observed_cost_proxy",
+      "proxy_source": "local AirfRANS internal.vtu file size"
+    },
+    "drivaerml": {
+      "cached_boundary_vtp_summary": {
+        "bytes_max": 705916493,
+        "bytes_median": 617923960.0,
+        "bytes_min": 546353515,
+        "bytes_total": 14962981642,
+        "count": 24
+      },
+      "cached_stl_summary": {
+        "bytes_max": 142485228,
+        "bytes_median": 142385658.0,
+        "bytes_min": 142246482,
+        "bytes_total": 3416862471,
+        "count": 24
+      },
+      "cached_stl_triangle_sample": [
+        {
+          "bytes": 142406577,
+          "path": "artifacts/benchmark/drivaerml_cache/run_10/drivaer_10.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142257008,
+          "path": "artifacts/benchmark/drivaerml_cache/run_102/drivaer_102.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142383011,
+          "path": "artifacts/benchmark/drivaerml_cache/run_112/drivaer_112.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142348163,
+          "path": "artifacts/benchmark/drivaerml_cache/run_115/drivaer_115.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142452589,
+          "path": "artifacts/benchmark/drivaerml_cache/run_117/drivaer_117.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142287073,
+          "path": "artifacts/benchmark/drivaerml_cache/run_127/drivaer_127.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142399497,
+          "path": "artifacts/benchmark/drivaerml_cache/run_134/drivaer_134.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142403888,
+          "path": "artifacts/benchmark/drivaerml_cache/run_16/drivaer_16.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142485228,
+          "path": "artifacts/benchmark/drivaerml_cache/run_18/drivaer_18.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142346440,
+          "path": "artifacts/benchmark/drivaerml_cache/run_2/drivaer_2.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142293294,
+          "path": "artifacts/benchmark/drivaerml_cache/run_25/drivaer_25.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142279739,
+          "path": "artifacts/benchmark/drivaerml_cache/run_38/drivaer_38.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142446724,
+          "path": "artifacts/benchmark/drivaerml_cache/run_39/drivaer_39.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142349594,
+          "path": "artifacts/benchmark/drivaerml_cache/run_45/drivaer_45.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142411349,
+          "path": "artifacts/benchmark/drivaerml_cache/run_56/drivaer_56.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142421947,
+          "path": "artifacts/benchmark/drivaerml_cache/run_58/drivaer_58.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142354260,
+          "path": "artifacts/benchmark/drivaerml_cache/run_59/drivaer_59.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142411893,
+          "path": "artifacts/benchmark/drivaerml_cache/run_64/drivaer_64.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142388305,
+          "path": "artifacts/benchmark/drivaerml_cache/run_67/drivaer_67.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142485128,
+          "path": "artifacts/benchmark/drivaerml_cache/run_69/drivaer_69.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142246482,
+          "path": "artifacts/benchmark/drivaerml_cache/run_73/drivaer_73.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142277391,
+          "path": "artifacts/benchmark/drivaerml_cache/run_8/drivaer_8.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142284636,
+          "path": "artifacts/benchmark/drivaerml_cache/run_88/drivaer_88.stl",
+          "triangles": null
+        },
+        {
+          "bytes": 142442255,
+          "path": "artifacts/benchmark/drivaerml_cache/run_98/drivaer_98.stl",
+          "triangles": null
+        }
+      ],
+      "case_count": 484,
+      "proxy_description": "Derived geometry-complexity proxy. It is useful for cost-aware policy mechanics but is not observed CFD runtime.",
+      "proxy_evidence": {
+        "geometry_feature_count": 16,
+        "geometry_features": [
+          "geom_vehicle_length",
+          "geom_vehicle_width",
+          "geom_vehicle_height",
+          "geom_front_overhang",
+          "geom_front_planview",
+          "geom_hood_angle",
+          "geom_approach_angle",
+          "geom_windscreen_angle",
+          "geom_greenhouse_tapering",
+          "geom_backlight_angle",
+          "geom_decklid_height",
+          "geom_rearend_tapering",
+          "geom_rear_overhang",
+          "geom_rear_diffusor_angle",
+          "geom_vehicle_ride_height",
+          "geom_vehicle_pitch"
+        ],
+        "proxy_formula": "1 + minmax_norm(norm(train-independent geometry descriptor distance from median))"
+      },
+      "proxy_kind": "derived_complexity_proxy",
+      "proxy_source": "compact geometry descriptors"
+    }
+  },
+  "schema_version": "aerocliff_aeromap_cost_proxy_audit_v0.5.0",
+  "selection_decision": {
+    "cost_aware_replay_authorised": true,
+    "reason": "At least one per-case proxy is available for every compact replay case. AirfRANS uses observed local case file size when available; DrivAerML uses derived geometry complexity because observed files are cached for only a subset."
+  }
+}

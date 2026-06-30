@@ -1,0 +1,24 @@
+classification: AEROCLIFF_CORE_VENTURI_LAB
+geometry:
+  ride_height_mm: 60.0
+  diffuser_angle_deg: 1.5
+  throat_ratio: 0.7
+  inlet_length_m: 0.4
+  contraction_length_m: 0.55
+  throat_length_m: 0.55
+  diffuser_length_m: 1.2
+  outlet_recovery_length_m: 0.4
+  span_m: 0.12
+  inlet_gap_ratio: 1.25
+mesh:
+  grid: medium
+  x_cells_per_segment: [16, 24, 24, 40, 16]
+  span_cells: 8
+  wall_normal_cells: 36
+  wall_normal_grading: 1.0
+solver:
+  max_iterations: 250
+  write_interval: 50
+  force_window: 50
+  u_inf_m_s: 40.0
+  rho_kg_m3: 1.225

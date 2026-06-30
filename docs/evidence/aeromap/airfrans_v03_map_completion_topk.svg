@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="80" y="28" font-family="Arial" font-size="22">AeroMap v0.3 map_completion: top-k overlap vs CFD labels</text>
+<line x1="80" y1="470" x2="920" y2="470" stroke="#111" stroke-width="1"/>
+<line x1="80" y1="40" x2="80" y2="470" stroke="#111" stroke-width="1"/>
+<text x="430.0" y="520" font-family="Arial" font-size="15">labelled CFD cases</text>
+<text x="18" y="315.0" transform="rotate(-90 18 315.0)" font-family="Arial" font-size="15">top-k overlap</text>
+<polyline points="80.0,463.9 290.0,199.7 500.0,150.6 710.0,181.3 920.0,193.6" fill="none" stroke="#2f6fed" stroke-width="3"/>
+<circle cx="920.0" cy="193.6" r="4" fill="#2f6fed"/>
+<rect x="650" y="53" width="14" height="4" fill="#2f6fed"/>
+<text x="672" y="64" font-family="Arial" font-size="13">diversity</text>
+<polyline points="80.0,439.3 290.0,205.9 500.0,132.1 710.0,89.1 920.0,101.4" fill="none" stroke="#c33c7a" stroke-width="3"/>
+<circle cx="920.0" cy="101.4" r="4" fill="#c33c7a"/>
+<rect x="650" y="73" width="14" height="4" fill="#c33c7a"/>
+<text x="672" y="84" font-family="Arial" font-size="13">engineering_decision_utility_v1</text>
+<polyline points="80.0,402.4 290.0,144.4 500.0,113.7 710.0,70.7 920.0,40.0" fill="none" stroke="#5f3dc4" stroke-width="3"/>
+<circle cx="920.0" cy="40.0" r="4" fill="#5f3dc4"/>
+<rect x="650" y="93" width="14" height="4" fill="#5f3dc4"/>
+<text x="672" y="104" font-family="Arial" font-size="13">engineering_decision_utility_v2_regret_aware</text>
+<polyline points="80.0,470.0 290.0,298.0 500.0,193.6 710.0,119.9 920.0,101.4" fill="none" stroke="#69707a" stroke-width="3"/>
+<circle cx="920.0" cy="101.4" r="4" fill="#69707a"/>
+<rect x="650" y="113" width="14" height="4" fill="#69707a"/>
+<text x="672" y="124" font-family="Arial" font-size="13">random</text>
+<polyline points="80.0,353.3 290.0,144.4 500.0,52.3 710.0,132.1 920.0,132.1" fill="none" stroke="#d55e00" stroke-width="3"/>
+<circle cx="920.0" cy="132.1" r="4" fill="#d55e00"/>
+<rect x="650" y="133" width="14" height="4" fill="#d55e00"/>
+<text x="672" y="144" font-family="Arial" font-size="13">uncertainty</text>
+<polyline points="80.0,433.1 290.0,187.4 500.0,132.1 710.0,101.4 920.0,199.7" fill="none" stroke="#009e73" stroke-width="3"/>
+<circle cx="920.0" cy="199.7" r="4" fill="#009e73"/>
+<rect x="650" y="153" width="14" height="4" fill="#009e73"/>
+<text x="672" y="164" font-family="Arial" font-size="13">uncertainty_plus_diversity</text>
+<text x="80" y="494" font-family="Arial" font-size="12" fill="#555">Open-CFD AirfRANS offline replay; compact benchmark scope.</text>
+</svg>

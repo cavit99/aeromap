@@ -1,0 +1,181 @@
+# AeroMap Mission Control
+
+**AeroMap Mission Control is a simulation-budget decision system for aerodynamic maps.**
+
+It trains a surrogate on the CFD labels available so far, estimates where the aero map is uncertain or decision-sensitive, and recommends the next simulation to run. The current release proves the loop on real open CFD data, extends it to compact 3D automotive metadata, and connects it to a structured Venturi-underfloor response benchmark.
+
+![Geometry-disjoint benchmark](docs/assets/aeromap/aeromap_headline_geometry_heldout.png)
+
+## Key Result
+
+On AirfRANS, a real open-CFD benchmark with 1,000 RANS cases, AeroMap uses geometry-aware features and a geometry-disjoint split over deterministic shape descriptors. The regret-aware acquisition policy leads the main design-decision metrics:
+
+| Method | C_D RMSE | C_L RMSE | Top-k | Pareto | Rank | Regret |
+|---|---:|---:|---:|---:|---:|---:|
+| Random | 0.003119 | 0.182288 | 0.464 | 0.210 | 0.866 | 16.389 |
+| Diversity | 0.002714 | 0.050832 | 0.520 | 0.310 | 0.907 | **11.195** |
+| Utility v1 | 0.002525 | **0.047634** | 0.544 | 0.340 | 0.913 | 22.886 |
+| Regret-aware utility v2 | **0.001966** | 0.050445 | **0.632** | **0.410** | **0.953** | 14.526 |
+
+The practical reading is simple: v2 is the recommended AirfRANS geometry-disjoint policy for drag error, top-k recovery, Pareto recall and ranking. Utility v1 remains best for lift RMSE, and diversity remains best for absolute regret.
+
+## Evidence Tiers
+
+The release package is:
+
+```text
+AEROMAP_AEROCLIFF_CORE_MVP_V0_1
+```
+
+| Tier | Role | Current result |
+|---|---|---|
+| AirfRANS | open-CFD active-learning benchmark | v2 leads several geometry-disjoint decision metrics |
+| DrivAerML | compact 3D automotive-aero bridge | 484 scalar cases, 16 geometry features, real STL ingestion |
+| AeroCliff Core | structured Venturi-underfloor benchmark | 3 x 5 pressure/load response-map replay |
+
+![AeroMap evidence tiers](docs/assets/aeromap/aeromap_two_tier_evidence.png)
+
+## How Mission Control Works
+
+```text
+labelled CFD cases
+        -> surrogate model
+        -> uncertainty and engineering utility
+        -> recommended next simulation
+        -> updated aero map
+```
+
+![Mission Control flow](docs/assets/aeromap/mission_control_flow.png)
+
+The benchmark reports engineering metrics as well as RMSE:
+
+- top-k design recovery;
+- Pareto-front recall;
+- lift/drag ranking;
+- best-design regret;
+- performance versus random, diversity and uncertainty baselines.
+
+![Label-budget learning curves](docs/assets/aeromap/label_budget_learning_curves.png)
+
+## 3D Automotive Bridge
+
+The DrivAerML bridge checks that the same decision loop can work beyond the 2D AirfRANS setting. It uses compact root metadata only: geometry parameters and integrated force/moment summaries.
+
+| Bridge item | Result |
+|---|---|
+| Dataset | DrivAerML compact metadata |
+| Cases | 484 |
+| Features | 16 geometry/design parameters |
+| Targets | `integrated_cd`, `integrated_cl` |
+| Geometry sample | three cached DrivAerML STLs, about 753k triangles each |
+| Recommended policy | diversity |
+
+![DrivAerML bridge metrics](docs/assets/aeromap/drivaerml_3d_bridge_metrics.png)
+
+The 3D bridge is deliberately lightweight: no volume fields, no boundary-field training and no cloud compute are needed for this replay.
+
+## Cost-Proxy Extension
+
+AeroMap v0.5 adds a bounded cost-aware check. AirfRANS uses observed local `internal.vtu` file size as a case-size proxy. DrivAerML uses a geometry-complexity proxy because full per-case solver cost is not available in the compact metadata.
+
+Cost-aware utility selects the lowest cumulative proxy-cost labelled set in both replays and wins AirfRANS geometry-disjoint best-design regret. The original regret-aware v2 still leads most AirfRANS decision metrics, and diversity remains strongest on the DrivAerML bridge.
+
+Details: [docs/reports/aeromap_cost_aware_v0_5_report.md](docs/reports/aeromap_cost_aware_v0_5_report.md)
+
+## AeroCliff Core Response Map
+
+AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mission Control to a custom underfloor response problem. The current Core release is pressure/load response mapping over ride height and diffuser angle.
+
+| Core result | Evidence |
+|---|---|
+| Response map | `3 x 5`: ride height `50/60/70 mm`, diffuser angle `3/4/5/6/7 deg` |
+| Medium cases | `15 / 15` passed mesh, mass and force gates |
+| Fine checks | `3 / 3` representative fine checks passed |
+| Replay result | engineering utility and cost-aware utility tie for best curve-error area |
+
+![AeroCliff Core suction response](docs/assets/aeromap/aerocliff_core_response_surface.png)
+
+![AeroCliff Core active replay](docs/assets/aeromap/aerocliff_core_active_replay.png)
+
+This Core tier gives the project a custom underfloor response surface while keeping the public claim focused on pressure/load mapping.
+
+## Demo
+
+Open the local demo directly:
+
+```sh
+open docs/demo/aeromap_mission_control.html
+```
+
+Regenerate the portfolio figures:
+
+```sh
+uv run python scripts/generate_aeromap_portfolio_figures.py
+```
+
+Run the compact AirfRANS replay:
+
+```sh
+uv run aeromap benchmark aeromap-decision-replay-v03 \
+  --config configs/benchmark/aeromap_mission_control_v03.yaml \
+  --dataset-npz docs/evidence/aeromap/airfrans_geometry_scalar_dataset.npz \
+  --out docs/evidence/aeromap/airfrans_decision_replay_v03.json \
+  --svg-dir docs/evidence/aeromap
+```
+
+Run the compact DrivAerML bridge:
+
+```sh
+uv run aeromap benchmark aeromap-3d-triage \
+  --out docs/evidence/aeromap3d/metadata_triage.json
+
+uv run aeromap benchmark aeromap-3d-drivaerml-scalars \
+  --cache-dir artifacts/benchmark/aeromap3d/drivaerml \
+  --out docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.json
+
+uv run aeromap benchmark aeromap-decision-replay-v03 \
+  --config configs/benchmark/aeromap_3d_bridge.yaml \
+  --dataset-npz docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.npz \
+  --out docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json \
+  --svg-dir docs/evidence/aeromap3d
+```
+
+Run the AeroCliff Core response-map replay:
+
+```sh
+uv run scripts/run_venturi_core_2d_response_map_replay.py --overwrite
+```
+
+## Repository Map
+
+| Path | Purpose |
+|---|---|
+| `src/aeromap/benchmarks/` | AeroMap, 3D bridge and cost-aware replay code |
+| `src/aeromap/cfd/venturi_core.py` | structured AeroCliff Core case generation and metrics |
+| `configs/benchmark/` | compact replay configs |
+| `configs/cfd/venturi_core_*.yaml` | Core structured-grid configs |
+| `docs/assets/aeromap/` | public figures |
+| `docs/demo/aeromap_mission_control.html` | no-server portfolio demo |
+| `docs/reports/` | technical and application-facing reports |
+| `docs/evidence/` | compact committed evidence artifacts |
+
+## Scope
+
+This release is an offline replay benchmark and structured Core response-map demo. It does not require cloud compute.
+
+Follow-on work:
+
+- wire the acquisition loop to live CFD scheduling;
+- add richer 3D or field-level targets;
+- extend AeroCliff Core toward live closed-loop simulation selection;
+- extend the custom AeroCliff lane toward higher-fidelity transfer studies.
+
+## Verification
+
+Current release checks:
+
+```text
+make lint
+make test
+GitHub Actions CI on main
+```

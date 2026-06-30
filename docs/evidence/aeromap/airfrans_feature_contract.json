@@ -1,0 +1,268 @@
+{
+  "claim_boundary": {
+    "aerocliff_result": false,
+    "f1_geometry": false,
+    "open_cfd_result": true
+  },
+  "dataset_classification": "AIRFRANS_REAL_GEOMETRY_SCALAR_DATASET",
+  "feature_count": 27,
+  "features": [
+    {
+      "category": "operating_condition",
+      "meaning": "freestream inlet velocity parsed from AirfRANS case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "inlet_velocity_m_s",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "m/s"
+    },
+    {
+      "category": "operating_condition",
+      "meaning": "angle of attack parsed from AirfRANS case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "aoa_deg",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "deg"
+    },
+    {
+      "category": "derived_operating_condition",
+      "meaning": "trigonometric angle-of-attack encoding",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "sin_aoa",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "derived_operating_condition",
+      "meaning": "trigonometric angle-of-attack encoding",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "cos_aoa",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "derived_operating_condition",
+      "meaning": "log10 Reynolds proxy from inlet velocity and fixed AirfRANS kinematic viscosity",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "log10_reynolds",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "AirfRANS shape token parsed from case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "shape_param_0",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dataset_native"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "AirfRANS shape token parsed from case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "shape_param_1",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dataset_native"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "AirfRANS shape token parsed from case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "shape_param_2",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dataset_native"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "AirfRANS shape token parsed from case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "shape_param_3",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dataset_native"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "AirfRANS shape token parsed from case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "shape_param_4",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dataset_native"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "AirfRANS shape token parsed from case ID",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "shape_param_5",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dataset_native"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised thickness distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_thickness_cos_0",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised thickness distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_thickness_cos_1",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised thickness distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_thickness_cos_2",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised thickness distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_thickness_cos_3",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised thickness distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_thickness_cos_4",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised thickness distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_thickness_cos_5",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised camber distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_camber_cos_0",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised camber distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_camber_cos_1",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised camber distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_camber_cos_2",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised camber distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_camber_cos_3",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised camber distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_camber_cos_4",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "cosine coefficient of chord-normalised camber distribution",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_camber_cos_5",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "maximum chord-normalised sampled thickness",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_max_thickness",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "maximum absolute chord-normalised sampled camber",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_max_abs_camber",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "sampled thickness near x/c=0.04",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_leading_station_thickness",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    },
+    {
+      "category": "geometry_descriptor",
+      "meaning": "sampled thickness near x/c=0.96",
+      "model_normalisation": "fit on labelled training subset inside each replay round",
+      "name": "geom_trailing_station_thickness",
+      "stored_normalisation": "raw",
+      "target_leakage": false,
+      "units": "dimensionless"
+    }
+  ],
+  "schema_version": "aerocliff_airfrans_feature_contract_v0.2.0",
+  "split_policy": {
+    "exact_repeated_geometry_groups": "not present in the materialised 1000-case AirfRANS scalar set",
+    "geometry_heldout": "deterministic farthest-first held-out selection over geometry descriptors",
+    "map_completion": "random case split over the full scalar pool"
+  },
+  "target_contract": {
+    "source": "AirfRANS Simulation.force_coefficient(reference=True)",
+    "target_leakage_into_features": false,
+    "targets": [
+      "integrated_cd",
+      "integrated_cl"
+    ]
+  }
+}

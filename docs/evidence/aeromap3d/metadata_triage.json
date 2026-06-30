@@ -1,0 +1,163 @@
+{
+  "candidates": [
+    {
+      "api_file_summary": {
+        "boundary_count": 1800,
+        "global_csvs": [
+          "force_mom_all.csv",
+          "geo_values_all.csv"
+        ],
+        "hf_file_count": 19812,
+        "ok": true,
+        "split_files": [
+          "splits/Makefile",
+          "splits/README.md",
+          "splits/README.pdf",
+          "splits/generate_splits.py",
+          "splits/manifest.json",
+          "splits/preamble.tex",
+          "splits/stall_onset.png",
+          "splits/visualize_stalled_cases.py"
+        ],
+        "stl_count": 1800,
+        "volume_count": 1800
+      },
+      "case_count": "1,800 samples: 180 geometry variants across 10 angles of attack.",
+      "citation": "NVIDIA HiLiftAeroML dataset card / NASA CRM-HL high-lift dataset",
+      "dataset_size": "README reports about 63 TB compressed and 190 TB unzipped.",
+      "estimated_3_stl_sample_bytes": 616652652,
+      "geometry_parameter_file": "geo_values_all.csv",
+      "licence": "cc-by-4.0",
+      "name": "HiLiftAeroML",
+      "ranking_inputs": {
+        "ease_of_compact_download": 4,
+        "geometry_descriptor_availability": 4,
+        "motorsport_vehicle_relevance": 2,
+        "scalar_label_availability": 5,
+        "time_to_positive_result": 4,
+        "wing_relevance": 5
+      },
+      "ranking_score": 24,
+      "repo_id": "nvidia/HiLiftAeroML",
+      "representative_stl": "geo_LHC001_AoA_10/geo_LHC001_AoA_10.stl",
+      "representative_stl_head": {
+        "content_length_bytes": 205550884,
+        "content_type": "model/stl",
+        "ok": true
+      },
+      "scalar_metadata_download_bytes": 300882,
+      "scalar_metadata_files": [
+        "force_mom_all.csv"
+      ],
+      "scalar_replay_feasible_without_volume_or_boundary": true,
+      "source_url": "https://huggingface.co/datasets/nvidia/HiLiftAeroML"
+    },
+    {
+      "api_file_summary": {
+        "boundary_count": 613,
+        "global_csvs": [
+          "force_mom_all.csv",
+          "force_mom_constref_all.csv",
+          "geo_parameters_all.csv"
+        ],
+        "hf_file_count": 96343,
+        "ok": true,
+        "split_files": [],
+        "stl_count": 172,
+        "volume_count": 348
+      },
+      "case_count": "500 morphed DrivAer notchback geometries; compact force file has 484 labelled rows.",
+      "citation": "DrivAerML dataset card / Ashton et al. scale-resolving DrivAer CFD dataset",
+      "dataset_size": "README reports about 31 TB for the full dataset.",
+      "estimated_3_stl_sample_bytes": 427155558,
+      "geometry_parameter_file": "geo_parameters_all.csv",
+      "licence": "cc-by-sa-4.0",
+      "name": "DrivAerML",
+      "ranking_inputs": {
+        "ease_of_compact_download": 5,
+        "geometry_descriptor_availability": 5,
+        "motorsport_vehicle_relevance": 5,
+        "scalar_label_availability": 5,
+        "time_to_positive_result": 5,
+        "wing_relevance": 2
+      },
+      "ranking_score": 27,
+      "repo_id": "neashton/drivaerml",
+      "representative_stl": "run_1/drivaer_1.stl",
+      "representative_stl_head": {
+        "content_length_bytes": 142385186,
+        "content_type": "model/stl",
+        "ok": true
+      },
+      "scalar_metadata_download_bytes": 145463,
+      "scalar_metadata_files": [
+        "force_mom_all.csv",
+        "force_mom_constref_all.csv"
+      ],
+      "scalar_replay_feasible_without_volume_or_boundary": true,
+      "source_url": "https://huggingface.co/datasets/neashton/drivaerml"
+    },
+    {
+      "api_file_summary": {
+        "boundary_count": 525,
+        "global_csvs": [
+          "force_mom_all.csv",
+          "force_mom_varref_all.csv",
+          "geo_parameters_all.csv"
+        ],
+        "hf_file_count": 60507,
+        "ok": true,
+        "split_files": [],
+        "stl_count": 1004,
+        "volume_count": 512
+      },
+      "case_count": "500 Ahmed-body geometry variants.",
+      "citation": "AhmedML dataset card / Ashton et al. Ahmed-body CFD dataset",
+      "dataset_size": "README reports about 2 TB for the full dataset.",
+      "estimated_3_stl_sample_bytes": 22492452,
+      "geometry_parameter_file": "geo_parameters_all.csv",
+      "licence": "cc-by-sa-4.0",
+      "name": "AhmedML",
+      "ranking_inputs": {
+        "ease_of_compact_download": 5,
+        "geometry_descriptor_availability": 5,
+        "motorsport_vehicle_relevance": 4,
+        "scalar_label_availability": 5,
+        "time_to_positive_result": 4,
+        "wing_relevance": 1
+      },
+      "ranking_score": 24,
+      "repo_id": "neashton/ahmedml",
+      "representative_stl": "run_1/ahmed_1.stl",
+      "representative_stl_head": {
+        "content_length_bytes": 7497484,
+        "content_type": "model/stl",
+        "ok": true
+      },
+      "scalar_metadata_download_bytes": 110448,
+      "scalar_metadata_files": [
+        "force_mom_all.csv",
+        "force_mom_varref_all.csv"
+      ],
+      "scalar_replay_feasible_without_volume_or_boundary": true,
+      "source_url": "https://huggingface.co/datasets/neashton/ahmedml"
+    }
+  ],
+  "classification": "AEROMAP_3D_COMPACT_PRACTICABILITY_TRIAGE",
+  "download_policy": {
+    "aerocliff_cfd_run": false,
+    "boundary_field_downloaded": false,
+    "cloud_used": false,
+    "full_dataset_clone": false,
+    "nim_used": false,
+    "volume_data_downloaded": false
+  },
+  "ranked_by_positive_result_likelihood": [
+    "DrivAerML",
+    "HiLiftAeroML",
+    "AhmedML"
+  ],
+  "schema_version": "aerocliff_aeromap3d_practicability_triage_v0.1.0",
+  "selected_dataset": "DrivAerML",
+  "selection_reason": "DrivAerML satisfies the explicit selection rule: compact all-case geometry parameters and force/moment summaries are accessible."
+}
