@@ -147,11 +147,11 @@ def test_corrector_checkpoint_round_trip_is_device_neutral(tmp_path: Path) -> No
     save_device_neutral_checkpoint(
         checkpoint,
         model=model,
-        metadata={"sample_schema": "aerocliff_sample_v0.2.0"},
+        metadata={"sample_schema": "aeromap_sample_v0.2.0"},
     )
     restored, metadata = load_device_neutral_checkpoint(checkpoint)
 
-    assert metadata == {"sample_schema": "aerocliff_sample_v0.2.0"}
+    assert metadata == {"sample_schema": "aeromap_sample_v0.2.0"}
     assert restored.config == model.config
     for original, reloaded in zip(model.parameters(), restored.parameters(), strict=True):
         assert original.device.type == "cpu"

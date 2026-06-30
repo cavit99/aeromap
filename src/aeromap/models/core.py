@@ -12,7 +12,7 @@ from typing import Any
 import torch
 from torch import Tensor, nn
 
-CHECKPOINT_SCHEMA_VERSION = "aerocliff_corrector_checkpoint_v0.1.0"
+CHECKPOINT_SCHEMA_VERSION = "aeromap_corrector_checkpoint_v0.1.0"
 FEATURE_TENSOR_RANK = 2
 VECTOR_FIELD_TENSOR_RANK = 2
 CARTESIAN_VECTOR_WIDTH = 3

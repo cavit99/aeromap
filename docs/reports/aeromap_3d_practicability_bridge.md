@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This slice tested whether AeroMap Mission Control can move beyond the 2D
+This bridge tested whether AeroMap Mission Control can move beyond the 2D
 AirfRANS benchmark into realistic 3D aerodynamic design data without reopening
 the large-data, cloud, NIM or custom-CFD lanes.
 
@@ -32,18 +32,13 @@ recommended acquisition policy across most decision metrics. The regret-aware
 utility v2 improves best-design regret versus random, but it does not beat
 diversity.
 
-## Goal Constraints
+## Scope
 
-The run obeyed the compact triage constraints:
-
-- Core/3D custom CFD is outside this bridge;
-- no EC2 or cloud compute;
-- no NIM;
-- no volume files;
-- no boundary fields;
-- no full dataset clone;
-- no custom AeroCliff CFD labels were used;
-- no F1 accuracy claim.
+The bridge uses compact metadata and scalar targets only. It is a local
+practicability result for 3D aerodynamic design data: geometry parameters,
+integrated force/moment summaries and a tiny STL readiness sample. Bulk field
+data, live solver coupling and higher-fidelity custom Core/3D transfer studies
+belong to later work.
 
 ## Phase 1: Metadata-Only Triage
 

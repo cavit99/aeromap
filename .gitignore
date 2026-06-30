@@ -14,7 +14,7 @@ __pycache__/
 .clawpatch/
 clawpatch-report.md
 
-# AeroCliff generated artifacts
+# Generated artifacts
 artifacts/
 cases/
 data/registry.parquet
@@ -31,7 +31,7 @@ reports/generated/
 *.pt
 *.pth
 
-# Committed compact gate evidence
+# Committed compact release evidence
 !docs/evidence/
 !docs/evidence/**
 !docs/evidence/**/*.stl

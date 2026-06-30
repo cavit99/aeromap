@@ -53,10 +53,11 @@
     h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: 0; }
     p { margin: 0; color: var(--muted); line-height: 1.55; }
     .lead { max-width: 740px; font-size: 19px; }
-    .hero-grid, .two, .three { display: grid; gap: 18px; }
+    .hero-grid, .two, .three, .four { display: grid; gap: 18px; }
     .hero-grid { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
     .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .panel {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -91,7 +92,7 @@
     @media (max-width: 860px) {
       nav { justify-content: flex-start; overflow-x: auto; }
       header { min-height: auto; }
-      .hero-grid, .two, .three { grid-template-columns: 1fr; }
+      .hero-grid, .two, .three, .four { grid-template-columns: 1fr; }
       h1 { font-size: 38px; }
     }
   </style>
@@ -114,9 +115,10 @@
         <p class="lead">An AI aerodynamicist for the hook; formally, a simulation-budget decision system for aerodynamic maps.</p>
       </div>
       <div class="panel">
-        <div class="three">
+        <div class="four">
           <div class="stat"><p>Open CFD cases</p><strong>1000</strong></div>
           <div class="stat"><p>Geometry features</p><strong>27</strong></div>
+          <div class="stat"><p>3D bridge cases</p><strong>484</strong></div>
           <div class="stat"><p>Core map cases</p><strong>15</strong></div>
         </div>
       </div>
@@ -166,7 +168,7 @@
       </div>
       <div class="panel">
         <h3>Compact bridge</h3>
-        <p>484 cases, 16 geometry/design features, C_D and C_L scalar targets, and a compact NPZ. No boundary fields, volume fields, NIM, cloud or full clone.</p>
+        <p>484 cases, 16 geometry/design features, C_D and C_L scalar targets, and a compact NPZ built from metadata rather than bulk field downloads.</p>
       </div>
       <div class="panel">
         <h3>Geometry sample</h3>
@@ -220,11 +222,11 @@
         </ul>
       </div>
       <div class="panel">
-        <h3>Out of scope here</h3>
+        <h3>Extension path</h3>
         <ul>
-          <li>Wall-shear and continuous f_sep labels.</li>
-          <li>Validated cliff-boundary discovery.</li>
-          <li>Full 3D transfer accuracy.</li>
+          <li>Wall-shear and continuous f_sep labels require matching validation data.</li>
+          <li>Cliff-boundary discovery is a later target once the field evidence supports it.</li>
+          <li>Full 3D transfer accuracy belongs to the higher-fidelity extension lane.</li>
         </ul>
       </div>
     </div>
@@ -248,7 +250,7 @@
           <li>Compact DrivAerML 3D scalar bridge with real STL geometry ingestion.</li>
           <li>Domain-specific acquisition policy selector.</li>
           <li>Structured AeroCliff Core pressure/load response-map replay.</li>
-          <li>No cloud required for this benchmark replay.</li>
+          <li>Runs locally for this benchmark replay.</li>
         </ul>
       </div>
       <div class="panel">

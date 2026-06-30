@@ -4,13 +4,13 @@
 
 `AEROMAP_V0_5_COST_PROXY_AWARE_REPLAY` and `AEROMAP_3D_SURFACE_FIELD_READINESS_SAMPLE`.
 
-## Claim Boundaries
+## Scope
 
-- No CFD was run.
-- No EC2, NIM, cloud or new dataset download was used.
-- Cost values are proxies, not measured live solver savings.
-- DrivAerML boundary fields were inspected only because they were already cached locally.
-- No AeroCliff, F1, DoMINO accuracy or field-prediction claim is made.
+This is a local replay over existing compact datasets. The cost values are
+proxies rather than measured live solver savings: AirfRANS uses observed local
+case file size, and DrivAerML uses a compact geometry-complexity proxy. The
+surface-field sample is a readiness check for cached 3D boundary data, not a
+field-prediction benchmark.
 
 ## Cost Proxy Sources
 
