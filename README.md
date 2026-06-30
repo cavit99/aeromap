@@ -158,10 +158,10 @@ Open the local demo directly:
 open docs/demo/aeromap_mission_control.html
 ```
 
-Regenerate the portfolio figures:
+Regenerate the release figures:
 
 ```sh
-uv run python scripts/generate_aeromap_portfolio_figures.py
+uv run python scripts/generate_aeromap_release_figures.py
 ```
 
 Run the compact AirfRANS replay:
@@ -223,8 +223,8 @@ uv run aeromap benchmark live-core-loop --max-iterations 4
 | `configs/benchmark/` | compact replay configs |
 | `configs/cfd/venturi_core_*.yaml` | Core structured-grid configs |
 | `docs/assets/aeromap/` | public figures |
-| `docs/demo/aeromap_mission_control.html` | no-server portfolio demo |
-| `docs/reports/` | technical and application-facing reports |
+| `docs/demo/aeromap_mission_control.html` | no-server demo |
+| `docs/reports/` | technical reports |
 | `docs/evidence/` | compact committed evidence artifacts |
 
 ## Scope

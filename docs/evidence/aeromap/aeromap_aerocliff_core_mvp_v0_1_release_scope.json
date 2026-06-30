@@ -36,7 +36,7 @@
     }
   },
   "status": {
-    "portfolio_package_ready": true,
+    "release_package_ready": true,
     "open_cfd_result": true,
     "core_underfloor_result": true,
     "full_3d_aerocliff_extension": true,

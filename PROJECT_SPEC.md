@@ -100,7 +100,7 @@ Primary commands:
 ```sh
 make lint
 make test
-uv run python scripts/generate_aeromap_portfolio_figures.py
+uv run python scripts/generate_aeromap_release_figures.py
 uv run aeromap benchmark aeromap-decision-replay-v03 \
   --config configs/benchmark/aeromap_mission_control_v03.yaml \
   --dataset-npz docs/evidence/aeromap/airfrans_geometry_scalar_dataset.npz \

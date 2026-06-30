@@ -229,7 +229,7 @@ def test_decision_replay_v03_reports_statistics_and_regret_aware_method(
     assert report["statistics"]["geometry_heldout"]["budget_statistics"]
     assert report["statistics"]["geometry_heldout"]["paired_differences"]
     assert report["statistics"]["geometry_heldout"]["learning_curve_area"]
-    assert "portfolio_headline_ready" in report["headline_readiness"]
+    assert "release_headline_ready" in report["headline_readiness"]
     assert (tmp_path / "airfrans_v03_map_completion_regret.svg").exists()
 
 

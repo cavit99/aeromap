@@ -1596,7 +1596,7 @@ def _headline_readiness(
 ) -> dict[str, Any]:
     geometry_metrics = final_metrics_by_split.get("geometry_heldout")
     if geometry_metrics is None:
-        return {"portfolio_headline_ready": False, "reason": "geometry_heldout split absent"}
+        return {"release_headline_ready": False, "reason": "geometry_heldout split absent"}
     winners = _decision_metric_winners(geometry_metrics)
     methods = sorted(geometry_metrics)
     win_counts = {
@@ -1606,7 +1606,7 @@ def _headline_readiness(
     best_count = max(win_counts.values()) if win_counts else 0
     recommended = [method for method, count in win_counts.items() if count == best_count]
     return {
-        "portfolio_headline_ready": bool(best_count >= HEADLINE_READY_DECISION_METRIC_COUNT),
+        "release_headline_ready": bool(best_count >= HEADLINE_READY_DECISION_METRIC_COUNT),
         "criterion": "one method leads or ties at least three geometry-heldout decision metrics",
         "recommended_methods": recommended,
         "geometry_heldout_decision_metric_wins_or_ties": win_counts,

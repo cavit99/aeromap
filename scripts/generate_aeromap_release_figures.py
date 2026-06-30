@@ -1,4 +1,4 @@
-"""Generate AeroMap Mission Control portfolio figures from v0.3 evidence."""
+"""Generate AeroMap Mission Control release figures from v0.3 evidence."""
 
 from __future__ import annotations
 
@@ -1032,8 +1032,8 @@ def write_manifest(paths: list[Path]) -> None:
         ]: "AeroMap to AeroCliff Core workflow for bounded pressure/load response mapping.",
     }
     payload = {
-        "schema_version": "aeromap_portfolio_figures_v1",
-        "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_PORTFOLIO_FIGURES",
+        "schema_version": "aeromap_release_figures_v1",
+        "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_RELEASE_FIGURES",
         "source_evidence": {
             "airfrans": str(EVIDENCE.relative_to(ROOT)),
             "drivaerml_bridge": str(DRIVAER3D.relative_to(ROOT)),
@@ -1061,7 +1061,7 @@ def _figure_source_case(path_name: str) -> str:
     if path_name.startswith(("aerocliff_core", "aeromap_aerocliff")):
         return "AeroCliff Core 2D pressure/load response replay"
     if "drivaerml" in path_name or "evidence_tiers" in path_name or "architecture" in path_name:
-        return "AeroMap 3D bridge and portfolio context"
+        return "AeroMap 3D bridge and release context"
     return "AirfRANS v0.3 open-CFD replay"
 
 
