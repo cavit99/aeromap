@@ -2,7 +2,7 @@
 
 **AeroMap Mission Control is a simulation-budget decision system for aerodynamic maps.**
 
-It trains a surrogate on the CFD labels available so far, estimates where the aero map is uncertain or decision-sensitive, and recommends the next simulation to run. The current release proves the loop on real open CFD data, extends it to compact 3D automotive metadata, and connects it to a structured Venturi-underfloor response benchmark.
+It trains a surrogate on the CFD cases available so far, estimates where the map is uncertain or decision-sensitive, and recommends the next simulation to run. The current release proves that loop on open CFD data, checks a compact 3D automotive bridge, and connects the same workflow to a structured Venturi-underfloor benchmark.
 
 ![Geometry-disjoint benchmark](docs/assets/aeromap/aeromap_headline_geometry_heldout.png)
 
@@ -17,43 +17,19 @@ On AirfRANS, a real open-CFD benchmark with 1,000 RANS cases, AeroMap uses geome
 | Utility v1 | 0.002525 | **0.047634** | 0.544 | 0.340 | 0.913 | 22.886 |
 | Regret-aware utility v2 | **0.001966** | 0.050445 | **0.632** | **0.410** | **0.953** | 14.526 |
 
-The practical reading is simple: v2 is the recommended AirfRANS geometry-disjoint policy for drag error, top-k recovery, Pareto recall and ranking. Utility v1 remains best for lift RMSE, and diversity remains best for absolute regret.
+Practical reading: v2 is the best AirfRANS geometry-disjoint policy for drag error, top-k recovery, Pareto recall and ranking. Utility v1 is still best for lift RMSE; diversity is still best for absolute regret.
 
-## Evidence tiers
+## What is in the repo
 
-The release package is:
-
-```text
-AEROMAP_AEROCLIFF_CORE_MVP_V0_1
-```
-
-| Tier | Role | Current result |
-|---|---|---|
-| AirfRANS | open-CFD active-learning benchmark | v2 leads several geometry-disjoint decision metrics |
-| DrivAerML | compact 3D automotive-aero bridge | 484 scalar cases, 16 geometry features, real STL ingestion |
-| AirfRANS field baseline | neural-CFD credibility check | surface-pressure MLP beats mean and nearest-case baselines |
-| AeroCliff Core | structured Venturi-underfloor benchmark | 3 x 5 pressure/load response-map replay |
-| NASA hump methodology | separated-flow CFD-methodology smoke | TMR ingest, local SST smoke, Cp/Cf overlays and 409 x 109 candidate |
+| Area | What it shows |
+|---|---|
+| AirfRANS decision benchmark | active learning on 1,000 real RANS cases with geometry-disjoint evaluation |
+| DrivAerML bridge | compact 3D automotive metadata, scalar force targets and STL ingestion |
+| AirfRANS field baseline | point-wise surface-pressure prediction on held-out CFD cases |
+| Venturi Core | structured underfloor pressure/load response mapping and local replay/live loop |
+| NASA hump methodology | OpenFOAM methodology pipeline on a recognised separated-flow validation case |
 
 ![AeroMap evidence tiers](docs/assets/aeromap/aeromap_evidence_tiers.png)
-
-## Current status
-
-| Capability | Status |
-|---|---|
-| Offline active-learning replay on real CFD data | Implemented |
-| Geometry-disjoint AirfRANS benchmark | Implemented |
-| Compact 3D DrivAerML scalar bridge | Implemented |
-| Custom OpenFOAM Venturi-underfloor response map | Implemented |
-| Cost-proxy replay | Implemented |
-| Local AeroCliff Core live/replay loop | Implemented |
-| AirfRANS surface-pressure field baseline | Implemented |
-| NASA/TMR hump methodology smoke | Reference ingest, local SST smoke, smoke-grid Cp/Cf overlay and medium-grid SST candidate |
-| New local CFD case generation from selected missing Core cases | Next extension |
-| Live industrial CFD scheduling | Not claimed |
-| 3D field-level neural surrogate | Next extension |
-| Trained DoMINO/PhysicsNeMo aero model | Not claimed |
-| F1 geometry or F1 accuracy | Not claimed |
 
 ## How Mission Control works
 
@@ -67,11 +43,11 @@ labelled CFD cases
 
 ![Mission Control flow](docs/assets/aeromap/mission_control_flow.png)
 
-The public architecture separates evidence, dataset contracts, acquisition policy, replay evaluation and output artifacts:
+The public architecture separates data contracts, acquisition policy, replay evaluation and output artifacts:
 
 ![AeroMap system architecture](docs/assets/aeromap/aeromap_system_architecture.png)
 
-The benchmark reports engineering metrics as well as RMSE:
+The benchmark reports decision metrics as well as RMSE:
 
 - top-k design recovery;
 - Pareto-front recall;
@@ -80,6 +56,22 @@ The benchmark reports engineering metrics as well as RMSE:
 - performance versus random, diversity and uncertainty baselines.
 
 ![Label-budget learning curves](docs/assets/aeromap/label_budget_learning_curves.png)
+
+## Quick start
+
+Install and run the checks:
+
+```sh
+uv sync
+make lint
+make test
+```
+
+Open the demo:
+
+```sh
+open docs/demo/aeromap_mission_control.html
+```
 
 ## 3D automotive bridge
 
@@ -118,17 +110,17 @@ operating-condition features and compact geometry descriptors.
 | Nearest case | 0.1614 | 0.3281 | 0.1668 |
 | Point-wise MLP | **0.0705** | **0.1183** | **0.0601** |
 
-This is a field-target baseline, not a DoMINO replacement or state-of-the-art
-claim. The value is the contract: held-out surface-pressure targets, train-only
-normalisation, length-weighted metrics and true/predicted/error maps.
+This is a compact field-target baseline. The useful part is the contract:
+held-out surface-pressure targets, train-only normalisation, length-weighted
+metrics and true/predicted/error maps.
 
 ![AirfRANS surface pressure examples](docs/assets/aeromap/airfrans_surface_pressure_field_examples.png)
 
 Details: [docs/reports/airfrans_surface_pressure_field_baseline_v0_1.md](docs/reports/airfrans_surface_pressure_field_baseline_v0_1.md)
 
-## AeroCliff Core response map
+## Venturi Core response map
 
-AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mission Control to a custom underfloor response problem. The current Core release is pressure/load response mapping over ride height and diffuser angle.
+Venturi Core is a structured underfloor benchmark built to connect Mission Control to a custom ground-effect response problem. It maps pressure/load response over ride height and diffuser angle.
 
 | Core result | Evidence |
 |---|---|
@@ -138,9 +130,9 @@ AeroCliff Core is a structured Venturi-underfloor benchmark built to connect Mis
 | Replay result | engineering utility and cost-aware utility tie for best curve-error area |
 | Live/replay loop | model selects Core cases, committed evidence is ingested, map metrics update |
 
-![AeroCliff Core suction response](docs/assets/aeromap/aerocliff_core_response_surface.png)
+![Venturi Core suction response](docs/assets/aeromap/aerocliff_core_response_surface.png)
 
-![AeroCliff Core active replay](docs/assets/aeromap/aerocliff_core_active_replay.png)
+![Venturi Core active replay](docs/assets/aeromap/aerocliff_core_active_replay.png)
 
 This Core tier gives the project a custom underfloor response surface while keeping the claim focused on pressure/load mapping.
 
@@ -152,13 +144,7 @@ utility reduce error versus the averaged random baseline.
 
 Details: [docs/reports/aerocliff_core_live_acquisition_loop.md](docs/reports/aerocliff_core_live_acquisition_loop.md)
 
-## Demo
-
-Open the local demo directly:
-
-```sh
-open docs/demo/aeromap_mission_control.html
-```
+## Reproduce the main results
 
 Regenerate the release figures:
 
@@ -201,7 +187,7 @@ uv run aeromap benchmark aeromap-decision-replay-v03 \
   --svg-dir docs/evidence/aeromap3d
 ```
 
-Run the AeroCliff Core response-map replay:
+Run the Venturi Core response-map replay:
 
 ```sh
 uv run scripts/run_venturi_core_2d_response_map_replay.py
@@ -215,6 +201,10 @@ Run the local Core live/replay acquisition loop:
 ```sh
 uv run aeromap benchmark live-core-loop --max-iterations 4
 ```
+
+## CFD methodology checks
+
+These commands reproduce the NASA/TMR wall-mounted-hump methodology lane. It is mainly a CFD-process check: reference ingestion, OpenFOAM conversion, wall-field extraction and coefficient overlays.
 
 Prepare the NASA/TMR hump methodology preflight:
 
@@ -261,7 +251,7 @@ Methodology finding: [docs/reports/nasa_hump_methodology_finding_v0_1.md](docs/r
 | Path | Purpose |
 |---|---|
 | `src/aeromap/benchmarks/` | AeroMap, 3D bridge and cost-aware replay code |
-| `src/aeromap/cfd/venturi_core.py` | structured AeroCliff Core case generation and metrics |
+| `src/aeromap/cfd/venturi_core.py` | structured Venturi Core case generation and metrics |
 | `configs/benchmark/` | compact replay configs |
 | `configs/cfd/venturi_core_*.yaml` | Core structured-grid configs |
 | `scripts/prepare_nasa_hump_methodology.py` | NASA/TMR hump reference-ingest and mesh-policy preflight |
@@ -278,15 +268,15 @@ Methodology finding: [docs/reports/nasa_hump_methodology_finding_v0_1.md](docs/r
 
 ## Scope
 
-This release is a reproducible offline replay and field-baseline package: AirfRANS scalar decision replay, AirfRANS surface-pressure baseline, compact DrivAerML scalar bridge, structured AeroCliff Core response-map/live-replay demo and NASA/TMR separated-flow methodology smoke with Cp/Cf overlay extraction plus a bounded 409 x 109 SST candidate. It does not require cloud compute.
+This release is a local, reproducible aero-ML package. It covers AirfRANS scalar active learning, an AirfRANS surface-pressure baseline, a compact DrivAerML scalar bridge, the structured Venturi Core response map/live replay and a NASA/TMR hump methodology check. It does not require cloud compute.
 
 Follow-on work:
 
 - extend the Core loop from committed evidence ingestion to new local CFD case generation;
 - add richer 3D field-level targets;
-- extend AeroCliff Core toward live closed-loop simulation selection;
-- improve the NASA hump OpenFOAM setup before SA/SST model comparison, since the current 409 x 109 SST candidate is not correlation-plausible;
-- extend the custom AeroCliff lane toward higher-fidelity transfer studies.
+- extend Venturi Core toward live closed-loop simulation selection;
+- continue the NASA hump setup diagnosis before any SA/SST model comparison;
+- extend the custom underfloor lane toward higher-fidelity transfer studies.
 
 ## Datasets and citations
 
@@ -296,9 +286,9 @@ This repository uses compact, committed evidence derived from public datasets an
 |---|---|---|
 | AirfRANS | 1,000-case open-CFD scalar benchmark for the main AeroMap active-learning replay and surface-pressure field baseline | AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier-Stokes Solutions. Dataset license: ODbL-1.0. See the [AirfRANS documentation](https://airfrans.readthedocs.io/en/latest/notes/introduction.html), [dataset description](https://airfrans.readthedocs.io/en/latest/notes/dataset.html), and [paper](https://arxiv.org/abs/2212.07564). |
 | DrivAerML | Compact 3D automotive scalar bridge using root metadata and a small STL readiness sample | DrivAerML: High-Fidelity Computational Fluid Dynamics Dataset for Road-Car External Aerodynamics. Dataset license: CC BY-SA 4.0. See the [Hugging Face dataset](https://huggingface.co/datasets/neashton/drivaerml), [dataset page](https://neilashton.github.io/caemldatasets/drivaerml/), and [paper](https://arxiv.org/abs/2408.11969). |
-| NASA/TMR wall-mounted hump | Separated-flow CFD-methodology smoke: reference ingestion, published SA/SST curve comparison, local OpenFOAM SST smoke, Cp/Cf overlay extraction and a bounded 409 x 109 SST candidate | NASA/TMR 2D wall-mounted hump validation case and reference data. See the [case page](https://tmbwg.github.io/turbmodels/nasahump_val.html), [SA comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sa.html), and [SST comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sst.html). |
-| OpenFOAM | CFD-oriented case structure, AeroCliff Core structured Venturi benchmark workflow, and NASA/TMR hump conversion scaffold | OpenFOAM is open-source CFD software distributed under GPL terms. See [openfoam.org licence](https://openfoam.org/licence/) and [openfoam.com licensing](https://www.openfoam.com/documentation/licencing). |
-| NVIDIA DoMINO / PhysicsNeMo references | Source of architectural context for automotive surrogate and predictor workflows; no DoMINO accuracy claim is made in this public release | See NVIDIA's [DoMINO Automotive Aero NIM overview](https://docs.nvidia.com/nim/physicsnemo/domino-automotive-aero/latest/overview.html), [NGC model page](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero), and [PhysicsNeMo DoMINO documentation](https://docs.nvidia.com/physicsnemo/25.11/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html). |
+| NASA/TMR wall-mounted hump | Separated-flow CFD methodology: reference ingestion, published SA/SST curve comparison, local OpenFOAM SST runs, Cp/Cf overlay extraction and a bounded 409 x 109 candidate | NASA/TMR 2D wall-mounted hump validation case and reference data. See the [case page](https://tmbwg.github.io/turbmodels/nasahump_val.html), [SA comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sa.html), and [SST comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sst.html). |
+| OpenFOAM | CFD-oriented case structure, Venturi Core structured benchmark workflow, and NASA/TMR hump conversion scaffold | OpenFOAM is open-source CFD software distributed under GPL terms. See [openfoam.org licence](https://openfoam.org/licence/) and [openfoam.com licensing](https://www.openfoam.com/documentation/licencing). |
+| NVIDIA DoMINO / PhysicsNeMo references | Architectural context for automotive surrogate and predictor workflows | See NVIDIA's [DoMINO Automotive Aero NIM overview](https://docs.nvidia.com/nim/physicsnemo/domino-automotive-aero/latest/overview.html), [NGC model page](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero), and [PhysicsNeMo DoMINO documentation](https://docs.nvidia.com/physicsnemo/25.11/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html). |
 
 ## Verification
 
