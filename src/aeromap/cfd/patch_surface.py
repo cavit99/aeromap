@@ -237,7 +237,7 @@ def _write_obj(
     faces = np.asarray(mesh.faces, dtype=np.int64)
     lines = [
         "# Wavefront OBJ file",
-        "# AeroCliff CFD-only patch export; DoMINO single-part STL is separate.",
+        "# AeroMap CFD patch export.",
         "# Regions:",
         *[f"#     {index}    {patch_name}" for index, patch_name in enumerate(patch_names)],
         f"# points    : {len(vertices)}",

@@ -4,9 +4,7 @@ from pathlib import Path
 
 import pytest
 import torch
-import yaml
 
-from aeromap.models.adapters import NimPredictorAdapter, PhysicsNeMoCorrector
 from aeromap.models.core import (
     CorrectorCoreConfig,
     ResidualCorrectorCore,
@@ -18,34 +16,6 @@ from aeromap.models.core import (
     save_device_neutral_checkpoint,
     surface_load_coefficients,
 )
-
-
-def test_nim_predictor_refuses_training(tmp_path: Path) -> None:
-    adapter = NimPredictorAdapter(
-        endpoint="http://localhost:8000",
-        cache_dir=tmp_path,
-        image_ref="nvcr.io/nim/nvidia/domino-automotive-aero:2.1.0-41313772",
-    )
-    with pytest.raises(RuntimeError, match="frozen predictor"):
-        adapter.train()
-
-
-def test_corrector_requires_cuda_for_training_boundary(
-    monkeypatch: pytest.MonkeyPatch,
-    tmp_path: Path,
-) -> None:
-    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
-
-    def fake_resolve_device(*args: object, **kwargs: object) -> object:
-        calls.append((args, kwargs))
-        message = "PhysicsNeMo/DoMINO requires a Linux NVIDIA CUDA host."
-        raise RuntimeError(message)
-
-    monkeypatch.setattr("aeromap.models.adapters.resolve_device", fake_resolve_device)
-    corrector = PhysicsNeMoCorrector(config_path=tmp_path / "corrector.yaml")
-    with pytest.raises(RuntimeError, match="requires a Linux NVIDIA CUDA host"):
-        corrector.train_step()
-    assert calls == [(("auto",), {"require_physicsnemo": True})]
 
 
 def _run_forward_backward(device: str) -> ResidualCorrectorCore:
@@ -157,15 +127,3 @@ def test_corrector_checkpoint_round_trip_is_device_neutral(tmp_path: Path) -> No
         assert original.device.type == "cpu"
         assert reloaded.device.type == "cpu"
         assert torch.allclose(original, reloaded)
-
-
-def test_cpu_mps_config_is_project_owned_not_domino_cuda_evidence() -> None:
-    payload = yaml.safe_load(
-        Path("configs/model/corrector_core_smoke.yaml").read_text(encoding="utf-8"),
-    )
-
-    assert payload["devices"]["required"] == ["cpu"]
-    assert payload["devices"]["optional"] == ["mps"]
-    assert (
-        payload["devices"]["claim_scope"] == "project_owned_pytorch_only_not_domino_cuda_evidence"
-    )

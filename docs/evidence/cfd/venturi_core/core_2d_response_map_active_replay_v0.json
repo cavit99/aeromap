@@ -122,7 +122,7 @@
     "cliff_boundary_label": false,
     "continuous_f_sep_label": false,
     "core_2d_pressure_load_response_mapping": true,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_floor_accuracy": false,
     "full_3d_extension_accuracy": false,
     "live_cfd_savings": false,

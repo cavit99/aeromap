@@ -11,7 +11,7 @@
     "airfrans_surface_pressure_only": true,
     "field_level_baseline": true,
     "not_aerocliff_accuracy": true,
-    "not_domino_replacement": true,
+    "not_external_predictor_replacement": true,
     "not_f1_geometry": true,
     "not_live_cfd_savings": true,
     "not_sota": true,

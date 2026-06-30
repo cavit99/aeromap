@@ -4,7 +4,7 @@
 
 This bridge tested whether AeroMap Mission Control can move beyond the 2D
 AirfRANS benchmark into realistic 3D aerodynamic design data without reopening
-the large-data, cloud, NIM or custom-CFD lanes.
+the large-data, cloud-predictor or custom-CFD lanes.
 
 Result:
 

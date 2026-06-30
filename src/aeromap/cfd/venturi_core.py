@@ -219,7 +219,7 @@ def _profile_payload(config: VenturiCoreConfig) -> dict[str, Any]:
         "claim_boundary": {
             "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
-            "domino_accuracy": False,
+            "external_predictor_accuracy": False,
             "training_eligible_before_validation": False,
             "structured_venturi_underfloor_benchmark": True,
         },
@@ -1153,7 +1153,7 @@ def write_venturi_core_case_metrics(case_dir: Path, *, out: Path | None = None) 
             "cliff_label_requires_near_cliff_validation": True,
             "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
-            "domino_accuracy": False,
+            "external_predictor_accuracy": False,
         },
         "artifacts": {
             "forceCoeffs": str(force_path),
@@ -1442,7 +1442,7 @@ def write_venturi_core_grid_validation(
             "separation_fraction_label": False,
             "full_3d_extension_accuracy": False,
             "f1_floor_accuracy": False,
-            "domino_accuracy": False,
+            "external_predictor_accuracy": False,
             "active_learning_claim": False,
         },
     }
@@ -1591,7 +1591,7 @@ def write_venturi_core_design_report(*, config: VenturiCoreConfig, out: Path) ->
         "",
         f"- classification: `{VENTURI_CORE_CLASSIFICATION}`",
         "- cloud: not required",
-        "- NIM/DoMINO: not used",
+        "- external predictor: not used",
         "- full 3D extension: paused",
         "",
         "## Geometry",
@@ -1643,7 +1643,7 @@ def write_venturi_core_design_report(*, config: VenturiCoreConfig, out: Path) ->
             ),
             (
                 "- Not allowed: full F1 floor accuracy, full 3D extension accuracy, "
-                "DoMINO accuracy, or training eligibility before validation."
+                "external predictor accuracy, or training eligibility before validation."
             ),
         ],
     )

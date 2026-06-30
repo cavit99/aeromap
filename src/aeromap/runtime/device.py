@@ -34,9 +34,9 @@ def _mps_available() -> bool:
 def resolve_device(
     request: DeviceRequest = "auto",
     *,
-    require_physicsnemo: bool = False,
+    require_cuda: bool = False,
 ) -> DeviceSpec:
-    """Resolve generic PyTorch or PhysicsNeMo/DoMINO device requests."""
+    """Resolve a PyTorch device request with optional CUDA-only enforcement."""
 
     if request not in {"auto", "cpu", "mps", "cuda"}:
         message = f"unknown device request: {request}"
@@ -45,15 +45,12 @@ def resolve_device(
     cuda_available = torch.cuda.is_available()
     mps_available = _mps_available()
 
-    if require_physicsnemo:
+    if require_cuda:
         if request not in {"auto", "cuda"}:
-            message = "PhysicsNeMo/DoMINO requires CUDA; requested device is not allowed."
+            message = "This workload requires CUDA; requested device is not allowed."
             raise RuntimeError(message)
         if not cuda_available:
-            message = (
-                "PhysicsNeMo/DoMINO requires a Linux NVIDIA CUDA host. "
-                "No CUDA device is visible; refusing to use CPU/MPS fallback."
-            )
+            message = "This workload requires CUDA; no CUDA device is visible."
             raise RuntimeError(message)
         resolved: Literal["cpu", "mps", "cuda"] = "cuda"
     elif request == "auto":

@@ -71,7 +71,7 @@ Not claimed:
 - validated cliff boundary;
 - full 3D extension accuracy;
 - F1 floor accuracy;
-- DoMINO accuracy;
+- external predictor accuracy;
 - industrial live CFD savings.
 
 ## Artifacts

@@ -12,7 +12,7 @@ Classification:
 AEROMAP_AIRFRANS_SURFACE_PRESSURE_FIELD_BASELINE_V0_1
 ```
 
-This is a baseline, not a neural-operator or DoMINO replacement. Its purpose is
+This is a baseline, not a neural-operator or external-predictor replacement. Its purpose is
 to show that the repo can handle coordinate/normal/field-target pairing,
 train/test separation, field metrics and held-out visualizations.
 
@@ -105,7 +105,7 @@ Not claimed:
 
 - F1 geometry;
 - custom 3D accuracy;
-- DoMINO replacement;
+- external-predictor replacement;
 - field-level state of the art;
 - live CFD savings;
 - full-volume prediction.

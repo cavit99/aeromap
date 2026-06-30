@@ -24,7 +24,7 @@
   "claim_boundary": {
     "accepted_core_label": false,
     "core_medium_candidate": true,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_floor_accuracy": false,
     "full_3d_extension_accuracy": false,
     "requires_fine_confirmation": true,

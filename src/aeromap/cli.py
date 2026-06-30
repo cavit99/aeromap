@@ -56,16 +56,6 @@ from aeromap.benchmarks.core_live_loop import (
 from aeromap.benchmarks.core_live_loop import (
     write_live_core_acquisition_loop,
 )
-from aeromap.benchmarks.drivaerml import (
-    DrivAerMLBenchmarkConfig,
-    validate_drivaerml_asset_manifest,
-    write_drivaerml_asset_manifest,
-    write_drivaerml_benchmark_plan,
-    write_drivaerml_cuda_bundle,
-    write_drivaerml_heldout_pilot_split,
-    write_drivaerml_sample_manifest,
-    write_drivaerml_sampling_manifest,
-)
 from aeromap.cfd.alternative_mesher import (
     AlternativeVolumeMesherConfig,
     build_alternative_mesh_inputs,
@@ -113,7 +103,6 @@ from aeromap.cfd.venturi_core import (
 from aeromap.data.converter import convert_case_to_sample
 from aeromap.data.loader import TrainingEligibilityError, load_sample
 from aeromap.geometry.diagnostics import diagnose_surface
-from aeromap.geometry.domino import DominoGeometryAdapter
 from aeromap.geometry.evidence import build_geometry_evidence
 from aeromap.geometry.generator import generate_geometry
 from aeromap.geometry.surface_candidates import generate_surface_candidates
@@ -171,7 +160,7 @@ def doctor() -> None:
     generic_device = resolve_device("auto")
     cuda_status: str
     try:
-        cuda_status = resolve_device("auto", require_physicsnemo=True).resolved
+        cuda_status = resolve_device("auto", require_cuda=True).resolved
     except RuntimeError as exc:
         cuda_status = f"blocked: {exc}"
 
@@ -183,7 +172,7 @@ def doctor() -> None:
         "foamRun": shutil.which("foamRun") or "",
         "nvidia-smi": shutil.which("nvidia-smi") or "",
         "generic_torch_device": generic_device.__dict__,
-        "physicsnemo_domino_cuda": cuda_status,
+        "optional_cuda_device": cuda_status,
     }
     typer.echo(json.dumps(report, indent=2, sort_keys=True))
 
@@ -362,37 +351,6 @@ def geometry_smoke(
         raise typer.Exit(2)
 
 
-@geometry_app.command("domino-export")
-def geometry_domino_export(
-    out: Annotated[Path, typer.Option("--out", file_okay=False)] = Path(
-        "artifacts/domino_geometry/canonical",
-    ),
-    target_surface_points: int = 300_000,
-) -> None:
-    """Export the separate high-resolution DoMINO/NIM geometry input."""
-
-    export = DominoGeometryAdapter(target_surface_points=target_surface_points).export(
-        AeroParams.canonical(),
-        out,
-    )
-    typer.echo(
-        json.dumps(
-            {
-                "stl_path": str(export.stl_path),
-                "manifest_path": str(export.manifest_path),
-                "surface_point_count": export.surface_point_count,
-                "meets_target_surface_points": export.meets_target_surface_points,
-                "subdivision_steps": export.subdivision_steps,
-                "nim_input_contract_valid": export.nim_input_contract_valid,
-            },
-            indent=2,
-            sort_keys=True,
-        ),
-    )
-    if not export.nim_input_contract_valid or not export.meets_target_surface_points:
-        raise typer.Exit(2)
-
-
 @geometry_app.command("evidence")
 def geometry_evidence(
     out: Annotated[Path, typer.Option("--out", file_okay=False)] = Path(
@@ -437,7 +395,7 @@ def _require_cuda_workload(device: str) -> None:
     if request != "cuda":
         return
     try:
-        spec = resolve_device("cuda", require_physicsnemo=True)
+        spec = resolve_device("cuda", require_cuda=True)
     except RuntimeError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(2) from exc
@@ -1573,7 +1531,7 @@ def data_validate(
 
 @model_app.command("base-predict")
 def model_base_predict() -> None:
-    _blocked("PhysicsNeMo/DoMINO base prediction requires a Linux NVIDIA CUDA host.")
+    _blocked("Base prediction is not part of the public AeroMap package.")
 
 
 @model_app.command("train")
@@ -2420,372 +2378,6 @@ def benchmark_aeromap_model_baselines_v02(
         "open_cfd_result": payload["claim_boundary"]["open_cfd_result"],
     }
     typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-
-
-@benchmark_app.command("drivaerml-plan", hidden=True)
-def benchmark_drivaerml_plan(
-    config: Annotated[
-        Path,
-        typer.Option("--config", exists=True, dir_okay=False, readable=True),
-    ] = Path("configs/benchmark/drivaerml_mvp.yaml"),
-    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_mvp_plan.json",
-    ),
-) -> None:
-    """Write the external DrivAerML benchmark plan without downloading data."""
-
-    try:
-        raw_config = yaml.safe_load(config.read_text(encoding="utf-8")) or {}
-        benchmark_config = DrivAerMLBenchmarkConfig.model_validate(raw_config)
-    except (OSError, ValidationError, yaml.YAMLError) as exc:
-        typer.echo(f"DrivAerML benchmark config is invalid: {exc}", err=True)
-        raise typer.Exit(2) from exc
-
-    plan_path = write_drivaerml_benchmark_plan(benchmark_config, out)
-    plan = json.loads(plan_path.read_text(encoding="utf-8"))
-    summary = {
-        "benchmark_class": plan["benchmark_class"],
-        "path": str(plan_path),
-        "split_counts": plan["split"]["counts"],
-        "download_status": plan["download_policy"]["status"],
-        "ec2_usage": plan["cost_policy"]["ec2_usage"],
-        "training_eligibility": plan["training_eligibility"],
-        "claim_eligibility": plan["claim_eligibility"],
-    }
-    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-
-
-@benchmark_app.command("drivaerml-assets", hidden=True)
-def benchmark_drivaerml_assets(
-    plan: Annotated[
-        Path, typer.Option("--plan", exists=True, dir_okay=False, readable=True)
-    ] = Path(
-        "artifacts/benchmark/drivaerml_mvp_plan.json",
-    ),
-    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest.json",
-    ),
-    cache_dir: Annotated[Path, typer.Option("--cache-dir", file_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_cache",
-    ),
-    split: Annotated[list[str] | None, typer.Option("--split")] = None,
-    case_id: Annotated[list[str] | None, typer.Option("--case-id")] = None,
-    max_cases: Annotated[int | None, typer.Option("--max-cases")] = None,
-    dry_run: Annotated[bool, typer.Option("--dry-run/--download")] = True,  # noqa: FBT002
-) -> None:
-    """Write a selected DrivAerML asset manifest; dry-run performs no network access."""
-
-    try:
-        manifest_path = write_drivaerml_asset_manifest(
-            plan,
-            out,
-            cache_dir=cache_dir,
-            splits=tuple(split or ("initial_labelled",)),
-            case_ids=tuple(case_id or ()),
-            max_cases=max_cases,
-            dry_run=dry_run,
-        )
-    except ValueError as exc:
-        typer.echo(f"DrivAerML asset selection is invalid: {exc}", err=True)
-        raise typer.Exit(2) from exc
-
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    validation = manifest["validation"]
-    summary = {
-        "path": str(manifest_path),
-        "benchmark_class": manifest["benchmark_class"],
-        "selected_case_count": manifest["selected_case_count"],
-        "selected_splits": manifest["selected_splits"],
-        "dry_run": manifest["download_policy"]["dry_run"],
-        "data_ready": validation["data_ready"],
-        "validation_ok": validation["ok"],
-        "downloaded_bytes": manifest["storage"]["downloaded_bytes"],
-        "known_estimated_bytes": manifest["storage"]["known_estimated_bytes"],
-        "unknown_byte_count_assets": manifest["storage"]["unknown_byte_count_assets"],
-        "no_volume_vtu_confirmed": manifest["no_volume_vtu_confirmed"],
-    }
-    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-    if not validation["ok"]:
-        raise typer.Exit(2)
-
-
-@benchmark_app.command("drivaerml-samples", hidden=True)
-def benchmark_drivaerml_samples(
-    asset_manifest: Annotated[
-        Path, typer.Option("--asset-manifest", exists=True, dir_okay=False, readable=True)
-    ] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest.json",
-    ),
-    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_sample_manifest.json",
-    ),
-) -> None:
-    """Write compact sample metadata from downloaded DrivAerML MVP assets."""
-
-    try:
-        sample_manifest = write_drivaerml_sample_manifest(asset_manifest, out)
-    except ValueError as exc:
-        typer.echo(f"DrivAerML sample manifest generation failed: {exc}", err=True)
-        raise typer.Exit(2) from exc
-    payload = json.loads(sample_manifest.read_text(encoding="utf-8"))
-    summary = {
-        "path": str(sample_manifest),
-        "benchmark_class": payload["benchmark_class"],
-        "selected_case_count": payload["selected_case_count"],
-        "data_ready": payload["data_ready"],
-        "training_eligibility": payload["training_eligibility"],
-        "claim_eligibility": payload["claim_eligibility"],
-        "targets": payload["targets"],
-        "no_volume_vtu_confirmed": payload["no_volume_vtu_confirmed"],
-    }
-    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-
-
-@benchmark_app.command("drivaerml-heldout-pilot-split", hidden=True)
-def benchmark_drivaerml_heldout_pilot_split(
-    asset_manifest: Annotated[
-        Path, typer.Option("--asset-manifest", exists=True, dir_okay=False, readable=True)
-    ] = Path(
-        "artifacts/benchmark/drivaerml_geometry_assets_144_downloaded.json",
-    ),
-    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_24_case_heldout_pilot_split.json",
-    ),
-    pilot_case_count: Annotated[int, typer.Option("--pilot-case-count")] = 24,
-    train_count: Annotated[int, typer.Option("--train-count")] = 16,
-    test_count: Annotated[int, typer.Option("--test-count")] = 8,
-) -> None:
-    """Write the 24-case DrivAerML held-out pilot split from geometry parameters only."""
-
-    try:
-        split_manifest = write_drivaerml_heldout_pilot_split(
-            asset_manifest,
-            out,
-            pilot_case_count=pilot_case_count,
-            train_count=train_count,
-            test_count=test_count,
-        )
-    except ValueError as exc:
-        typer.echo(f"DrivAerML held-out pilot split generation failed: {exc}", err=True)
-        raise typer.Exit(2) from exc
-    payload = json.loads(split_manifest.read_text(encoding="utf-8"))
-    summary = {
-        "path": str(split_manifest),
-        "experiment_id": payload["experiment_id"],
-        "dataset_class": payload["dataset_class"],
-        "counts": payload["counts"],
-        "train": payload["case_ids"]["train"],
-        "heldout_test": payload["case_ids"]["heldout_test"],
-        "file_order_used_for_split": payload["selection_method"]["file_order_used_for_split"],
-        "aerocliff_claim_eligible": payload["aerocliff_claim_eligible"],
-        "active_learning_claim_eligible": payload["active_learning_claim_eligible"],
-    }
-    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-
-
-@benchmark_app.command("drivaerml-cuda-bundle", hidden=True)
-def benchmark_drivaerml_cuda_bundle(
-    asset_manifest: Annotated[
-        Path, typer.Option("--asset-manifest", exists=True, dir_okay=False, readable=True)
-    ] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest_initial2_downloaded.json",
-    ),
-    sample_manifest: Annotated[
-        Path, typer.Option("--sample-manifest", exists=True, dir_okay=False, readable=True)
-    ] = Path(
-        "artifacts/benchmark/drivaerml_sample_manifest_initial2.json",
-    ),
-    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_cuda_bundle_initial2.json",
-    ),
-    dataset_revision: Annotated[str | None, typer.Option("--dataset-revision")] = None,
-    physicsnemo_commit: Annotated[str | None, typer.Option("--physicsnemo-commit")] = None,
-    physicsnemo_cfd_commit: Annotated[str | None, typer.Option("--physicsnemo-cfd-commit")] = None,
-    nim_image_tag: Annotated[
-        str,
-        typer.Option("--nim-image-tag"),
-    ] = "nvcr.io/nim/nvidia/domino-automotive-aero:2.1.0-41313772",
-    nim_image_digest: Annotated[str | None, typer.Option("--nim-image-digest")] = None,
-    predictor_checkpoint_digest: Annotated[
-        str | None, typer.Option("--predictor-checkpoint-digest")
-    ] = None,
-    corrector_initialisation_checkpoint_digest: Annotated[
-        str | None,
-        typer.Option("--corrector-initialisation-checkpoint-digest"),
-    ] = None,
-    corrector_checkpoint_digest: Annotated[
-        str | None, typer.Option("--corrector-checkpoint-digest")
-    ] = None,
-) -> None:
-    """Write the verified local command bundle for the future DrivAerML CUDA smoke."""
-
-    try:
-        bundle_path = write_drivaerml_cuda_bundle(
-            asset_manifest,
-            sample_manifest,
-            out,
-            dataset_revision=dataset_revision,
-            physicsnemo_commit=physicsnemo_commit,
-            physicsnemo_cfd_commit=physicsnemo_cfd_commit,
-            nim_image_tag=nim_image_tag,
-            nim_image_digest=nim_image_digest,
-            predictor_checkpoint_digest=predictor_checkpoint_digest,
-            corrector_initialisation_checkpoint_digest=(corrector_initialisation_checkpoint_digest),
-            corrector_checkpoint_digest=corrector_checkpoint_digest,
-        )
-    except ValueError as exc:
-        typer.echo(f"DrivAerML CUDA bundle generation failed: {exc}", err=True)
-        raise typer.Exit(2) from exc
-    payload = json.loads(bundle_path.read_text(encoding="utf-8"))
-    summary = {
-        "path": str(bundle_path),
-        "local_preparation_complete": payload["local_preparation_complete"],
-        "cuda_launch_ready": payload["cuda_launch_ready"],
-        "cuda_launch_blockers": payload["cuda_launch_blockers"],
-        "selected_case_count": payload["selected_case_count"],
-        "surface_checks": len(payload["surface_checks"]),
-        "cost_starting_instance_family": payload["cost_and_observability_policy"][
-            "starting_instance_family"
-        ],
-    }
-    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-
-
-@benchmark_app.command("drivaerml-sampling", hidden=True)
-def benchmark_drivaerml_sampling(
-    sample_manifest: Annotated[
-        Path,
-        typer.Option("--sample-manifest", exists=True, dir_okay=False, readable=True),
-    ] = Path(
-        "artifacts/benchmark/drivaerml_sample_manifest_initial2.json",
-    ),
-    out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_sampling_manifest_initial2.json",
-    ),
-    seed: Annotated[int, typer.Option("--seed")] = 20260624,
-    sample_count: Annotated[int, typer.Option("--sample-count")] = 65_536,
-) -> None:
-    """Write deterministic DrivAerML sampled-cell IDs for CUDA training smoke."""
-
-    try:
-        sampling_manifest = write_drivaerml_sampling_manifest(
-            sample_manifest,
-            out,
-            seed=seed,
-            sample_count=sample_count,
-        )
-    except ValueError as exc:
-        typer.echo(f"DrivAerML sampling manifest generation failed: {exc}", err=True)
-        raise typer.Exit(2) from exc
-    payload = json.loads(sampling_manifest.read_text(encoding="utf-8"))
-    summary = {
-        "path": str(sampling_manifest),
-        "dataset_class": payload["dataset_class"],
-        "case_count": payload["case_count"],
-        "sample_count": payload["training_sampling"]["sample_count"],
-        "normalisation_reference_contract_sha256": payload[
-            "normalisation_reference_contract_sha256"
-        ],
-        "full_surface_evaluation_required": payload["evaluation"]["surface"] == "full_surface",
-    }
-    typer.echo(json.dumps(summary, indent=2, sort_keys=True))
-
-
-def _require_drivaerml_data_ready(asset_manifest: Path) -> dict[str, object]:
-    if not asset_manifest.exists():
-        _blocked(f"DrivAerML asset manifest not found: {asset_manifest}")
-    validation = validate_drivaerml_asset_manifest(asset_manifest)
-    if not validation["ok"]:
-        _blocked(f"DrivAerML asset manifest is invalid: {validation['issues']}")
-    if not validation["data_ready"]:
-        _blocked(
-            "DrivAerML asset manifest is only plan evidence; download and hash selected "
-            "assets before running CUDA benchmark work.",
-        )
-    return validation
-
-
-def _require_ngc_api_key() -> None:
-    if not os.environ.get("NGC_API_KEY"):
-        _blocked("NGC_API_KEY is required for official DoMINO/NIM access and must not be stored.")
-
-
-def _blocked_drivaerml_cuda_workload(
-    *,
-    workload: str,
-    asset_manifest: Path,
-    device: str,
-) -> None:
-    _require_drivaerml_data_ready(asset_manifest)
-    _require_cuda_workload(device)
-    _require_ngc_api_key()
-    _blocked(
-        f"{workload} is a CUDA-only external benchmark lane; implementation starts in Slice 3."
-    )
-
-
-@benchmark_app.command("drivaerml-cache-frozen-predictor", hidden=True)
-def benchmark_drivaerml_cache_frozen_predictor(
-    asset_manifest: Annotated[Path, typer.Option("--asset-manifest", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest.json",
-    ),
-    device: Annotated[str, typer.Option("--device")] = "cuda",
-) -> None:
-    """Stub for frozen Automotive Aero DoMINO cache generation."""
-
-    _blocked_drivaerml_cuda_workload(
-        workload="Frozen DoMINO predictor cache",
-        asset_manifest=asset_manifest,
-        device=device,
-    )
-
-
-@benchmark_app.command("drivaerml-train-corrector", hidden=True)
-def benchmark_drivaerml_train_corrector(
-    asset_manifest: Annotated[Path, typer.Option("--asset-manifest", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest.json",
-    ),
-    device: Annotated[str, typer.Option("--device")] = "cuda",
-) -> None:
-    """Stub for official PhysicsNeMo/DoMINO corrector training."""
-
-    _blocked_drivaerml_cuda_workload(
-        workload="Official PhysicsNeMo corrector training",
-        asset_manifest=asset_manifest,
-        device=device,
-    )
-
-
-@benchmark_app.command("drivaerml-train-ensemble", hidden=True)
-def benchmark_drivaerml_train_ensemble(
-    asset_manifest: Annotated[Path, typer.Option("--asset-manifest", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest.json",
-    ),
-    device: Annotated[str, typer.Option("--device")] = "cuda",
-) -> None:
-    """Stub for external DrivAerML corrector ensemble training."""
-
-    _blocked_drivaerml_cuda_workload(
-        workload="DrivAerML corrector ensemble training",
-        asset_manifest=asset_manifest,
-        device=device,
-    )
-
-
-@benchmark_app.command("drivaerml-active-replay", hidden=True)
-def benchmark_drivaerml_active_replay(
-    asset_manifest: Annotated[Path, typer.Option("--asset-manifest", dir_okay=False)] = Path(
-        "artifacts/benchmark/drivaerml_assets_manifest.json",
-    ),
-    device: Annotated[str, typer.Option("--device")] = "cuda",
-) -> None:
-    """Stub for offline active-learning replay on the fixed DrivAerML pool."""
-
-    _blocked_drivaerml_cuda_workload(
-        workload="DrivAerML active-learning replay",
-        asset_manifest=asset_manifest,
-        device=device,
-    )
 
 
 @benchmark_app.command("report", hidden=True)

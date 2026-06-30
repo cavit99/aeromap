@@ -111,7 +111,7 @@
   "claim_boundary": {
     "cliff_boundary_label": false,
     "continuous_f_sep_label": false,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_floor_accuracy": false,
     "field_level_surrogate": false,
     "full_3d_extension_accuracy": false,

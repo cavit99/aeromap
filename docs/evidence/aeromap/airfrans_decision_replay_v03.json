@@ -3,7 +3,7 @@
   "claim_boundary": {
     "active_learning_claim": "decision_quality_open_cfd_offline_replay_not_aerocliff",
     "aerocliff_result": false,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_geometry": false,
     "live_cfd_savings": false,
     "open_cfd_result": true

@@ -13,7 +13,7 @@
     "field-level targets",
     "wall-shear and separation labels after matching validation data",
     "full 3D extension transfer",
-    "DoMINO comparison on accepted custom targets",
+    "external predictor comparison on accepted custom targets",
     "measured live solver savings"
   ],
   "primary_headline": "AeroMap Mission Control learns aerodynamic maps under a CFD-label budget, proves the idea on open CFD data, and connects it to a structured Venturi Core Venturi-underfloor benchmark through a bounded pressure/load response-map replay.",

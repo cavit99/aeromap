@@ -513,7 +513,7 @@ def run_airfrans_surface_pressure_baseline(
             "not_sota": True,
             "not_f1_geometry": True,
             "not_aerocliff_accuracy": True,
-            "not_domino_replacement": True,
+            "not_external_predictor_replacement": True,
             "not_live_cfd_savings": True,
         },
     }

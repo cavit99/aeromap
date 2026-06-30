@@ -411,7 +411,7 @@ def build_drivaerml_scalar_bridge_dataset_from_paths(
             "f1_geometry": False,
             "field_prediction": False,
             "live_cfd_savings": False,
-            "domino_accuracy": False,
+            "external_predictor_accuracy": False,
         },
     }
     atomic_write_json(out, payload)

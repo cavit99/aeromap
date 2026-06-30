@@ -244,7 +244,7 @@ def build_aeromap_plan(config: AeroMapConfig) -> dict[str, Any]:
         "stop_conditions": [
             "no custom AeroCliff CFD",
             "no cloud",
-            "no NIM",
+            "no external predictor",
             "no DrivAerML scale-up",
             "custom AeroCliff CFD labels remain outside this benchmark",
             "stop if AirfRANS scalar targets are ambiguous",
@@ -1563,7 +1563,7 @@ def run_decision_replay_v03(
             "aerocliff_result": False,
             "f1_geometry": False,
             "live_cfd_savings": False,
-            "domino_accuracy": False,
+            "external_predictor_accuracy": False,
             "active_learning_claim": active_learning_claim,
         },
         "config": config.model_dump(),
@@ -2115,7 +2115,7 @@ def write_airfrans_v02_audit(
             "aerocliff_result": False,
             "f1_geometry": False,
             "live_cfd_savings": False,
-            "domino_accuracy": False,
+            "external_predictor_accuracy": False,
         },
     }
     atomic_write_json(out, payload)

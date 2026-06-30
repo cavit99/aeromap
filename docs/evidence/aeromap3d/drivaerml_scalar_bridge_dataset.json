@@ -5,7 +5,7 @@
   "claim_boundary": {
     "aerocliff_result": false,
     "compact_3d_scalar_bridge": true,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_geometry": false,
     "field_prediction": false,
     "live_cfd_savings": false,

@@ -851,7 +851,7 @@ def _release_scope() -> dict[str, bool]:
         "active_learning_cliff_discovery": False,
         "full_3d_extension_accuracy": False,
         "f1_floor_accuracy": False,
-        "domino_accuracy": False,
+        "external_predictor_accuracy": False,
         "live_cfd_savings": False,
     }
 

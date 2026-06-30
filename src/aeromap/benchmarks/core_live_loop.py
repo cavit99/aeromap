@@ -595,7 +595,7 @@ def _claim_boundary() -> dict[str, bool]:
         "field_level_surrogate": False,
         "full_3d_extension_accuracy": False,
         "f1_floor_accuracy": False,
-        "domino_accuracy": False,
+        "external_predictor_accuracy": False,
         "industrial_live_cfd_savings": False,
     }
 
@@ -797,7 +797,7 @@ Not claimed:
 - validated cliff boundary;
 - full 3D extension accuracy;
 - F1 floor accuracy;
-- DoMINO accuracy;
+- external predictor accuracy;
 - industrial live CFD savings.
 
 ## Artifacts

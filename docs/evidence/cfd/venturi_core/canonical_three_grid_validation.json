@@ -79,7 +79,7 @@
     "core_cliff_boundary_label": false,
     "core_pressure_load_reference": true,
     "core_structured_attached_anchor": true,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_floor_accuracy": false,
     "full_3d_extension_accuracy": false,
     "near_cliff_case_validation_required": true,

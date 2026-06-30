@@ -3,7 +3,7 @@
   "claim_boundary": {
     "active_learning_claim": "compact_3d_open_cfd_scalar_bridge_offline_replay",
     "aerocliff_result": false,
-    "domino_accuracy": false,
+    "external_predictor_accuracy": false,
     "f1_geometry": false,
     "live_cfd_savings": false,
     "open_cfd_result": true
