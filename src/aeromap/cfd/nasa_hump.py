@@ -55,8 +55,8 @@ CORRELATION_REQUIREMENTS = [
     ("methodology_mesh_gate_defined", "Pass"),
     ("openfoam_sst_setup_generated", "Pass: single-grid smoke setup"),
     ("solver_run_completed", "Pass: single-grid smoke only"),
-    ("cp_cf_extracted_from_openfoam", "Partial: wall pressure/shear field export only"),
-    ("openfoam_vs_experiment_compared", "Not yet"),
+    ("cp_cf_extracted_from_openfoam", "Pass: smoke-grid overlay only"),
+    ("openfoam_vs_experiment_compared", "Pass: smoke-grid overlay metrics only"),
     ("grid_sensitivity_checked", "Not yet"),
 ]
 

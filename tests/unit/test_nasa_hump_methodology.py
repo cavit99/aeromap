@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import gzip
 import json
+import textwrap
 from pathlib import Path
 
 from aeromap.cfd.nasa_hump import (
@@ -12,6 +13,7 @@ from aeromap.cfd.nasa_hump import (
     write_conversion_scaffold,
     write_sst_smoke_case_template,
 )
+from scripts.extract_nasa_hump_cp_cf import extract_openfoam_wall_curve
 from scripts.report_nasa_hump_sst_smoke import latest_hump_wall_vtk
 
 
@@ -31,9 +33,8 @@ def test_correlation_eligibility_marks_solver_work_pending() -> None:
     assert rows["experimental_cp_cf_parsed"] == "Pass"
     assert rows["methodology_mesh_gate_defined"] == "Pass"
     assert rows["solver_run_completed"] == "Pass: single-grid smoke only"
-    assert rows["cp_cf_extracted_from_openfoam"] == (
-        "Partial: wall pressure/shear field export only"
-    )
+    assert rows["cp_cf_extracted_from_openfoam"] == "Pass: smoke-grid overlay only"
+    assert rows["openfoam_vs_experiment_compared"] == "Pass: smoke-grid overlay metrics only"
     assert rows["grid_sensitivity_checked"] == "Not yet"
 
 
@@ -81,3 +82,45 @@ def test_latest_hump_wall_vtk_uses_numeric_time_suffix(tmp_path: Path) -> None:
     (vtk_dir / "hump_wall_9.vtk").write_text("9", encoding="utf-8")
 
     assert latest_hump_wall_vtk(tmp_path).name == "hump_wall_120.vtk"
+
+
+def test_cp_cf_extraction_applies_audited_negative_shear_transform(tmp_path: Path) -> None:
+    vtk_path = tmp_path / "hump_wall_10.vtk"
+    vtk_path.write_text(
+        textwrap.dedent(
+            """\
+            # vtk DataFile Version 2.0
+            hump_wall
+            ASCII
+            DATASET POLYDATA
+            POINTS 24 float
+            -6 0 0 -5 0 0 -5 0 1 -6 0 1
+            -5 0 0 -4 0 0 -4 0 1 -5 0 1
+            -4 0 0 -3 0 0 -3 0 1 -4 0 1
+            -3 0 0 -2 0 0 -2 0 1 -3 0 1
+            -2 0 0 -1 0 0 -1 0 1 -2 0 1
+            -1 0 0 0 0 0 0 0 1 -1 0 1
+            POLYGONS 6 30
+            4 0 1 2 3
+            4 4 5 6 7
+            4 8 9 10 11
+            4 12 13 14 15
+            4 16 17 18 19
+            4 20 21 22 23
+            CELL_DATA 6
+            FIELD attributes 2
+            p 1 6 float
+            0.5 0.5 0.5 0.5 0.5 0.5
+            wallShearStress 3 6 float
+            -0.1 0 0 -0.1 0 0 -0.1 0 0 -0.1 0 0 -0.1 0 0 -0.1 0 0
+            """
+        ),
+        encoding="utf-8",
+    )
+
+    curve, audit = extract_openfoam_wall_curve(vtk_path)
+
+    assert audit["cf_sign_audit"]["raw_attached_region_sign"] == "negative"
+    assert audit["cf_sign_audit"]["sign_transform_applied"].startswith("Cf = -")
+    assert curve.cp.tolist() == [1.0] * 6
+    assert curve.cf.tolist() == [0.2] * 6

@@ -48,11 +48,11 @@
     },
     {
       "requirement": "cp_cf_extracted_from_openfoam",
-      "status": "Partial: wall pressure/shear field export only"
+      "status": "Pass: smoke-grid overlay only"
     },
     {
       "requirement": "openfoam_vs_experiment_compared",
-      "status": "Not yet"
+      "status": "Pass: smoke-grid overlay metrics only"
     },
     {
       "requirement": "grid_sensitivity_checked",

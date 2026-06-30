@@ -67,6 +67,8 @@ Current status:
   for conversion, boundary-condition and single-solver smoke work;
 - a bounded OpenFOAM v13 `kOmegaSST` smoke run completes after `potentialFoam`
   initialisation and exports hump-wall pressure/shear fields;
+- the exported smoke wall fields can be converted into NASA/TMR-style `C_p(x)`
+  and `C_f(x)` curves with an explicit `C_f` sign audit;
 - no OpenFOAM correlation result or turbulence-model recommendation is claimed.
 
 ## Coordinate And Coefficient Contract
@@ -108,13 +110,14 @@ AeroMap reports both prediction error and design-decision quality:
 
 ## Public Scope
 
-This repository is an offline benchmark and reproducible prototype. It demonstrates budgeted simulation selection, compact 3D metadata ingestion, a field-level AirfRANS surface-pressure baseline, a structured underfloor pressure/load response map and a NASA/TMR separated-flow methodology smoke.
+This repository is an offline benchmark and reproducible prototype. It demonstrates budgeted simulation selection, compact 3D metadata ingestion, a field-level AirfRANS surface-pressure baseline, a structured underfloor pressure/load response map and a NASA/TMR separated-flow methodology smoke with Cp/Cf extraction.
 
 The release does not present production F1 geometry, industrial live solver scheduling, 3D field prediction, wall-shear/separation labels, OpenFOAM NASA hump correlation accuracy, turbulence-model recommendation or DoMINO accuracy as current results. Those are extension paths once matching validation data are available.
 
 The NASA hump extension does not claim OpenFOAM correlation accuracy or a
-turbulence-model recommendation. The current evidence is a single-grid smoke run;
-medium/fine grid correlation evidence is required before any validation claim.
+turbulence-model recommendation. The current evidence is a single-grid smoke run
+and smoke-grid Cp/Cf overlay; medium/fine grid correlation evidence is required
+before any validation claim.
 
 ## Reproduction Targets
 
@@ -134,4 +137,5 @@ uv run python scripts/prepare_nasa_hump_methodology.py
 uv run python scripts/convert_tmr_nasa_hump_to_openfoam.py
 uv run python scripts/run_nasa_hump_sst_smoke.py --overwrite
 uv run python scripts/report_nasa_hump_sst_smoke.py
+uv run python scripts/extract_nasa_hump_cp_cf.py
 ```
