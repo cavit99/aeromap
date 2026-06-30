@@ -60,11 +60,12 @@ Do not weaken the global AeroMap mesh gate. The NASA/TMR hump uses a separate me
 | `solver_run_completed` | Pass: single-grid smoke only |
 | `cp_cf_extracted_from_openfoam` | Pass: smoke-grid overlay only |
 | `openfoam_vs_experiment_compared` | Pass: smoke-grid overlay metrics only |
+| `medium_grid_sst_candidate_checked` | Pass: 409 x 109 candidate not correlation-plausible |
 | `grid_sensitivity_checked` | Not yet |
 
 ## Next Step
 
-Materialise the tracked conversion scaffold with `scripts/convert_tmr_nasa_hump_to_openfoam.py`. The follow-up SST smoke artifact records a bounded single-grid OpenFOAM run and wall-field export. A model recommendation requires medium/fine grid correlation.
+The follow-up SST smoke and Cp/Cf extraction artifacts show that the OpenFOAM wall-field overlay pipeline works. The 409 x 109 SST candidate now tests the next methodology question and is not correlation-plausible yet, so a model recommendation should wait for boundary-condition, grid or numerics improvements.
 
 ## Claim Boundary
 

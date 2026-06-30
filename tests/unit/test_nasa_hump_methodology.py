@@ -10,6 +10,7 @@ from aeromap.cfd.nasa_hump import (
     RECORDED_103X28_CHECKMESH,
     correlation_eligibility,
     methodology_mesh_policy,
+    plot3d_grid_input_name,
     write_conversion_scaffold,
     write_sst_smoke_case_template,
 )
@@ -35,6 +36,9 @@ def test_correlation_eligibility_marks_solver_work_pending() -> None:
     assert rows["solver_run_completed"] == "Pass: single-grid smoke only"
     assert rows["cp_cf_extracted_from_openfoam"] == "Pass: smoke-grid overlay only"
     assert rows["openfoam_vs_experiment_compared"] == "Pass: smoke-grid overlay metrics only"
+    assert rows["medium_grid_sst_candidate_checked"] == (
+        "Pass: 409 x 109 candidate not correlation-plausible"
+    )
     assert rows["grid_sensitivity_checked"] == "Not yet"
 
 
@@ -82,6 +86,13 @@ def test_latest_hump_wall_vtk_uses_numeric_time_suffix(tmp_path: Path) -> None:
     (vtk_dir / "hump_wall_9.vtk").write_text("9", encoding="utf-8")
 
     assert latest_hump_wall_vtk(tmp_path).name == "hump_wall_120.vtk"
+
+
+def test_plot3d_grid_input_name_preserves_selected_grid() -> None:
+    assert (
+        plot3d_grid_input_name(Path("hump2newtop_noplenumZ409x109.p2dfmt.gz"))
+        == "hump2newtop_noplenumZ409x109.p2dfmt"
+    )
 
 
 def test_cp_cf_extraction_applies_audited_negative_shear_transform(tmp_path: Path) -> None:

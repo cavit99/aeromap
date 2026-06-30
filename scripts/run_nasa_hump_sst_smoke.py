@@ -10,6 +10,7 @@ import subprocess
 from pathlib import Path
 
 from aeromap.cfd.nasa_hump import (
+    plot3d_grid_input_name,
     split_plot3d_default_patch,
     write_conversion_scaffold,
     write_sst_smoke_case_template,
@@ -59,14 +60,14 @@ def run_smoke_case(
         )
         raise FileNotFoundError(msg)
 
+    grid_input_name = plot3d_grid_input_name(grid_path)
     write_conversion_scaffold(grid_path=grid_path, out_dir=case_dir)
     template = write_sst_smoke_case_template(case_dir, end_time=end_time)
     (case_dir / "logs").mkdir(parents=True, exist_ok=True)
 
     _docker_openfoam(
         case_dir,
-        "plot3dToFoam -noBlank -2D 0.1 input/hump2newtop_noplenumZ103x28.p2dfmt "
-        "> logs/plot3dToFoam.log 2>&1",
+        f"plot3dToFoam -noBlank -2D 0.1 input/{grid_input_name} > logs/plot3dToFoam.log 2>&1",
     )
     split = split_plot3d_default_patch(case_dir)
     _docker_openfoam(case_dir, "checkMesh > logs/checkMesh.log 2>&1")

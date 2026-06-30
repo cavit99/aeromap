@@ -57,6 +57,7 @@ CORRELATION_REQUIREMENTS = [
     ("solver_run_completed", "Pass: single-grid smoke only"),
     ("cp_cf_extracted_from_openfoam", "Pass: smoke-grid overlay only"),
     ("openfoam_vs_experiment_compared", "Pass: smoke-grid overlay metrics only"),
+    ("medium_grid_sst_candidate_checked", "Pass: 409 x 109 candidate not correlation-plausible"),
     ("grid_sensitivity_checked", "Not yet"),
 ]
 
@@ -148,11 +149,19 @@ def correlation_eligibility() -> list[dict[str, str]]:
     ]
 
 
+def plot3d_grid_input_name(grid_path: Path) -> str:
+    """Return the decompressed input filename for a NASA/TMR PLOT3D grid."""
+
+    name = grid_path.name
+    return name.removesuffix(".gz")
+
+
 def write_conversion_scaffold(
     *,
     grid_path: Path,
     out_dir: Path,
     case_name: str = "nasa_hump_no_plenum_103x28",
+    target_grid_name: str | None = None,
 ) -> dict[str, Any]:
     """Write a small OpenFOAM conversion scaffold for the NASA/TMR hump grid.
 
@@ -163,7 +172,7 @@ def write_conversion_scaffold(
     out_dir.mkdir(parents=True, exist_ok=True)
     input_dir = out_dir / "input"
     input_dir.mkdir(exist_ok=True)
-    target_grid = input_dir / "hump2newtop_noplenumZ103x28.p2dfmt"
+    target_grid = input_dir / (target_grid_name or plot3d_grid_input_name(grid_path))
     if grid_path.suffix == ".gz":
         target_grid.write_bytes(gzip.decompress(grid_path.read_bytes()))
     else:
@@ -189,7 +198,7 @@ def write_conversion_scaffold(
                 "#   source /opt/openfoam13/etc/bashrc",
                 "",
                 f"case_name={case_name!r}",
-                "grid=input/hump2newtop_noplenumZ103x28.p2dfmt",
+                f"grid=input/{target_grid.name}",
                 "",
                 'plot3dToFoam -noBlank -2D 0.1 "$grid"',
                 "# Apply the patch split described in patch_contract.json before solving.",

@@ -33,7 +33,7 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | DrivAerML | compact 3D automotive-aero bridge | 484 scalar cases, 16 geometry features, real STL ingestion |
 | AirfRANS field baseline | neural-CFD credibility check | surface-pressure MLP beats mean and nearest-case baselines |
 | AeroCliff Core | structured Venturi-underfloor benchmark | 3 x 5 pressure/load response-map replay |
-| NASA hump methodology | separated-flow CFD-methodology smoke | TMR data ingestion, local SST smoke and smoke-grid Cp/Cf overlay |
+| NASA hump methodology | separated-flow CFD-methodology smoke | TMR ingest, local SST smoke, Cp/Cf overlays and 409 x 109 candidate |
 
 ![AeroMap evidence tiers](docs/assets/aeromap/aeromap_evidence_tiers.png)
 
@@ -48,7 +48,7 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 | Cost-proxy replay | Implemented |
 | Local AeroCliff Core live/replay loop | Implemented |
 | AirfRANS surface-pressure field baseline | Implemented |
-| NASA/TMR hump methodology smoke | Reference ingest, mesh-policy gate, local SST smoke and smoke-grid Cp/Cf overlay |
+| NASA/TMR hump methodology smoke | Reference ingest, local SST smoke, smoke-grid Cp/Cf overlay and medium-grid SST candidate |
 | New local CFD case generation from selected missing Core cases | Next extension |
 | Live industrial CFD scheduling | Not claimed |
 | 3D field-level neural surrogate | Next extension |
@@ -245,6 +245,15 @@ uv run python scripts/extract_nasa_hump_cp_cf.py
 
 Details: [docs/reports/nasa_hump_cp_cf_extraction_v0_1.md](docs/reports/nasa_hump_cp_cf_extraction_v0_1.md)
 
+Run and report the medium-grid SST candidate:
+
+```sh
+uv run python scripts/run_nasa_hump_medium_grid_sst.py --overwrite --end-time 200
+uv run python scripts/report_nasa_hump_medium_grid_sst.py
+```
+
+Details: [docs/reports/nasa_hump_medium_grid_sst_v0_1.md](docs/reports/nasa_hump_medium_grid_sst_v0_1.md)
+
 ## Repository map
 
 | Path | Purpose |
@@ -258,6 +267,8 @@ Details: [docs/reports/nasa_hump_cp_cf_extraction_v0_1.md](docs/reports/nasa_hum
 | `scripts/run_nasa_hump_sst_smoke.py` | local Docker/OpenFOAM SST smoke run |
 | `scripts/report_nasa_hump_sst_smoke.py` | local OpenFOAM SST smoke evidence summary |
 | `scripts/extract_nasa_hump_cp_cf.py` | smoke-grid NASA/TMR-style Cp/Cf extraction and overlay |
+| `scripts/run_nasa_hump_medium_grid_sst.py` | local Docker/OpenFOAM SST run on the 409 x 109 NASA/TMR grid |
+| `scripts/report_nasa_hump_medium_grid_sst.py` | medium-grid SST candidate overlay and claim-boundary report |
 | `docs/assets/aeromap/` | public figures |
 | `docs/demo/aeromap_mission_control.html` | no-server demo |
 | `docs/reports/` | technical reports |
@@ -265,13 +276,14 @@ Details: [docs/reports/nasa_hump_cp_cf_extraction_v0_1.md](docs/reports/nasa_hum
 
 ## Scope
 
-This release is a reproducible offline replay and field-baseline package: AirfRANS scalar decision replay, AirfRANS surface-pressure baseline, compact DrivAerML scalar bridge, structured AeroCliff Core response-map/live-replay demo and NASA/TMR separated-flow methodology smoke with Cp/Cf overlay extraction. It does not require cloud compute.
+This release is a reproducible offline replay and field-baseline package: AirfRANS scalar decision replay, AirfRANS surface-pressure baseline, compact DrivAerML scalar bridge, structured AeroCliff Core response-map/live-replay demo and NASA/TMR separated-flow methodology smoke with Cp/Cf overlay extraction plus a bounded 409 x 109 SST candidate. It does not require cloud compute.
 
 Follow-on work:
 
 - extend the Core loop from committed evidence ingestion to new local CFD case generation;
 - add richer 3D field-level targets;
 - extend AeroCliff Core toward live closed-loop simulation selection;
+- improve the NASA hump OpenFOAM setup before SA/SST model comparison, since the current 409 x 109 SST candidate is not correlation-plausible;
 - extend the custom AeroCliff lane toward higher-fidelity transfer studies.
 
 ## Datasets and citations
@@ -282,7 +294,7 @@ This repository uses compact, committed evidence derived from public datasets an
 |---|---|---|
 | AirfRANS | 1,000-case open-CFD scalar benchmark for the main AeroMap active-learning replay and surface-pressure field baseline | AirfRANS: High Fidelity Computational Fluid Dynamics Dataset for Approximating Reynolds-Averaged Navier-Stokes Solutions. Dataset license: ODbL-1.0. See the [AirfRANS documentation](https://airfrans.readthedocs.io/en/latest/notes/introduction.html), [dataset description](https://airfrans.readthedocs.io/en/latest/notes/dataset.html), and [paper](https://arxiv.org/abs/2212.07564). |
 | DrivAerML | Compact 3D automotive scalar bridge using root metadata and a small STL readiness sample | DrivAerML: High-Fidelity Computational Fluid Dynamics Dataset for Road-Car External Aerodynamics. Dataset license: CC BY-SA 4.0. See the [Hugging Face dataset](https://huggingface.co/datasets/neashton/drivaerml), [dataset page](https://neilashton.github.io/caemldatasets/drivaerml/), and [paper](https://arxiv.org/abs/2408.11969). |
-| NASA/TMR wall-mounted hump | Separated-flow CFD-methodology smoke: reference data ingestion, published SA/SST curve comparison, methodology mesh gate, local OpenFOAM SST smoke, wall-field export and smoke-grid Cp/Cf overlay extraction | NASA/TMR 2D wall-mounted hump validation case and reference data. See the [case page](https://tmbwg.github.io/turbmodels/nasahump_val.html), [SA comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sa.html), and [SST comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sst.html). |
+| NASA/TMR wall-mounted hump | Separated-flow CFD-methodology smoke: reference ingestion, published SA/SST curve comparison, local OpenFOAM SST smoke, Cp/Cf overlay extraction and a bounded 409 x 109 SST candidate | NASA/TMR 2D wall-mounted hump validation case and reference data. See the [case page](https://tmbwg.github.io/turbmodels/nasahump_val.html), [SA comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sa.html), and [SST comparison](https://tmbwg.github.io/turbmodels/nasahump_val_sst.html). |
 | OpenFOAM | CFD-oriented case structure, AeroCliff Core structured Venturi benchmark workflow, and NASA/TMR hump conversion scaffold | OpenFOAM is open-source CFD software distributed under GPL terms. See [openfoam.org licence](https://openfoam.org/licence/) and [openfoam.com licensing](https://www.openfoam.com/documentation/licencing). |
 | NVIDIA DoMINO / PhysicsNeMo references | Source of architectural context for automotive surrogate and predictor workflows; no DoMINO accuracy claim is made in this public release | See NVIDIA's [DoMINO Automotive Aero NIM overview](https://docs.nvidia.com/nim/physicsnemo/domino-automotive-aero/latest/overview.html), [NGC model page](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero), and [PhysicsNeMo DoMINO documentation](https://docs.nvidia.com/physicsnemo/25.11/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html). |
 

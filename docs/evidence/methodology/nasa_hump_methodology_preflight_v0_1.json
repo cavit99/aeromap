@@ -55,6 +55,10 @@
       "status": "Pass: smoke-grid overlay metrics only"
     },
     {
+      "requirement": "medium_grid_sst_candidate_checked",
+      "status": "Pass: 409 x 109 candidate not correlation-plausible"
+    },
+    {
       "requirement": "grid_sensitivity_checked",
       "status": "Not yet"
     }

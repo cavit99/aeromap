@@ -69,6 +69,11 @@ Current status:
   initialisation and exports hump-wall pressure/shear fields;
 - the exported smoke wall fields can be converted into NASA/TMR-style `C_p(x)`
   and `C_f(x)` curves with an explicit `C_f` sign audit;
+- the official `409 x 109` no-plenum grid can run through the same local SST
+  pipeline with wall-tangent-projected `C_f`;
+- that medium-grid SST candidate is not correlation-plausible yet: it still
+  lacks the expected `C_f` zero-crossing behaviour and remains a methodology
+  finding, not a model comparison;
 - no OpenFOAM correlation result or turbulence-model recommendation is claimed.
 
 ## Coordinate And Coefficient Contract
@@ -110,14 +115,15 @@ AeroMap reports both prediction error and design-decision quality:
 
 ## Public Scope
 
-This repository is an offline benchmark and reproducible prototype. It demonstrates budgeted simulation selection, compact 3D metadata ingestion, a field-level AirfRANS surface-pressure baseline, a structured underfloor pressure/load response map and a NASA/TMR separated-flow methodology smoke with Cp/Cf extraction.
+This repository is an offline benchmark and reproducible prototype. It demonstrates budgeted simulation selection, compact 3D metadata ingestion, a field-level AirfRANS surface-pressure baseline, a structured underfloor pressure/load response map and a NASA/TMR separated-flow methodology smoke with Cp/Cf extraction plus a bounded medium-grid SST candidate.
 
 The release does not present production F1 geometry, industrial live solver scheduling, 3D field prediction, wall-shear/separation labels, OpenFOAM NASA hump correlation accuracy, turbulence-model recommendation or DoMINO accuracy as current results. Those are extension paths once matching validation data are available.
 
 The NASA hump extension does not claim OpenFOAM correlation accuracy or a
-turbulence-model recommendation. The current evidence is a single-grid smoke run
-and smoke-grid Cp/Cf overlay; medium/fine grid correlation evidence is required
-before any validation claim.
+turbulence-model recommendation. The current evidence includes a single-grid
+smoke run, smoke-grid Cp/Cf overlay and a `409 x 109` SST candidate that is not
+yet correlation-plausible. Boundary-condition, grid or numerics work is required
+before any SA/SST model-comparison branch.
 
 ## Reproduction Targets
 
@@ -138,4 +144,6 @@ uv run python scripts/convert_tmr_nasa_hump_to_openfoam.py
 uv run python scripts/run_nasa_hump_sst_smoke.py --overwrite
 uv run python scripts/report_nasa_hump_sst_smoke.py
 uv run python scripts/extract_nasa_hump_cp_cf.py
+uv run python scripts/run_nasa_hump_medium_grid_sst.py --overwrite --end-time 200
+uv run python scripts/report_nasa_hump_medium_grid_sst.py
 ```

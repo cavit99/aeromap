@@ -8,7 +8,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -24,6 +24,8 @@ FIGURE_PATH = ROOT / "docs/assets/methodology/nasa_hump_cp_cf_overlay_v0_1.png"
 CLASSIFICATION = "OPENFOAM_NASA_HUMP_CP_CF_EXTRACTION_V0_1"
 ATTACHED_REGION_X_MAX = -2.0
 MIN_ATTACHED_SIGN_SAMPLES = 5
+MIN_TANGENT_POINTS = 2
+TANGENT_NORM_EPSILON = 1e-14
 
 
 @dataclass(frozen=True)
@@ -32,6 +34,7 @@ class WallCurve:
     cp: np.ndarray
     cf: np.ndarray
     raw_wall_shear_x: np.ndarray
+    raw_wall_shear_tangent: np.ndarray
     pressure: np.ndarray
 
 
@@ -126,6 +129,28 @@ def latest_hump_wall_vtk(case_dir: Path) -> Path:
     return max(candidates, key=time_value)
 
 
+def _wall_tangent(face_points: np.ndarray) -> np.ndarray:
+    """Return a downstream-oriented wall tangent for a boundary face."""
+
+    xy = np.unique(np.round(face_points[:, :2], decimals=12), axis=0)
+    if xy.shape[0] >= MIN_TANGENT_POINTS:
+        deltas = xy[:, None, :] - xy[None, :, :]
+        distances = np.sum(deltas**2, axis=2)
+        i, j = np.unravel_index(int(np.argmax(distances)), distances.shape)
+        vector_2d = xy[j] - xy[i]
+    else:
+        vector_2d = np.array([1.0, 0.0], dtype=np.float64)
+    if (
+        abs(float(vector_2d[0])) < TANGENT_NORM_EPSILON
+        and abs(float(vector_2d[1])) < TANGENT_NORM_EPSILON
+    ):
+        vector_2d = np.array([1.0, 0.0], dtype=np.float64)
+    if vector_2d[0] < 0:
+        vector_2d = -vector_2d
+    tangent = np.array([vector_2d[0], vector_2d[1], 0.0], dtype=np.float64)
+    return tangent / float(np.linalg.norm(tangent))
+
+
 def _parse_vtk_polydata(path: Path) -> dict[str, Any]:
     tokens = path.read_text(encoding="utf-8", errors="replace").split()
 
@@ -163,11 +188,16 @@ def _parse_vtk_polydata(path: Path) -> dict[str, Any]:
         fields[name] = np.asarray(values, dtype=np.float64).reshape(tuples, components)
 
     centers = np.asarray([points[polygon].mean(axis=0) for polygon in polygons], dtype=np.float64)
+    tangents = np.asarray(
+        [_wall_tangent(points[polygon]) for polygon in polygons],
+        dtype=np.float64,
+    )
     return {
         "points": points,
         "polygons": polygons,
         "cell_count": cell_count,
         "centers": centers,
+        "wall_tangents": tangents,
         "fields": fields,
     }
 
@@ -194,10 +224,23 @@ def _openfoam_curve_error(reference: Curve, candidate: Curve) -> dict[str, float
     }
 
 
+def _cf_formula(
+    *,
+    cf_mode: Literal["global_x", "wall_tangent"],
+    sign_multiplier: float,
+) -> str:
+    if cf_mode == "global_x":
+        prefix = "-" if sign_multiplier < 0 else ""
+        return f"Cf = {prefix}wallShearStress_x / (0.5 * U_inf^2)"
+    prefix = "-" if sign_multiplier < 0 else ""
+    return f"Cf = {prefix}dot(wallShearStress, wall_tangent) / (0.5 * U_inf^2)"
+
+
 def extract_openfoam_wall_curve(
     vtk_path: Path,
     *,
     u_inf: float = HUMP_U_INF,
+    cf_mode: Literal["global_x", "wall_tangent"] = "global_x",
 ) -> tuple[WallCurve, dict[str, Any]]:
     vtk = _parse_vtk_polydata(vtk_path)
     fields = vtk["fields"]
@@ -207,13 +250,18 @@ def extract_openfoam_wall_curve(
 
     centers = vtk["centers"]
     pressure = fields["p"][:, 0]
-    raw_wall_shear_x = fields["wallShearStress"][:, 0]
+    raw_wall_shear = fields["wallShearStress"]
+    raw_wall_shear_x = raw_wall_shear[:, 0]
+    raw_wall_shear_tangent = np.einsum("ij,ij->i", raw_wall_shear, vtk["wall_tangents"])
+    raw_shear_for_cf = raw_wall_shear_x if cf_mode == "global_x" else raw_wall_shear_tangent
     x = centers[:, 0]
     order = np.argsort(x)
 
     x_sorted = x[order]
     pressure_sorted = pressure[order]
     shear_x_sorted = raw_wall_shear_x[order]
+    shear_tangent_sorted = raw_wall_shear_tangent[order]
+    shear_for_cf_sorted = raw_shear_for_cf[order]
     q_inf = 0.5 * u_inf**2
 
     upstream_mask = x_sorted < ATTACHED_REGION_X_MAX
@@ -222,11 +270,11 @@ def extract_openfoam_wall_curve(
             MIN_ATTACHED_SIGN_SAMPLES,
             x_sorted.size // 5,
         )
-    upstream_median = float(np.median(shear_x_sorted[upstream_mask]))
+    upstream_median = float(np.median(shear_for_cf_sorted[upstream_mask]))
     sign_multiplier = -1.0 if upstream_median < 0 else 1.0
 
     cp = pressure_sorted / q_inf
-    cf = sign_multiplier * shear_x_sorted / q_inf
+    cf = sign_multiplier * shear_for_cf_sorted / q_inf
     non_monotonic_steps = int(np.sum(np.diff(x_sorted) <= 0))
     duplicate_x_count = int(x_sorted.size - np.unique(np.round(x_sorted, decimals=10)).size)
     sign_audit = {
@@ -234,21 +282,22 @@ def extract_openfoam_wall_curve(
         "positive_cf_convention": (
             "positive in the local downstream wall-tangent direction of the external flow"
         ),
-        "raw_openfoam_wall_shear_field": "wallShearStress_x from hump_wall cell data",
+        "cf_mode": cf_mode,
+        "raw_openfoam_wall_shear_field": (
+            "wallShearStress_x from hump_wall cell data"
+            if cf_mode == "global_x"
+            else "wallShearStress projected onto downstream-oriented local wall tangent"
+        ),
         "raw_attached_region_definition": (
             "hump-wall cells with x < -2.0, falling back to first 20 percent if needed"
         ),
         "raw_attached_region_sample_count": int(upstream_mask.sum()),
         "openfoam_wall_shear_x_raw_attached_region_median": upstream_median,
         "raw_attached_region_sign": "negative" if upstream_median < 0 else "positive",
-        "sign_transform_applied": (
-            "Cf = -wallShearStress_x / (0.5 * U_inf^2)"
-            if sign_multiplier < 0
-            else "Cf = wallShearStress_x / (0.5 * U_inf^2)"
-        ),
+        "sign_transform_applied": _cf_formula(cf_mode=cf_mode, sign_multiplier=sign_multiplier),
         "later_correlation_note": (
-            "This smoke v0.1 extraction uses the global x-component after sign audit. "
-            "A medium/fine correlation branch should project shear onto the local wall tangent."
+            "This extraction records the shear component convention explicitly. "
+            "Medium/fine correlation candidates should use local wall-tangent projection."
         ),
     }
     curve = WallCurve(
@@ -256,6 +305,7 @@ def extract_openfoam_wall_curve(
         cp=cp,
         cf=cf,
         raw_wall_shear_x=shear_x_sorted,
+        raw_wall_shear_tangent=shear_tangent_sorted,
         pressure=pressure_sorted,
     )
     geometry_audit = {
@@ -296,6 +346,7 @@ def _curve_to_payload(curve: WallCurve) -> dict[str, list[float]]:
         "cp": [float(item) for item in curve.cp],
         "cf": [float(item) for item in curve.cf],
         "raw_wall_shear_x": [float(item) for item in curve.raw_wall_shear_x],
+        "raw_wall_shear_tangent": [float(item) for item in curve.raw_wall_shear_tangent],
         "pressure": [float(item) for item in curve.pressure],
     }
 
@@ -342,10 +393,16 @@ def _plot_overlay(*, curve: WallCurve, references: dict[str, Curve], path: Path)
     plt.close(fig)
 
 
-def build_payload(*, case_dir: Path, raw_dir: Path, figure_path: Path) -> dict[str, Any]:
+def build_payload(
+    *,
+    case_dir: Path,
+    raw_dir: Path,
+    figure_path: Path,
+    cf_mode: Literal["global_x", "wall_tangent"] = "global_x",
+) -> dict[str, Any]:
     smoke_evidence = json.loads(SMOKE_EVIDENCE_PATH.read_text(encoding="utf-8"))
     vtk_path = latest_hump_wall_vtk(case_dir)
-    curve, audits = extract_openfoam_wall_curve(vtk_path)
+    curve, audits = extract_openfoam_wall_curve(vtk_path, cf_mode=cf_mode)
     references = _load_references(raw_dir)
     openfoam_cp = Curve(x=curve.x, y=curve.cp)
     openfoam_cf = Curve(x=curve.x, y=curve.cf)
@@ -524,9 +581,15 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=EVIDENCE_PATH)
     parser.add_argument("--report", type=Path, default=REPORT_PATH)
     parser.add_argument("--figure", type=Path, default=FIGURE_PATH)
+    parser.add_argument("--cf-mode", choices=["global_x", "wall_tangent"], default="global_x")
     args = parser.parse_args()
 
-    payload = build_payload(case_dir=args.case_dir, raw_dir=args.raw_dir, figure_path=args.figure)
+    payload = build_payload(
+        case_dir=args.case_dir,
+        raw_dir=args.raw_dir,
+        figure_path=args.figure,
+        cf_mode=args.cf_mode,
+    )
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     write_report(payload, args.report)
