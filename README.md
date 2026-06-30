@@ -229,7 +229,7 @@ uv run aeromap benchmark live-core-loop --max-iterations 4
 
 ## Scope
 
-This release is an offline replay benchmark and structured Core response-map demo. It does not require cloud compute.
+This release is a reproducible offline replay and field-baseline package: AirfRANS scalar decision replay, AirfRANS surface-pressure baseline, compact DrivAerML scalar bridge, and structured AeroCliff Core response-map/live-replay demo. It does not require cloud compute.
 
 Follow-on work:
 

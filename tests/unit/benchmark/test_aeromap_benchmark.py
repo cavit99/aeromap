@@ -254,8 +254,9 @@ def _write_airfrans_surface_fixture(root: Path, case_id: str, *, pressure_offset
     mesh.save(case_dir / f"{case_id}_aerofoil.vtp")
 
 
-def test_airfrans_surface_pressure_baseline_runs_on_fixture(tmp_path: Path) -> None:
-    dataset_root = tmp_path / "processed" / "Dataset"
+def _write_airfrans_surface_fixture_dataset(tmp_path: Path) -> Path:
+    processed_root = tmp_path / "processed"
+    dataset_root = processed_root / "Dataset"
     train = [
         "airFoil2D_SST_40.0_0.0_0.5_3.0_0.0_8.0",
         "airFoil2D_SST_42.0_2.0_0.6_3.5_1.0_9.0",
@@ -272,9 +273,13 @@ def test_airfrans_surface_pressure_baseline_runs_on_fixture(tmp_path: Path) -> N
         json.dumps({"full_train": train, "full_test": test}),
         encoding="utf-8",
     )
+    return processed_root
 
+
+def test_airfrans_surface_pressure_baseline_runs_on_fixture(tmp_path: Path) -> None:
+    processed_root = _write_airfrans_surface_fixture_dataset(tmp_path)
     report_path = run_airfrans_surface_pressure_baseline(
-        root=tmp_path / "processed",
+        root=processed_root,
         out=tmp_path / "field.json",
         visual_out=tmp_path / "field.png",
         summary_plot_out=tmp_path / "summary.png",
@@ -295,6 +300,48 @@ def test_airfrans_surface_pressure_baseline_runs_on_fixture(tmp_path: Path) -> N
     assert report["claim_boundary"]["field_level_baseline"] is True
     assert (tmp_path / "field.png").exists()
     assert (tmp_path / "summary.png").exists()
+
+
+def test_airfrans_surface_pressure_baseline_cli_runs_on_fixture(tmp_path: Path) -> None:
+    processed_root = _write_airfrans_surface_fixture_dataset(tmp_path)
+
+    result = CliRunner().invoke(
+        app,
+        [
+            "benchmark",
+            "airfrans-field-baseline",
+            "--root",
+            str(processed_root),
+            "--out",
+            str(tmp_path / "field_cli.json"),
+            "--visual-out",
+            str(tmp_path / "field_cli.png"),
+            "--summary-plot-out",
+            str(tmp_path / "summary_cli.png"),
+            "--train-cases",
+            "3",
+            "--val-cases",
+            "1",
+            "--test-cases",
+            "2",
+            "--epochs",
+            "1",
+            "--batch-size",
+            "16",
+            "--hidden-width",
+            "8",
+        ],
+    )
+
+    assert result.exit_code == 0
+    payload = json.loads(result.stdout)
+    assert payload["classification"] == "AEROMAP_AIRFRANS_SURFACE_PRESSURE_FIELD_BASELINE_V0_1"
+    assert payload["train_cases"] == 3
+    assert payload["test_cases"] == 2
+    assert payload["best_method_by_rmse"] in {"train_mean", "nearest_case", "pointwise_mlp"}
+    assert Path(payload["path"]).exists()
+    assert (tmp_path / "field_cli.png").exists()
+    assert (tmp_path / "summary_cli.png").exists()
 
 
 def test_aeromap3d_scalar_bridge_dataset_uses_compact_drivaerml_csvs(
