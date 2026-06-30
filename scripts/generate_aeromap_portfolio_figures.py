@@ -859,7 +859,7 @@ def write_manifest(paths: list[Path]) -> None:
         ]: "AeroMap to AeroCliff Core workflow for bounded pressure/load response mapping.",
     }
     payload = {
-        "schema_version": "aerocliff_aeromap_portfolio_figures_v1",
+        "schema_version": "aeromap_portfolio_figures_v1",
         "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_PORTFOLIO_FIGURES",
         "source_evidence": {
             "airfrans": str(EVIDENCE.relative_to(ROOT)),

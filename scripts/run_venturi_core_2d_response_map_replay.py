@@ -1186,11 +1186,52 @@ def _not_run_fine_status(reason: str) -> dict[str, Any]:
     }
 
 
+def _run_from_committed_dataset(repo_root: Path) -> None:
+    dataset = _load_json(repo_root / DATASET_PATH)
+    rows = list(dataset["cases"])
+    clean_rows = _clean_rows(rows)
+    fine_sanity = dataset.get(
+        "fine_sanity_status",
+        _not_run_fine_status("committed dataset did not include fine sanity metadata"),
+    )
+    replay = _run_replay(clean_rows)
+    payload = _build_payload(
+        repo_root=repo_root,
+        dataset=dataset,
+        replay=replay,
+        fine_sanity=fine_sanity,
+    )
+    _write_report(repo_root, payload, dataset)
+    print(
+        json.dumps(
+            {
+                "mode": "committed_dataset_replay",
+                "classification": payload["classification"],
+                "accepted": payload["accepted"],
+                "screening_only": payload["screening_only"],
+                "clean_case_count": dataset["medium_map_status"]["clean_case_count"],
+                "best_method": replay.get("best_method_by_curve_error_area"),
+                "report": str(REPORT_PATH),
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--overwrite", action="store_true", help="overwrite generated case dirs")
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="regenerate OpenFOAM cases with Docker instead of replaying committed evidence",
+    )
     args = parser.parse_args()
     repo_root = Path(__file__).resolve().parents[1]
+
+    if not args.overwrite and (repo_root / DATASET_PATH).exists():
+        _run_from_committed_dataset(repo_root)
+        return
 
     rows, medium_status = _build_medium_map(repo_root, overwrite=args.overwrite)
     clean_rows = _clean_rows(rows)

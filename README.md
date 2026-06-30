@@ -143,8 +143,11 @@ uv run aeromap benchmark aeromap-decision-replay-v03 \
 Run the AeroCliff Core response-map replay:
 
 ```sh
-uv run scripts/run_venturi_core_2d_response_map_replay.py --overwrite
+uv run scripts/run_venturi_core_2d_response_map_replay.py
 ```
+
+Pass `--overwrite` only when you want to regenerate the OpenFOAM cases with
+Docker rather than replaying the committed Core evidence.
 
 ## Repository Map
 

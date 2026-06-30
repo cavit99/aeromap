@@ -260,16 +260,16 @@ uv run aeromap benchmark aeromap-3d-drivaerml-scalars \
   --cache-dir artifacts/benchmark/aeromap3d/drivaerml \
   --out docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.json
 
-uv run aeromap benchmark aeromap-3d-geometry-sample \
-  --out docs/evidence/aeromap3d/drivaerml_geometry_readiness_sample.json \
-  --sample-points 512
-
 uv run aeromap benchmark aeromap-decision-replay-v03 \
   --config configs/benchmark/aeromap_3d_bridge.yaml \
   --dataset-npz docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.npz \
   --out docs/evidence/aeromap3d/drivaerml_scalar_bridge_replay.json \
   --svg-dir docs/evidence/aeromap3d
 ```
+
+The committed geometry-readiness sample is retained as evidence. Regenerating it
+requires explicit local STL paths from a DrivAerML sample cache; the public
+clean-checkout path does not assume those bulky STL files are present.
 
 ## Release Scope
 

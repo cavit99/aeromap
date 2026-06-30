@@ -1,23 +1,12 @@
 {
   "accepted": true,
-  "release_scope": {
-    "active_learning_cliff_discovery": false,
-    "cliff_boundary_label": false,
-    "continuous_f_sep_label": false,
-    "core_2d_pressure_load_response_mapping": true,
-    "domino_accuracy": false,
-    "f1_floor_accuracy": false,
-    "full_3d_aerocliff_accuracy": false,
-    "live_cfd_savings": false,
-    "wall_shear_label": false
-  },
   "classification": "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_REPLAY_V0",
   "dataset": {
     "classification": "AEROCLIFF_CORE_2D_PRESSURE_LOAD_RESPONSE_DATASET_V0",
     "clean_case_count": 15,
     "observed_case_count": 15,
     "path": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json",
-    "sha256": "202a9e75159f2fbbe63cdc47502f3cde29c53dd66383500768afdfb1936d162a"
+    "sha256": "7b3e099ec5b13ca5385760b11fb16490ee2a6b34e513c9b79b853ffd50a2aca5"
   },
   "fine_sanity_status": {
     "all_passed": true,
@@ -128,6 +117,17 @@
     "status": "ran"
   },
   "reason": "2D Core pressure/load response-map replay completed with representative fine sanity checks",
+  "release_scope": {
+    "active_learning_cliff_discovery": false,
+    "cliff_boundary_label": false,
+    "continuous_f_sep_label": false,
+    "core_2d_pressure_load_response_mapping": true,
+    "domino_accuracy": false,
+    "f1_floor_accuracy": false,
+    "full_3d_aerocliff_accuracy": false,
+    "live_cfd_savings": false,
+    "wall_shear_label": false
+  },
   "replay": {
     "accepted": true,
     "best_method_by_curve_error_area": "engineering_utility",

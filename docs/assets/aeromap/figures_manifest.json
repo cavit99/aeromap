@@ -1,6 +1,6 @@
 {
   "classification": "AEROMAP_AEROCLIFF_CORE_MVP_V0_1_PORTFOLIO_FIGURES",
-  "evidence_generation_git_sha": "7d16107",
+  "evidence_generation_git_sha": "445a056",
   "figures": [
     {
       "caption": "Geometry-disjoint final metrics summary for AeroMap Mission Control v0.3.",
@@ -59,7 +59,7 @@
     }
   ],
   "git_sha_note": "This SHA records the commit used to generate the figure manifest; the containing release commit may be later.",
-  "schema_version": "aerocliff_aeromap_portfolio_figures_v1",
+  "schema_version": "aeromap_portfolio_figures_v1",
   "source_evidence": {
     "aerocliff_core_dataset": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_dataset_v0.json",
     "aerocliff_core_replay": "docs/evidence/cfd/aerocliff_core/core_2d_response_map_active_replay_v0.json",

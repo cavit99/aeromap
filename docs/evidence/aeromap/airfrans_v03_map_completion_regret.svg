@@ -29,5 +29,5 @@
 <circle cx="920.0" cy="211.2" r="4" fill="#009e73"/>
 <rect x="650" y="153" width="14" height="4" fill="#009e73"/>
 <text x="672" y="164" font-family="Arial" font-size="13">uncertainty_plus_diversity</text>
-<text x="80" y="494" font-family="Arial" font-size="12" fill="#555">Lower is better. Open-CFD AirfRANS offline replay.</text>
+<text x="80" y="494" font-family="Arial" font-size="12" fill="#555">Lower is better. Open-CFD AirfRANS offline replay; compact benchmark scope.</text>
 </svg>

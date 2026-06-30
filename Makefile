@@ -44,4 +44,4 @@ aeromap-3d-bridge:
 		--svg-dir docs/evidence/aeromap3d
 
 core-replay:
-	uv run scripts/run_venturi_core_2d_response_map_replay.py --overwrite
+	uv run scripts/run_venturi_core_2d_response_map_replay.py

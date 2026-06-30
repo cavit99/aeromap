@@ -1983,7 +1983,7 @@ def benchmark_aeromap_3d_drivaerml_scalars(
     typer.echo(json.dumps(summary, indent=2, sort_keys=True))
 
 
-@benchmark_app.command("aeromap-3d-geometry-sample")
+@benchmark_app.command("aeromap-3d-geometry-sample", hidden=True)
 def benchmark_aeromap_3d_geometry_sample(
     stl: Annotated[
         list[Path] | None,
@@ -2093,11 +2093,11 @@ def benchmark_aeromap_cost_proxy_audit_v05(
     ] = Path("docs/evidence/aeromap3d/drivaerml_scalar_bridge_dataset.npz"),
     airfrans_processed_root: Annotated[
         Path,
-        typer.Option("--airfrans-processed-root", exists=True, file_okay=False, readable=True),
+        typer.Option("--airfrans-processed-root", file_okay=False),
     ] = Path("artifacts/benchmark/airfrans/processed"),
     drivaerml_cache_root: Annotated[
         Path,
-        typer.Option("--drivaerml-cache-root", exists=True, file_okay=False, readable=True),
+        typer.Option("--drivaerml-cache-root", file_okay=False),
     ] = Path("artifacts/benchmark/drivaerml_cache"),
     out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
         "docs/evidence/aeromap/cost_proxy_audit_v0_5.json",
@@ -2144,7 +2144,7 @@ def benchmark_aeromap_cost_aware_replay_v05(
     out: Annotated[Path, typer.Option("--out", dir_okay=False)],
     airfrans_processed_root: Annotated[
         Path,
-        typer.Option("--airfrans-processed-root", exists=True, file_okay=False, readable=True),
+        typer.Option("--airfrans-processed-root", file_okay=False),
     ] = Path("artifacts/benchmark/airfrans/processed"),
 ) -> None:
     """Run v0.5 cost-proxy-aware AeroMap replay."""
@@ -2179,7 +2179,7 @@ def benchmark_aeromap_cost_aware_replay_v05(
 def benchmark_aeromap_3d_surface_field_precheck_v05(
     drivaerml_cache_root: Annotated[
         Path,
-        typer.Option("--drivaerml-cache-root", exists=True, file_okay=False, readable=True),
+        typer.Option("--drivaerml-cache-root", file_okay=False),
     ] = Path("artifacts/benchmark/drivaerml_cache"),
     out: Annotated[Path, typer.Option("--out", dir_okay=False)] = Path(
         "docs/evidence/aeromap3d/surface_field_readiness_v0_5.json",
