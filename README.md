@@ -35,6 +35,20 @@ AEROMAP_AEROCLIFF_CORE_MVP_V0_1
 
 ![AeroMap evidence tiers](docs/assets/aeromap/aeromap_evidence_tiers.png)
 
+## Current status
+
+| Capability | Status |
+|---|---|
+| Offline active-learning replay on real CFD data | Implemented |
+| Geometry-disjoint AirfRANS benchmark | Implemented |
+| Compact 3D DrivAerML scalar bridge | Implemented |
+| Custom OpenFOAM Venturi-underfloor response map | Implemented |
+| Cost-proxy replay | Implemented |
+| Live CFD scheduling | Next extension |
+| Field-level neural surrogate | Next extension |
+| Trained DoMINO/PhysicsNeMo aero model | Not claimed |
+| F1 geometry or F1 accuracy | Not claimed |
+
 ## How Mission Control works
 
 ```text

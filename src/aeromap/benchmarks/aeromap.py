@@ -38,7 +38,7 @@ AEROMAP_AUDIT_SCHEMA = "aerocliff_aeromap_airfrans_audit_v0.3.0"
 
 AIRFRANS_DOCS_URL = "https://airfrans.readthedocs.io/en/latest/notes/dataset.html"
 AIRFRANS_DATASET_URL = "https://data.isir.upmc.fr/extrality/NeurIPS_2022/Dataset.zip"
-AIRFRANS_LICENSE = "CC BY-NC-SA 4.0"
+AIRFRANS_LICENSE = "ODbL-1.0"
 AIRFRANS_CITATION_KEY = "bonnet2022airfrans"
 DEFAULT_TOP_K_FRACTION = 0.10
 RIDGE_LAMBDA = 1.0e-3
